@@ -10,6 +10,11 @@
 	margin-bottom: 0px;
 }
 
+.btn-adjust, .btn {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
 ol li {
 	margin-bottom: 10px;
 }
