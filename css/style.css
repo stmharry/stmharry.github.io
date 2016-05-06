@@ -1,3 +1,8 @@
+/* global */
+p {
+    font-size: 15px;
+}
+
 .margin-bottom {
 	margin-bottom: 30px;
 }
@@ -10,6 +15,7 @@
     font-weight: 300;
 }
 
+/* header */
 @media (max-width: 768px) {
 	.jumbotron {
 		text-align: center;
@@ -21,10 +27,12 @@
 	margin-bottom: 5px;
 }
 
+/* publication */
 ol li {
 	margin-bottom: 10px;
 }
 
+/* research */
 .label-adjust, .label {
 	display: inline-block;
 	margin-bottom: 5px;
