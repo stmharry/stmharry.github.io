@@ -6,6 +6,10 @@
 	margin-bottom: 0px;
 }
 
+.text-light {
+    font-weight: 300;
+}
+
 @media (max-width: 768px) {
 	.jumbotron {
 		text-align: center;
@@ -24,6 +28,7 @@ ol li {
 .label-adjust, .label {
 	display: inline-block;
 	margin-bottom: 5px;
+    font-size: 100%;
 	font-weight: 300;
 } 
 
@@ -38,5 +43,6 @@ ol li {
 .progress-bar {
 	padding-left: 10px;
 	text-align: left;
+    font-size: 14px;
 }
 
