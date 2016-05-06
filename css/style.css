@@ -1,13 +1,15 @@
-.container, .container-fluid {
-	/* min-width: 768px; */
-}
-
-.subsection {
+.margin-bottom {
 	margin-bottom: 30px;
 }
 
 .no-margin-bottom {
 	margin-bottom: 0px;
+}
+
+@media (max-width: 768px) {
+	.jumbotron {
+		text-align: center;
+	}
 }
 
 .btn-adjust, .btn {
