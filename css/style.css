@@ -33,6 +33,13 @@ ol li {
 }
 
 /* research */
+.label-adjust h4,
+.label-adjust h5 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: inline;
+}
+
 .label-adjust, .label {
 	display: inline-block;
 	margin-bottom: 5px;
@@ -54,3 +61,10 @@ ol li {
     font-size: 14px;
 }
 
+.panel-body > h5:first-child {
+    margin-top: 0px
+}
+
+.panel-body > p:last-child {
+    margin-bottom: 0px;
+}
