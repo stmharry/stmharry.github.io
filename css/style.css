@@ -30,6 +30,14 @@ p {
 	margin-bottom: 5px;
 }
 
+/* hightlight */
+.highlight {
+    border-left-color: #1b809e;
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-radius: 3px;
+}
+
 /* publication */
 ol li {
 	margin-bottom: 10px;
