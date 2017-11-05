@@ -52,6 +52,7 @@
 \usepackage{import}
 \usepackage[super]{nth}
 \usepackage{booktabs}
+\usepackage{graphicx}
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
 
 
@@ -79,25 +80,15 @@
 {\thepage}
 
 \begin{document}
-%%% Make a header for CV with personal data
+
 \makecvheader
 
-\iffalse
-\cvsection{Upcoming Research}
-\begin{cvskills}{2.5cm}{13.9cm}
-    \cvskill{Signal Kinetics}
-    {
-        Signals are everywhere in our daily lives, and some of them is visible while others cannot be seen. Ranging from WiFi signals to brain waves, the pervasiveness of these signals results in networking the whole world through both natural and man-made links. The aim of my upcoming researches is to explore ways to link the natural and man-made links such that not only computers but humans can extend their abilities in communicating, sensing, and actuation. Tools from multiple fields are applied in order to extract the information of physical world and to explicitly relate them. }
-    \cvskill{}
-    {
-        Computer networks aids us in sensing the status of a remote target, a patient, for example. We are able to collect the reflected signal from the subject's body, and then translate the signal into interpretable features with signal processing algorithms. The algorithms have to be carefully tailored to filter out unwanted influences of the outside world, which could be millions of times stronger than the desired signal. Having obtained the features, we thus apply machine learning techniques to learn and predict the subject's attributes such as health status, gesture, or even mood.
-    }
-    \cvskill{}
-    {
-        In my upcoming research starting September 2017, the aforementioned techniques will be applied to further strengthen the connection between humans and machines via interactions through signals. 
-    }
+\cvsection{Highlights}
+\begin{cvskills}{0.7cm}{15.7cm}
+    \cvskill{1}{\textbf{1.5} years of experience in deep learning model deployment for Bite! APP}
+    \cvskill{2}{\textbf{2} majors acquired in undergraduate education}
+    \cvskill{3}{Ranked \textbf{\#1} in International Physics Olympiad 2011 in both theory and experiment}
 \end{cvskills}
-\fi
 
 \cvsection{Research Interests}
 \begin{cvskills}{0.7cm}{15.7cm}
@@ -108,12 +99,8 @@
 
 \cvsection{Skills}
 \begin{cvskills}{2.2cm}{14.2cm}
-    \cvskill{Programming}{Python (TensorFlow), C / C++, MATLAB, Caffe, Java, HTML / CSS / JS}
+    \cvskill{Programming}{Python / TensorFlow, Docker, C / C++, MATLAB, Java, HTML / CSS / JS}
     \cvskill{Languages}{Mandarin Chinese (Native), Taiwanese (Native), English (Fluent), Spanish (Intermediate)}
-    \iffalse
-        \cvskill{GRE}{Verbal (153 / 170), Quantitative (170 / 170), Analytical Writing (4.0 / 6.0)}
-        \cvskill{TOEFL iBT}{Reading (29 / 30), Listening (30 / 30), Speaking (22 / 30), Writing (27 / 30)}
-    \fi
 \end{cvskills}
 
 \cvsection{Education}
@@ -186,6 +173,8 @@
     {2015}
 \end{cvhonors}
 
+\newpage
+
 \cvsubsection{Individual}
 \begin{cvhonors}
     \cvhonor
@@ -203,7 +192,7 @@
     \cvhonor
     {Gold Medal Award}
     {International Junior Science Olympiad (IJSO)}
-    {Gyeong-Nam, South Korea}
+    {South Korea}
     {2008}
 \end{cvhonors}
 
@@ -227,7 +216,7 @@
             \end{cvitems}
         \item{\bfseries Unsupervised Domain Adaptation with Imbalanced Cross-domain Data}
             \begin{cvitems}
-            \item{Information of labeled source-domain data is transferred to the unlabeled target-domain, which may be a small set with imbalanced label counts}
+            \item{Information of labeled source-domain data is transferred to the unlabeled target-domain, which may be with imbalanced labels}
             \item{An algorithm is proposed to combine sub-domain level classifiers to identify better source data applicability}
             \end{cvitems}
         \item{\bfseries Unsupervised Domain Adaptation with Balanced Cross-domain Data}
@@ -281,7 +270,7 @@
     {Backend Engineer}
     {Digital Drift Corporation}
     {Taipei, Taiwan}
-    {Mar. 2016 - Now}
+    {Mar. 2016 - Aug. 2017}
     {
         \begin{cvitems}
         \item{\bfseries Deep Neural Networks for Image Interpretation}
@@ -303,16 +292,5 @@
         \end{cvitems}
     }
 \end{cventries}
-
-\iffalse
-\cvsection{Selected Past Projects}
-\begin{cvskills}{3.7cm}{12.5cm}
-    \cvskill{Automatic Control}{A robust inverted pendulum-balancing bot that navigate along a track \ifelectronic\quad\link{https://www.youtube.com/watch?v=zKLleBYi6jc}{[YouTube Link]}\fi}
-    \cvskill{Communication System}{A gesture-detecting system using Doppler effect on WiFi signal \ifelectronic\quad\link{https://www.youtube.com/watch?v=iwQ2nppWnd0}{[YouTube Link]}\fi}
-    \cvskill{Embedded System}{{\bfseries EzBud}, a music manipulation platform that synchronizes with user heart rate during sporting}
-    \cvskill{Speech Processing}{A complete system producing sentences from raw recordings using deep learning}
-\end{cvskills}
-\fi
-
 
 \end{document}
