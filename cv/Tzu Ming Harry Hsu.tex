@@ -60,8 +60,8 @@
 %     Personal Data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Essentials
-\name{T.M. Harry}{Hsu}
-\address{Tzu-Ming Harry Hsu, Department of Electrical Engineering and Computer Science, Massachusetts Institute of Technology}
+\name{Tzu-Ming Harry}{Hsu}
+\address{Department of Electrical Engineering and Computer Science, Massachusetts Institute of Technology}
 \mobile{(+1) 617-803-7785} 
 %%% Social
 \email{stmharry@mit.edu}
@@ -83,6 +83,7 @@
 
 \makecvheader
 
+\iffalse
 \cvsection{Highlights}
 \begin{cvskills}{0.7cm}{15.7cm}
     \cvskill{1}{\textbf{2} years in deep learning service deployment for Bite! APP with 40k users and 400k user images}
@@ -96,20 +97,14 @@
     \cvskill{2}{Computer Vision}
     \cvskill{3}{Machine Learning}
 \end{cvskills}
-
-\cvsection{Skills}
-\begin{cvskills}{2.2cm}{14.2cm}
-    \cvskill{Programming}{Python / TensorFlow, Docker, C / C++, MATLAB, Java, HTML / CSS / JS}
-    \cvskill{Languages}{Mandarin Chinese (Native), Taiwanese (Native), English (Fluent), Spanish (Intermediate)}
-    \cvskill{Miscellaneous}{Beatbox, Mixology, Longboarding, Guitar}
-\end{cvskills}
+\fi
 
 \cvsection{Education}
 \begin{cventries}
     \cventry
     {Ph.D. Student in Computer Science}
     {Massachusetts Institute of Technology (MIT)}
-    {Cambridge, MA, USA}
+    {Cambridge, MA}
     {Sep. 2017 - Now}
     {}
 
@@ -122,7 +117,8 @@
         \vspace{-3mm}
         \begin{cvskills}{2.7cm}{13.7cm}
             \cvskill{GPA}{Overall (3.99 / 4.00), Last 60 units (3.99 / 4.00)}
-            \cvskill{Overall ranking}{1 / 190}
+            \cvskill{Overall rank}{1 / 190}
+            \iffalse
             \cvskill{Relevant courses}{
                 {\bfseries Deep and Structured Machine Learning}, 
                 {\bfseries Digital Visual Effects},
@@ -131,27 +127,41 @@
                 Probability and Statistics, 
                 Linear Algebra
             }
+            \fi
         \end{cvskills}
     }
 \end{cventries}
 \vspace{-5mm}
 
+\cvsection{Skills}
+\begin{cvskills}{2.2cm}{14.2cm}
+    \cvskill{Programming}{Python + TensorFlow, Docker, C / C++, MATLAB, Java, HTML / CSS / JS}
+    \cvskill{Languages}{Mandarin Chinese (Native), Taiwanese (Native), English (Fluent), Spanish (Intermediate)}
+    \iffalse
+    \cvskill{Miscellaneous}{Beatbox, Mixology, Longboarding, Guitar}
+    \fi
+\end{cvskills}
+
 \cvsection{Publications}
 \cvsubsection{Conference Paper}
 \begin{cvskills}{0.7cm}{15.7cm}
     \cvskill{[1]}{
+        \link{https://arxiv.org/pdf/1808.09351}{3D-Aware Scene Manipulation via Inverse Graphics.}
+        {\bfseries Tzu-Ming Harry Hsu*}, Shunyu Yao*, Jun-Yan Zhu, Jiajun Wu, Antonio Torralba, William T. Freeman, Joshua B. Tenenbaum, to be presented at \emph{NIPS} 2018
+    }
+    \cvskill{[2]}{
         \link{http://stmharry.github.io/pdf/ECCV_2016.pdf}{Transfer Neural Trees for Heterogeneous Domain Adaptation.}
         Wei-Yu Chen, {\bfseries Tzu-Ming Harry Hsu}, Yao-Hung Hubert Tsai, and Yu-Chiang Frank Wang, in \emph{ECCV} 2016. 
     }
-    \cvskill{[2]}{
+    \cvskill{[3]}{
         \link{http://stmharry.github.io/pdf/ICCV_2015.pdf}{Unsupervised Domain Adaptation With Imbalanced Cross-Domain Data.}
         {\bfseries Tzu-Ming Harry Hsu}, Wei-Yu Chen, Cheng-An Hou, Yao-Hung Hubert Tsai, Yi-Ren Yeh, and Yu-Chiang Frank Wang, in \emph{ICCV} 2015. 
     }
-    \cvskill{[3]}{
+    \cvskill{[4]}{
         \link{http://stmharry.github.io/pdf/ICIP_2015.pdf}{Connecting the dots without clues: Unsupervised domain adaptation for cross-domain visual classification.}
         Wei-Yu Chen, {\bfseries Tzu-Ming Harry Hsu}, Cheng-An Hou, Yi-Ren Yeh and Yu-Chiang Frank Wang, in \emph{ICIP} 2015. 
     }
-    \cvskill{[4]}{
+    \cvskill{[5]}{
         \link{http://stmharry.github.io/pdf/ICASSP_2015.pdf}{Robust Motion Artifact Reduction of Photoplethysmographic Signal with Trajectory Space Circular Model.}
         {\bfseries Tzu-Ming Harry Hsu}, Wei-Yu Chen, Kuan-Lin Chen, Mong-Chi Ko, You-Cheng Liu, An-Yeu Andy Wu, in \emph{ICASSP Signal Processing Cup} 2015. 
     }
@@ -174,8 +184,6 @@
     {2015}
 \end{cvhonors}
 
-\newpage
-
 \cvsubsection{Individual}
 \begin{cvhonors}
     \cvhonor
@@ -197,12 +205,29 @@
     {2008}
 \end{cvhonors}
 
+\newpage
+
 \cvsection{Research Experiences}
 \begin{cventries}
     \cventry
+    {Ph.D. Student of Prof. Peter Szolovits}
+    {Clinical Descision Making Group}
+    {CSAIL, MIT}
+    {Jul. 2018 - Now}
+    {
+        \begin{cvitems}
+        \item{\bfseries Unsupervised Machine Learning for Healthcare}
+            \begin{cvitems}
+                \item{Align clinical imaging data and radiology reports with representation learning.}
+            \end{cvitems}
+        \end{cvitems} 
+    }
+    \vspace{-5mm}
+
+    \cventry
     {}
     {Computer Vision Group}
-    {CSAIL MIT, US}
+    {CSAIL MIT}
     {Feb. 2018 - Now}
     {
         \begin{cvitems}
@@ -212,11 +237,12 @@
             \end{cvitems}
         \end{cvitems} 
     }
+    \vspace{-5mm}
 
     \cventry
     {Research Assistant of Dr. Fadel Adib}
     {Signal Kinetics Lab}
-    {Media Lab, MIT, US}
+    {Media Lab, MIT}
     {Sep. 2017 - Jan. 2018}
     {
         \begin{cvitems}
@@ -226,6 +252,7 @@
             \end{cvitems}
         \end{cvitems} 
     }
+    \vspace{-5mm}
 
     \cventry
     {Intern student under the instruction of Dr. Yu-Chiang Frank Wang}
@@ -259,6 +286,8 @@
             \end{cvitems}
         \end{cvitems}
     }
+    \vspace{-5mm}
+
     \cventry
     {Intern student under the instruction of Dr. An-Yeu Andy Wu}
     {Access IC Lab}
@@ -273,6 +302,8 @@
             \end{cvitems}
         \end{cvitems}
     }
+    \vspace{-5mm}
+
     \cventry
     {Intern student under the instruction of Dr. Jie-Hong Roland Jiang}
     {Laboratory for Applied Logic and Computation in System Design (ALCom Lab)}
@@ -293,8 +324,6 @@
 \end{cventries}
 \vspace{-5mm}
 
-\newpage
-
 \cvsection{Work \& Teaching Experiences}
 \begin{cventries}
     \cventry
@@ -311,6 +340,7 @@
         \end{cvitems}
     }
 
+    \iffalse
     \cventry
     {Private Tutor}
     {Olympiad Tutoring Community}
@@ -322,6 +352,7 @@
         \item{Two students became national representatives for Taiwan in International Physics Olympiad (IPhO)}
         \end{cvitems}
     }
+    \fi
 \end{cventries}
 
 \end{document}
