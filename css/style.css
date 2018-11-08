@@ -15,6 +15,11 @@ p {
     font-weight: 300;
 }
 
+.align-vertical {
+    display: flex;
+    align-items: center;
+}
+
 @media print {
     a:link:after, a:visited:after {
         content: "";
