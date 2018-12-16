@@ -58,6 +58,15 @@ ol li {
 	margin-bottom: 10px;
 }
 
+.media-body h1,
+.media-body h2,
+.media-body h3,
+.media-body h4,
+.media-body h5,
+.media-body h6 {
+    display: inline;
+}
+
 /* research */
 .label-adjust h4,
 .label-adjust h5 {
