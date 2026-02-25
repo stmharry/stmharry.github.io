@@ -30,4 +30,16 @@ describe("canonical CV content", () => {
 
     expect(new Set(orders).size).toBe(orders.length);
   });
+
+  test("citation count values use numeric representation", () => {
+    for (const publication of cvContent.publications) {
+      if (publication.citationCount === undefined) {
+        continue;
+      }
+
+      expect(typeof publication.citationCount).toBe("number");
+      expect(Number.isInteger(publication.citationCount)).toBeTrue();
+      expect(publication.citationCount).toBeGreaterThanOrEqual(0);
+    }
+  });
 });

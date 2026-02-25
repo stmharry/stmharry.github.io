@@ -73,7 +73,8 @@ const renderAward = (item: AwardItem): string => {
 const renderPublication = (item: PublicationItem): string => {
   const authors = highlightSelfInAuthors(escapeLatex(item.authors));
   const authorBlock = `{\\scriptsize ${authors}}`;
-  return renderResumeItem(item.title, String(item.year), item.venue, item.citationLabel ?? "", authorBlock);
+  const citationText = item.citationCount ? `Cited by ${item.citationCount}` : "";
+  return renderResumeItem(item.title, String(item.year), item.venue, citationText, authorBlock);
 };
 
 const renderHeader = (): string => {

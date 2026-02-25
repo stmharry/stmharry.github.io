@@ -79,12 +79,24 @@ export type AwardItem = {
 
 export type PublicationKind = "journal" | "conference" | "workshop" | "patent" | "thesis" | "preprint";
 
+export type PublicationResourceType = "paper" | "slides" | "poster" | "video" | "code" | "project" | "dataset";
+
+export type PublicationResource = {
+  type: PublicationResourceType;
+  href: string;
+};
+
+export type PublicationThumbnail = {
+  src: string;
+  aspectRatio: number;
+};
+
 export type PublicationItem = {
   id: string;
   title: string;
   year: number;
   venue: string;
-  citationLabel?: string;
+  citationCount?: number;
   authors: string;
   kind: PublicationKind;
   href?: string;
@@ -96,6 +108,8 @@ export type PublicationItem = {
   codeUrl?: string;
   projectUrl?: string;
   datasetUrl?: string;
+  resources?: PublicationResource[];
+  thumbnail?: PublicationThumbnail;
   topics: TopicSlug[];
   featuredOnWeb: boolean;
   order: number;

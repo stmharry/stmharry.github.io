@@ -19,19 +19,6 @@ const AUTHOR_VARIANTS = new Set([
   "Harry Hsu",
 ]);
 
-const parseCitationCount = (citationLabel?: string): number | null => {
-  if (!citationLabel) {
-    return null;
-  }
-
-  const match = citationLabel.match(/(\d[\d,]*)/);
-  if (!match) {
-    return null;
-  }
-
-  return Number.parseInt(match[1].replaceAll(",", ""), 10);
-};
-
 const hasYearInVenue = (venue: string): boolean => {
   return /\b(19|20)\d{2}\b/.test(venue);
 };
@@ -145,7 +132,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
       <ul className="mt-6 space-y-4">
         {visiblePublications.map((publication) => {
-          const citationCount = parseCitationCount(publication.citationLabel);
+          const citationCount = publication.citationCount ?? null;
           const mediaLinks = actionLinks(publication);
           const mediaAspect = classifyAspect(publication.thumbnailAspectRatio);
 
