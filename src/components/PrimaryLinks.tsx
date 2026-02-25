@@ -1,4 +1,5 @@
 import type { LinkItem } from "../data/cv/types";
+import { isExternalUrl, toPublicUrl } from "../lib/url";
 
 type PrimaryLinksProps = {
   links: LinkItem[];
@@ -44,16 +45,23 @@ export const PrimaryLinks = ({ links }: PrimaryLinksProps) => {
       <ul className="flex flex-wrap items-center gap-2.5 sm:gap-3">
         {links.map((link) => (
           <li key={link.label}>
+            {(() => {
+              const resolvedHref = toPublicUrl(link.href);
+              const external = isExternalUrl(resolvedHref);
+
+              return (
             <a
-              href={link.href}
-              target={link.href.startsWith("mailto:") || link.href.startsWith("/") ? undefined : "_blank"}
-              rel={link.href.startsWith("mailto:") || link.href.startsWith("/") ? undefined : "noreferrer"}
+              href={resolvedHref}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noreferrer" : undefined}
               className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_10%)] text-(--ink-700) transition hover:border-(--ink-700) hover:text-(--ink-900) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ink-700)/40"
               aria-label={`${link.label}: ${link.description}`}
               title={`${link.label}: ${link.description}`}
             >
               {iconByType[link.icon]}
             </a>
+              );
+            })()}
           </li>
         ))}
       </ul>

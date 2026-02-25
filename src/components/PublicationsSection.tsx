@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 
 import { filterPublicationsByTopic, getTopicLabelBySlug, getUsedTopics, getWebPublications } from "../data/cv/selectors";
 import type { PublicationItem, Topic } from "../data/cv/types";
+import { isExternalUrl, toPublicUrl } from "../lib/url";
 
 type PublicationsSectionProps = {
   publications: PublicationItem[];
@@ -154,7 +155,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                 <figure className="mb-3 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:hidden">
                   <div className="h-20 w-full">
                     <img
-                      src={publication.thumbnailPath}
+                      src={toPublicUrl(publication.thumbnailPath)}
                       alt={`${publication.title} thumbnail`}
                       className="h-full w-full object-contain"
                       loading="lazy"
@@ -177,7 +178,12 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
                   <h3 className="mt-2 text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
                     {publication.href ? (
-                      <a href={publication.href} target="_blank" rel="noreferrer" className="hover:underline">
+                      <a
+                        href={toPublicUrl(publication.href)}
+                        target={isExternalUrl(toPublicUrl(publication.href)) ? "_blank" : undefined}
+                        rel={isExternalUrl(toPublicUrl(publication.href)) ? "noreferrer" : undefined}
+                        className="hover:underline"
+                      >
                         {publication.title}
                       </a>
                     ) : (
@@ -192,7 +198,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                   <figure className="hidden shrink-0 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:block">
                     <div className={`${mediaFrameClassByAspect[mediaAspect]} max-w-full`}>
                       <img
-                        src={publication.thumbnailPath}
+                        src={toPublicUrl(publication.thumbnailPath)}
                         alt={`${publication.title} thumbnail`}
                         className="h-full w-full object-contain"
                         loading="lazy"
@@ -204,11 +210,11 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
               <div className="mt-3 flex flex-wrap gap-2">
                 {mediaLinks.map((link) => (
-                  <a
-                    key={`${publication.id}-${link.label}`}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
+                    <a
+                      key={`${publication.id}-${link.label}`}
+                      href={toPublicUrl(link.href)}
+                      target={isExternalUrl(toPublicUrl(link.href)) ? "_blank" : undefined}
+                      rel={isExternalUrl(toPublicUrl(link.href)) ? "noreferrer" : undefined}
                     className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
                   >
                     <ExternalLinkIcon />
