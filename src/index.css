@@ -7,7 +7,16 @@
   --ink-900: #111827;
   --ink-700: #374151;
   --paper: #f8f7f4;
+  --paper-accent: #f3f2ef;
   --line: #d1d5db;
+}
+
+:root[data-theme="dark"] {
+  --ink-900: #f3f4f6;
+  --ink-700: #d1d5db;
+  --paper: #111827;
+  --paper-accent: #1f2937;
+  --line: #374151;
 }
 
 @layer base {
@@ -21,7 +30,7 @@
     min-height: 100vh;
     font-family: var(--font-sans);
     color: var(--ink-900);
-    background: radial-gradient(circle at top left, #ffffff 0%, var(--paper) 60%, #f3f2ef 100%);
+    background: radial-gradient(circle at top left, color-mix(in oklab, var(--paper), white 10%) 0%, var(--paper) 60%, var(--paper-accent) 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
