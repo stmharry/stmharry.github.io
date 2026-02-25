@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
+import { ExperienceSection } from "./components/ExperienceSection";
+import { Hero } from "./components/Hero";
+import { PrimaryLinks } from "./components/PrimaryLinks";
+import { PublicationsSection } from "./components/PublicationsSection";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { siteContent } from "./data/content";
 import {
   applyTheme,
   getInitialTheme,
@@ -34,21 +39,14 @@ function App() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-6 py-16 sm:px-10">
-      <div className="flex items-center justify-between">
-        <p className="text-xs tracking-[0.24em] text-(--ink-700) uppercase">Personal site scaffold</p>
+    <main className="mx-auto w-full max-w-5xl px-6 py-12 sm:px-10 sm:py-16">
+      <div className="flex items-center justify-end">
         <ThemeToggle mode={theme} onToggle={handleToggleTheme} />
       </div>
-      <h1 className="mt-4 text-4xl leading-tight font-medium sm:text-6xl" style={{ fontFamily: "var(--font-serif)" }}>
-        Tzu-Ming Harry Hsu
-      </h1>
-      <p className="mt-6 max-w-2xl text-base leading-relaxed text-(--ink-700) sm:text-lg">
-        This project is now configured with Vite, React, TypeScript, Bun, and Tailwind CSS. Next, we will replace
-        this placeholder with the minimal one-page personal website content.
-      </p>
-      <div className="mt-10 border-t border-(--line) pt-4 text-sm text-(--ink-700)">
-        <span className="font-medium">Stack:</span> React + TypeScript + Tailwind CSS + Bun
-      </div>
+      <Hero profile={siteContent.profile} />
+      <PrimaryLinks links={siteContent.links} />
+      <ExperienceSection items={siteContent.experience} />
+      <PublicationsSection publications={siteContent.publications} topics={siteContent.topics} />
     </main>
   );
 }
