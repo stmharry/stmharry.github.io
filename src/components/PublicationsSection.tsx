@@ -26,32 +26,37 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
   );
 
   return (
-    <section aria-labelledby="publications-heading" className="mt-14">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 id="publications-heading" className="text-sm tracking-[0.2em] text-(--ink-700) uppercase">
-            Selected publications
-          </h2>
-          <p className="mt-2 text-sm text-(--ink-700)">Single-topic filter with curated highlights.</p>
-        </div>
-        <label className="text-xs tracking-[0.14em] text-(--ink-700) uppercase" htmlFor="topic-filter">
-          Topic
-          <select
-            id="topic-filter"
-            value={topicFilter}
-            onChange={(event) => {
-              setTopicFilter(event.target.value as TopicFilter);
-            }}
-            className="mt-2 block w-full rounded-md border border-(--line) bg-transparent px-3 py-2 text-sm text-(--ink-900) sm:w-52"
+    <section aria-labelledby="publications-heading" className="mt-20">
+      <div>
+        <h2 id="publications-heading" className="text-sm tracking-[0.2em] uppercase">
+          Selected publications
+        </h2>
+        <p className="mt-2 text-sm text-(--ink-700)">Single-topic filter with curated highlights.</p>
+        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by topic">
+          <button
+            className={`rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
+              topicFilter === "all"
+                ? "border-(--ink-900) bg-(--ink-900) text-(--paper)"
+                : "border-(--line) text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
+            }`}
+            onClick={() => setTopicFilter("all")}
           >
-            <option value="all">All topics</option>
-            {availableTopics.map((topic) => (
-              <option key={topic.slug} value={topic.slug}>
-                {topic.label}
-              </option>
-            ))}
-          </select>
-        </label>
+            All
+          </button>
+          {availableTopics.map((topic) => (
+            <button
+              key={topic.slug}
+              className={`rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
+                topicFilter === topic.slug
+                  ? "border-(--ink-900) bg-(--ink-900) text-(--paper)"
+                  : "border-(--line) text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
+              }`}
+              onClick={() => setTopicFilter(topic.slug)}
+            >
+              {topic.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <ul className="mt-6 space-y-4">

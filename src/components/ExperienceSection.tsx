@@ -10,8 +10,8 @@ const formatYearRange = (startYear: number, endYear: number | null) => {
 
 export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
   return (
-    <section aria-labelledby="experience-heading" className="mt-14">
-      <h2 id="experience-heading" className="text-sm tracking-[0.2em] text-(--ink-700) uppercase">
+    <section aria-labelledby="experience-heading" className="mt-20">
+      <h2 id="experience-heading" className="text-sm tracking-[0.2em] uppercase">
         Experience
       </h2>
       <ul className="mt-5 space-y-4">
