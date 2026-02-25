@@ -27,7 +27,7 @@ python3 .agents/skills/google-scholar-cv-sync/scripts/sync_google_scholar_cv.py 
   --apply
 ```
 4. For unmatched/new items, add or edit publication objects manually in `src/data/cv/content.ts`:
-- Keep `id`, `kind`, `topics`, `featuredOnWeb`, and `order` aligned with project conventions.
+- Keep `id`, `kind`, `topics`, and `order` aligned with project conventions.
 - Set `citationCount` using numeric values when citations are non-zero.
 
 ## Options

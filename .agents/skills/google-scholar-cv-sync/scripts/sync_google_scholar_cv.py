@@ -338,7 +338,6 @@ def run_self_test() -> int:
       venue: "Venue X",
       kind: "journal",
       topics: ["medical-ai"],
-      featuredOnWeb: false,
       order: 1,
     },
     {
@@ -349,7 +348,6 @@ def run_self_test() -> int:
       citationCount: 5,
       kind: "journal",
       topics: ["medical-ai"],
-      featuredOnWeb: false,
       order: 2,
     },
   ],
