@@ -56,10 +56,10 @@ const classifyAspect = (aspectRatio?: number): "panorama" | "wide" | "standard" 
 };
 
 const mediaFrameClassByAspect = {
-  panorama: "h-16 w-32",
-  wide: "h-16 w-28",
-  standard: "h-16 w-24",
-  compact: "h-18 w-18",
+  panorama: "h-12 w-24 sm:h-16 sm:w-32",
+  wide: "h-12 w-20 sm:h-16 sm:w-28",
+  standard: "h-12 w-16 sm:h-16 sm:w-24",
+  compact: "h-14 w-14 sm:h-18 sm:w-18",
 } as const;
 
 const renderAuthors = (authors: string) => {
