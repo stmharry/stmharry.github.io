@@ -9,6 +9,7 @@
   --paper: #f8f7f4;
   --paper-accent: #f3f2ef;
   --line: #d1d5db;
+  color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,16 +27,38 @@
     box-sizing: border-box;
   }
 
+  html,
   body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
+    background-color: var(--paper);
+  }
+
+  body {
     font-family: var(--font-sans);
     color: var(--ink-900);
-    background: radial-gradient(circle at top left, color-mix(in oklab, var(--paper), white 10%) 0%, var(--paper) 60%, var(--paper-accent) 100%);
+    background: radial-gradient(circle at top left, #ffffff 0%, var(--paper) 60%, var(--paper-accent) 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: radial-gradient(circle at top left, #182233 0%, var(--paper) 60%, var(--paper-accent) 100%);
+    }
+  }
+
+  @supports (color: color-mix(in oklab, white, black)) {
+    body {
+      background: radial-gradient(
+        circle at top left,
+        color-mix(in oklab, var(--paper), white 10%) 0%,
+        var(--paper) 60%,
+        var(--paper-accent) 100%
+      );
+    }
   }
 
   a {
