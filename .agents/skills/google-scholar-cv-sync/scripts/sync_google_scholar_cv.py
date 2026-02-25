@@ -413,6 +413,30 @@ def apply_updates(content: str, blocks: list[PublicationBlock], scholar_by_norm:
     return merged, report
 
 
+def update_profile_summary_citation_bullet(content: str, total_citations: int) -> tuple[str, str]:
+    summary_match = re.search(r"(summaryBullets:\s*\[)(.*?)(\n\s*\],)", content, re.S)
+    if not summary_match:
+        return content, "not_found"
+
+    bullets_body = summary_match.group(2)
+    citation_pattern = re.compile(r'("[^"]*?with\s+)([0-9][0-9,]*)(\s+Google Scholar citations\.[^"]*")')
+    citation_match = citation_pattern.search(bullets_body)
+    if not citation_match:
+        return content, "not_found"
+
+    new_count = f"{total_citations:,}"
+    if citation_match.group(2) == new_count:
+        return content, "unchanged"
+
+    updated_bullets_body = (
+        bullets_body[: citation_match.start(2)]
+        + new_count
+        + bullets_body[citation_match.end(2) :]
+    )
+    updated_content = content[: summary_match.start(2)] + updated_bullets_body + content[summary_match.end(2) :]
+    return updated_content, "updated"
+
+
 def dedupe_entries(entries: Iterable[ScholarEntry]) -> dict[str, ScholarEntry]:
     by_norm: dict[str, ScholarEntry] = {}
     for entry in entries:
@@ -491,6 +515,19 @@ def run_self_test() -> int:
     assert report["scholar_url_changes"]["added"] == 2
     assert report["paper_url_changes"]["added"] == 1
     assert report["paper_url_changes"]["updated"] == 1
+
+    profile_sample = '''export const cvContent = {
+  profile: {
+    summaryBullets: [
+      "Entrepreneurial builder with experience leading cross-functional teams.",
+      "AI and healthcare researcher with peer-reviewed work spanning medical imaging and federated learning, with 1,234 Google Scholar citations.",
+    ],
+  },
+};'''
+    profile_updated, profile_state = update_profile_summary_citation_bullet(profile_sample, 98765)
+    assert profile_state == "updated"
+    assert "with 98,765 Google Scholar citations." in profile_updated
+
     print("Self-test passed")
     return 0
 
@@ -540,6 +577,12 @@ def main() -> int:
     content = content_path.read_text(encoding="utf-8")
     blocks = parse_publication_blocks(content)
     merged, report = apply_updates(content, blocks, scholar_by_norm)
+    total_citations = sum(entry.citations for entry in scholar_by_norm.values())
+    merged, summary_bullet_state = update_profile_summary_citation_bullet(merged, total_citations)
+    report["profile_summary_citation_bullet"] = {
+        "status": summary_bullet_state,
+        "total_google_scholar_citations": total_citations,
+    }
 
     print(json.dumps(report, indent=2, ensure_ascii=False))
 

@@ -19,6 +19,7 @@ python3 .agents/skills/google-scholar-cv-sync/scripts/sync_google_scholar_cv.py 
 - `citation_count_changes`: counts of `added`/`updated`/`removed` numeric values.
 - `scholar_url_changes`: counts of updates to `scholarCitationUrl`.
 - `paper_url_changes`: counts of updates to `paperUrl`.
+- `profile_summary_citation_bullet`: sync status for the profile summary bullet that includes `Google Scholar citations`, plus the recomputed total citation count.
 - `new_scholar_entries`: items present on Scholar but not matched in CV by normalized title.
 - `unmatched_cv_titles`: CV items not found on Scholar.
 3. Apply updates after review:
@@ -50,4 +51,5 @@ Link behavior during apply:
 
 - Matching uses normalized title strings (case/punctuation-insensitive).
 - Script updates `citationCount`, `paperUrl`, and `scholarCitationUrl`; it does not auto-create new publication objects.
+- Script also updates the numeric citation value inside the profile summary bullet sentence that explicitly contains `Google Scholar citations`.
 - Google Scholar HTML can change; if parsing fails, inspect row selectors in the script and patch accordingly.

@@ -8,8 +8,8 @@ export const cvContent: CvContent = {
     headline: "Ph.D. in AI and Healthcare, MIT",
     location: "Taiwan and Boston",
     summaryBullets: [
-      "Expert in technologies including AI and blockchain, with the mission to scale human civilization and liberate humanity from repetitive labor.",
       "Entrepreneurial builder with experience leading cross-functional teams, scaling products from idea to launch, and turning research into practical impact.",
+      "Researcher with peer-reviewed work spanning AI, medical imaging, and machine learning, with 3,685 Google Scholar citations.",
       "Taiwan-born, US-educated innovator seeking to elevate Taiwan's role as a global engineering powerhouse and promoting a culture of rapid iterative innovation.",
       "Ocean lover with an AIDA Instructor Certification and an SDI Open Water Scuba Diving Certification.",
     ],
