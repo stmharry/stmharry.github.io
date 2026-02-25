@@ -3,6 +3,7 @@ import { isExternalUrl, toPublicUrl } from "../lib/url";
 
 type PrimaryLinksProps = {
   links: LinkItem[];
+  className?: string;
 };
 
 const iconByType = {
@@ -39,9 +40,9 @@ const iconByType = {
   ),
 } as const;
 
-export const PrimaryLinks = ({ links }: PrimaryLinksProps) => {
+export const PrimaryLinks = ({ links, className = "mt-8 sm:mt-10" }: PrimaryLinksProps) => {
   return (
-    <section aria-label="Primary links" className="mt-8 sm:mt-10">
+    <section aria-label="Primary links" className={className}>
       <ul className="flex flex-wrap items-center gap-2.5 sm:gap-3">
         {links.map((link) => (
           <li key={link.label}>

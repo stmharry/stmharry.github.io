@@ -1,7 +1,10 @@
+import { PrimaryLinks } from "./PrimaryLinks";
+import type { LinkItem } from "../data/cv/types";
 import type { WebProfile } from "../data/cv/selectors";
 
 type HeroProps = {
   profile: WebProfile;
+  links: LinkItem[];
 };
 
 const SUMMARY_TITLES = ["Builder", "Research", "Mission", "Life"];
@@ -26,7 +29,7 @@ const StatementRail = ({ bullets }: SummaryShowcaseProps) => (
   </section>
 );
 
-export const Hero = ({ profile }: HeroProps) => {
+export const Hero = ({ profile, links }: HeroProps) => {
   return (
     <header className="mt-2 w-full sm:mt-4">
       <p className="text-xs tracking-[0.24em] text-(--ink-700) uppercase">Personal site</p>
@@ -34,6 +37,7 @@ export const Hero = ({ profile }: HeroProps) => {
         {profile.name}
       </h1>
       <p className="mt-3 text-xs tracking-[0.16em] text-(--ink-700) uppercase sm:mt-4 sm:text-sm">{profile.headline}</p>
+      <PrimaryLinks links={links} className="mt-5 sm:mt-6" />
       <div className="mt-6 max-w-4xl">
         <StatementRail bullets={profile.summaryBullets} />
       </div>
