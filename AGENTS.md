@@ -9,6 +9,9 @@
 - Scope for v1: one-page essentials (hero, short bio, links, selected publications)
 - Legacy usage rule: use `origin/master` only as a source of content/assets
 - `CNAME` is intentionally not included during scaffold stage
+- Content architecture: typed data in `src/data/*`, rendering in `src/components/*`
+- Topics use internal slug + display label (`TopicSlug` + `Topic`)
+- Theme behavior: manual light/dark toggle, system default, persisted preference
 
 ## Working agreement
 
@@ -26,3 +29,10 @@
 - Prefer whitespace, restrained color, and clear hierarchy
 - Preserve mobile and desktop readability
 - Avoid carrying old Bootstrap-era styles into the new implementation
+
+## Core features for current baseline
+
+- Structured sections with predefined fields for profile, experience, and publications
+- Single-select topic filter for selected publications
+- SEO baseline (meta tags + Open Graph + Twitter + JSON-LD Person)
+- Theme system with light/dark mode and local persistence
