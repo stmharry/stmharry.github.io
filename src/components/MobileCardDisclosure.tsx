@@ -56,6 +56,7 @@ export const MobileCardDisclosure = ({
   const isExpanded = isDesktop || isExpandedOnMobile;
   const panelId = `${id}-mobile-details`;
   const triggerContent = typeof trigger === "function" ? trigger({ isDesktop, isExpanded }) : trigger;
+  const panelSpacingClass = isExpanded ? className : "";
 
   const toggleExpanded = () => {
     if (isDesktop) {
@@ -93,11 +94,9 @@ export const MobileCardDisclosure = ({
             toggleExpanded();
           }
         }}
-        className={`relative ${!isDesktop ? "cursor-pointer rounded-md p-1 -m-1 transition duration-200 ease-out active:scale-[0.995] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ink-900)" : ""}`}
+        className={`relative ${!isDesktop ? "-m-1 cursor-pointer rounded-md p-1 pr-10 transition duration-200 ease-out active:scale-[0.995] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ink-900)" : ""}`}
       >
-        {!isDesktop ? <span aria-hidden="true" className="pointer-events-none float-right h-7 w-7" /> : null}
         {triggerContent}
-        {!isDesktop ? <span aria-hidden="true" className="block clear-both h-0" /> : null}
         {!isDesktop ? (
           <span className="pointer-events-none absolute top-0.5 right-0.5 z-10 rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_6%)] p-1.5 text-(--ink-700)">
             <ChevronDown expanded={isExpandedOnMobile} />
@@ -107,8 +106,8 @@ export const MobileCardDisclosure = ({
 
       <div
         id={panelId}
-        className={`${className} grid transition-[grid-template-rows,opacity,margin] duration-200 ease-out motion-reduce:transition-none ${
-          isExpanded ? "grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0"
+        className={`${panelSpacingClass} grid transition-[grid-template-rows,opacity,margin] duration-200 ease-out motion-reduce:transition-none ${
+          isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
         <div className={`min-h-0 overflow-hidden ${isExpanded ? "pointer-events-auto" : "pointer-events-none"}`}>{children}</div>
