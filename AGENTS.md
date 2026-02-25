@@ -58,3 +58,10 @@
 - SEO baseline (meta tags + Open Graph + Twitter + JSON-LD Person)
 - Theme system with automatic system light/dark behavior
 - Dual output targets: minimal website + full resume PDF
+
+## Local skills
+
+- Project-local skills live in `./.agents/skills/`
+- `google-scholar-cv-sync` (`./.agents/skills/google-scholar-cv-sync/SKILL.md`)
+- Purpose (`google-scholar-cv-sync`): extract Google Scholar publications/citation counts and reconcile them with `src/data/cv/content.ts`
+- Trigger (`google-scholar-cv-sync`): requests to sync/update Scholar citations, detect new Scholar publications, or merge Scholar publication metadata into CV source-of-truth

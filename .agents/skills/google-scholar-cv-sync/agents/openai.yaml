@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scholar CV Sync"
+  short_description: "Sync Google Scholar citations into content.ts"
+  default_prompt: "Fetch my Google Scholar profile, update citation counts in src/data/cv/content.ts, and report new unmatched publications."
