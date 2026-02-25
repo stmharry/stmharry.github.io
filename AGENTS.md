@@ -33,6 +33,7 @@
   - `bun run build`
   - `bun run resume:generate`
 - Push after each successful commit
+- When `main` receives new commits (direct commit or post-integration), push `main` to `origin/main` immediately
 - Follow `.gitmessage.txt` gitmoji commit style
 
 ## Worktree merge strategy
