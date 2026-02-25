@@ -16,8 +16,8 @@ export const getWebProfile = (content: CvContent): WebProfile => {
   };
 };
 
-export const getWebExperience = (content: CvContent, limit = 4): ExperienceItem[] => {
-  return content.experience.slice(0, limit);
+export const getWebExperience = (content: CvContent): ExperienceItem[] => {
+  return content.experience;
 };
 
 export const sortPublicationsByYear = (publications: PublicationItem[]): PublicationItem[] => {

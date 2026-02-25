@@ -57,6 +57,7 @@ export type ExperienceItem = {
   location: string;
   summary: string;
   highlights: DetailItem[];
+  highlighted: boolean;
 };
 
 export type LeadershipItem = {

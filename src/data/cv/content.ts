@@ -72,104 +72,101 @@ export const cvContent: CvContent = {
   education: [
     {
       id: "mit-phd",
-      institution: "Massachusetts Institute of Technology",
-      period: "2020 -- 2022",
+      institution: "Massachusetts Institute of Technology (MIT)",
+      period: "Jun 2020 -- Jun 2022",
       degree: "Ph.D., Computer Science",
       location: "Cambridge, MA",
       details: [
         { label: "Advisor", text: "Peter Szolovits" },
-        { label: "Dissertation", text: "Effective Modeling of Medical Imaging Tasks with Constrained Data" },
-        { label: "Research Areas", text: "Computer Vision, Federated Learning, and Machine Learning for Healthcare." },
+        { label: "Research areas", text: "Computer vision, federated learning, machine learning for healthcare" },
+        {
+          text: "See Research Pillars 1-3 for detailed narratives on medical language models, clinically validated imaging, and robust visual learning under distribution shift",
+        },
       ],
     },
     {
       id: "mit-sm",
-      institution: "Massachusetts Institute of Technology",
-      period: "2017 -- 2020",
-      degree: "Master's (S.M.), Electrical Engineering and Computer Science",
+      institution: "Massachusetts Institute of Technology (MIT)",
+      period: "Sep 2017 -- May 2020",
+      degree: "S.M., Electrical Engineering and Computer Science",
       location: "Cambridge, MA",
       details: [
-        { label: "Advisors", text: "Peter Szolovits / Fadel Adib" },
-        { label: "Thesis", text: "Automatic Longitudinal Assessment of Tumor Responses" },
-        { label: "Research Areas", text: "Computer Vision, Machine Learning, Wireless Signal, and Signal Processing." },
+        { label: "Advisors", text: "Peter Szolovits, Fadel Adib" },
+        { label: "Research areas", text: "Computer vision, machine learning, wireless signal, signal processing" },
+        {
+          text: "See Research Pillars 3-4 for detailed narratives on robust visual learning and wireless sensing / RF-based intelligence",
+        },
       ],
     },
     {
       id: "ntu-bs",
-      institution: "National Taiwan University",
-      period: "2011 -- 2016",
-      degree: "Bachelor (B.S.), Physics; and Bachelor (B.S.E.), Electrical Engineering",
+      institution: "National Taiwan University (NTU)",
+      period: "Sep 2011 -- Jun 2016",
+      degree: "B.S., Physics; B.S.E., Electrical Engineering",
       location: "Taipei, Taiwan",
-      details: [{ label: "Grade", text: "GPA: 3.99/4.00, Class Rank: 1/190" }],
+      details: [
+        { label: "Class rank", text: "1/190" },
+        { label: "GPA", text: "3.99 / 4.00" },
+      ],
     },
   ],
   experience: [
     {
-      id: "codegreen",
-      organization: "CodeGreen Labs PBC",
-      period: "2023 -- 2024",
-      role: "Co-founder and Chief Technology Officer (CTO)",
-      location: "Boston / Taipei",
+      id: "dentscape",
+      organization: "Dentscape",
+      period: "Apr 2025 -- Present",
+      role: "Machine Learning & Software Engineering Consultant",
+      location: "Taipei / Remote",
       summary:
-        "Building decentralized software solutions that empower climate-conscious investors and enable funding for initiatives aligned with the UN's 2030 Agenda.",
+        "Part-time senior ML and software engineering consultant (10-30 hours/week) focusing on large-scale dental data pipelines, model deployment, and production engineering practices.",
       highlights: [
-        { label: "Rapid Growth", text: "Achieved $1MM USD annual revenue with 10 team members." },
         {
-          label: "Extensive Partnerships",
-          text: "Established numerous partnerships with Microsoft, the Global Blockchain Business Council, the Gold Standard, the SDG Data Alliance, and PVBLIC, among others.",
+          text: "Reorganized a fragmented ~10 TB dental dataset into a standardized ~4 TB ML-ready registry, reducing raw-data access from ~3 days to minutes.",
         },
         {
-          label: "Integrated Approach",
-          text: "Formed a collaborative team of top professionals from climate, finance, and software fields to drive innovation.",
+          text: "Rebuilt labeling and pre-labeling workflows end-to-end, cutting 100-200 case batch turnaround from ~4 weeks to ~1 week with clear audit trails.",
         },
         {
-          label: "Crossing Difficult Gaps",
-          text: "Developed decentralized systems with strong auditability, regulatory compliance, and interoperability within existing ecosystems.",
+          text: "Standardized devops/deployment with modern packaging, private registry support, and GitHub Actions; deploys moved from manual half-day ops to single-push workflows.",
+        },
+        {
+          text: "Led infra migration from GPU-heavy services to CPU-compatible stack for CPU-bound workloads, reducing overall server costs by ~50%.",
+        },
+        {
+          text: "Implemented bilevel/meta-learning framework for personal AI crown generation and improved preference fit by ~20%, contributing to higher user engagement.",
+        },
+        {
+          text: "Optimized backend pipelines for SLO segmentation and crown generation, achieving ~110% aggregate throughput improvement.",
+        },
+        {
+          text: "Introduced structured hiring and engineering standards; closed a senior leadership hire and supported award-related media visibility.",
         },
       ],
+      highlighted: true,
     },
     {
-      id: "hashgreen",
-      organization: "Hashgreen Labs",
-      period: "2022 -- 2023",
+      id: "clarq-ai",
+      organization: "Clarq AI",
+      period: "Dec 2024 -- Present",
       role: "Co-founder and Chief Technology Officer (CTO)",
-      location: "Boston / Taipei",
+      location: "Taipei / Remote",
       summary:
-        "Driving real-world impact with green blockchain technology, leveraging smart contracts and programmable data to solve critical problems.",
+        "Founding technical and fundraising partner helping reposition Clarq from hardware product to human force intelligence data and model company.",
       highlights: [
         {
-          label: "Capacity Building",
-          text: "Raised over $1MM USD in capital and led team growth from inception to 20 employees with robust hiring and review systems.",
+          text: "Co-led fundraising and positioning narrative around a three-layer strategy: hardware wedge, SaaS profit engine, and long-term data/model moat.",
         },
         {
-          label: "Project Delivery",
-          text: "Secured and delivered projects for clients including the World Bank and Chia Network.",
+          text: "Drove US-facing investor outreach and progressed pre-seed conversations toward near-commit stage with angels.",
         },
         {
-          label: "Breakthrough Technology",
-          text: "Led development of decentralized finance protocols including a DEX and AMM, achieving an early milestone on the Chia blockchain.",
+          text: "Supported Startup Island Taiwan Silicon Valley program participation and international expansion narrative.",
+        },
+        {
+          text: "Aligned product roadmap, data strategy, and investor-facing story across Taiwan hardware operations and US capital market expectations.",
         },
       ],
-    },
-    {
-      id: "iabit",
-      organization: "International Academia of Biomedical Innovation Technology",
-      period: "2021 -- Present",
-      role: "Consultant and Convener",
-      location: "Taipei, Taiwan",
-      summary:
-        "Driving innovation in biomedical technology through interdisciplinary collaboration, industry partnerships, and advanced training programs.",
-      highlights: [
-        {
-          text: "Contributed to a community of 50+ members, supporting 8+ academic projects and 15+ publications in leading venues.",
-        },
-        {
-          text: "Led a dental AI research team in collaboration with National Taiwan University Hospital.",
-        },
-        {
-          text: "Co-organized demo events with 100+ participants to promote public education and awareness.",
-        },
-      ],
+      highlighted: true,
     },
     {
       id: "mit-ra",
@@ -178,7 +175,7 @@ export const cvContent: CvContent = {
       role: "Research Assistant",
       location: "Cambridge, MA",
       summary:
-        "Pioneering new frontiers in medicine and AI through publication, peer review, and collaboration with leading organizations.",
+        "Pioneered medical AI and computer vision research through top-tier publications, interdisciplinary partnerships, and clinically grounded system development.",
       highlights: [
         {
           text: "Published 14 conference articles, 5 journal articles, one U.S. patent, and two degree theses.",
@@ -190,33 +187,59 @@ export const cvContent: CvContent = {
         },
         { text: "Awarded scholarships totaling 4 years in duration." },
       ],
+      highlighted: true,
     },
     {
       id: "worldquant",
       organization: "WorldQuant",
-      period: "2021 -- 2021",
+      period: "Jun 2021 -- Aug 2021",
       role: "Data Science Intern",
       location: "Taipei, Taiwan",
-      summary:
-        "A quantitative investment firm that uses advanced technology and innovative research to analyze and forecast market trends.",
-      highlights: [{ text: "Researched and optimized market front-running strategies, improving market correlation by +1.5%." }],
+      summary: "Researched and optimized market front-running strategies, delivering a +1.5% increase in market correlation for an existing strategy.",
+      highlights: [],
+      highlighted: false,
     },
     {
-      id: "google",
-      organization: "Google",
-      period: "2019 -- 2020",
-      role: "Student Researcher and Software Engineer Intern",
-      location: "Seattle, WA",
+      id: "digital-drift",
+      organization: "Digital Drift",
+      period: "Mar 2016 -- Mar 2020",
+      role: "Lead Machine Learning Scientist",
+      location: "Taipei, Taiwan",
       summary:
-        "Driving progress in Mobile Vision and Medical AI research groups through open-source research and development.",
+        "Built production mobile intelligence capabilities by combining image-recognition models with maintainable backend APIs for real-world deployment.",
       highlights: [
-        { text: "Conducted research on deep federated learning and contributed to a rapidly growing field." },
-        { text: "Published 2 peer-reviewed papers on behalf of the company." },
+        { text: "Built deep neural networks for cuisine recognition and matching using TensorFlow on multi-GPU machines." },
+        { text: "Designed and maintained backend APIs to serve model predictions in production settings." },
+      ],
+      highlighted: false,
+    },
+    {
+      id: "google-software-engineer-intern",
+      organization: "Google",
+      period: "Jun 2020 -- Sep 2020",
+      role: "Software Engineer Intern",
+      location: "Remote",
+      summary: "Contributed to software and experimentation infrastructure supporting applied machine learning efforts.",
+      highlights: [],
+      highlighted: false,
+    },
+    {
+      id: "google-student-researcher",
+      organization: "Google",
+      period: "Jun 2019 -- Mar 2020",
+      role: "Student Researcher",
+      location: "Seattle, WA / Cambridge, MA",
+      summary:
+        "Mobile Vision and Medical AI research groups.",
+      highlights: [
+        { text: "Conducted foundational research in deep federated learning, contributing to early growth of the field." },
+        { text: "Published 2 peer-reviewed papers and presented findings at top conferences and workshops." },
         {
-          text: "Developed a scalable library for large-scale machine learning experiments across thousands of machines and 1000+ GPUs.",
+          text: "Developed a scalable experimentation library running on thousands of machines and 1,000+ GPUs (over 1M machine hours).",
         },
         { text: "Open-sourced research code and datasets for broader community use." },
       ],
+      highlighted: true,
     },
     {
       id: "bwh-bidmc",
@@ -226,45 +249,27 @@ export const cvContent: CvContent = {
       location: "Boston, MA",
       summary: "Research and deployment in clinical AI workflows.",
       highlights: [
-        { text: "Published three research articles on liver tumor assessment, COVID-19 risk prediction, and pancreatic cancer assessment." },
+        { text: "Co-authored research on liver tumor assessment, COVID-19 clinical risk prediction, and automatic pancreatic cancer assessment." },
         {
-          text: "Developed and implemented an AI patient screening pipeline in PACS workflows, screening 1,000+ patients.",
+          text: "Built and deployed an AI-driven patient screening pipeline in PACS workflows, screening 1,000+ patients and improving diagnostic workflows.",
         },
-        { text: "Managed shared computation resources for a 10+ member research unit." },
+        { text: "Managed compute infrastructure for a deep learning research unit of 10+ members." },
       ],
+      highlighted: false,
     },
     {
-      id: "academia-sinica",
-      organization: "Multimedia and Machine Learning Lab, Academia Sinica",
-      period: "2014 -- 2016",
-      role: "Student Researcher",
+      id: "olympiad-tutor",
+      organization: "Olympiad Tutoring Community",
+      period: "Sep 2011 -- Jun 2015",
+      role: "Private Tutor",
       location: "Taipei, Taiwan",
-      summary: "Research on heterogeneous and semi-supervised domain adaptation for visual classification.",
-      highlights: [
-        { text: "Published 3 peer-reviewed papers and presented findings at top conferences and workshops." },
-      ],
-    },
-    {
-      id: "access-ic",
-      organization: "Access IC Lab",
-      period: "2014 -- 2015",
-      role: "Student Researcher",
-      location: "Taipei, Taiwan",
-      summary: "Studied photoplethysmographic signals and developed motion-artifact reduction algorithms.",
+      summary: "Tutored high school physics, competition physics, GRE Physics, and SAT II Physics.",
       highlights: [
         {
-          text: "Obtained 10th place in the 2015 IEEE Signal Processing Cup for heart-rate estimation.",
+          text: "Mentored students who became Taiwan national representatives in the International Physics Olympiad (IPhO).",
         },
       ],
-    },
-    {
-      id: "alcom",
-      organization: "Laboratory for Applied Logic and Computation in System Design (ALCom Lab)",
-      period: "2013 -- 2014",
-      role: "Student Researcher",
-      location: "Taipei, Taiwan",
-      summary: "Developed mathematical models for analog neural networks in collaboration with TSMC.",
-      highlights: [],
+      highlighted: false,
     },
   ],
   leadership: [
