@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper, margin=0.75in]{geometry}
+
+\usepackage{xcolor}
+\usepackage{baskervillef}
+\usepackage{CJKutf8}
+\usepackage[T1]{fontenc}
+
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{enumitem}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage[super]{nth}
+
+\usepackage{xparse}
+
+\titleformat
+  {\section}
+  {\it\vspace{3pt}}
+  {}
+  {0em}
+  {}
+  [\titlerule\vspace{-5pt}]
+
+\NewDocumentEnvironment{resumeItemList}
+  {
+    O{0.15in}
+    +b
+  }
+  {
+    \begin{itemize}[leftmargin=#1, label={}]
+      #2
+    \end{itemize}
+  }{}
+
+\NewDocumentCommand{\resumeItem}
+  {
+    O{0.99\textwidth}
+    O{0.80\textwidth}
+    m m m m m
+  }
+  {
+    \item
+      \begin{tabular*}{#1}[t]{@{\extracolsep{\fill}} p{#2} r}
+        {\bf #3} & {#4} \\
+        {\it\small #5} & {\it\small #6}
+      \end{tabular*}
+
+      \ifx\empty#7\else{\small #7}\fi
+  }
+
+\NewDocumentEnvironment{resumeDetailItemList}
+  {
+    O{\small}
+    +b
+  }
+  {
+    \begin{itemize}[topsep=0pt]
+      #1#2
+    \end{itemize}
+  }{}
+
+\NewDocumentCommand{\resumeDetailItem}
+  {
+    O{}
+    m
+  }
+  {
+    \item
+      \ifx\empty#1\else{\emph{#1}: }\fi#2
+  }
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\raggedright
+
+\begin{document}
+
+%%__GENERATED_CONTENT__%%
+
+\end{document}

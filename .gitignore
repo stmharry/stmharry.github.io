@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local assistant workspace
+.claude/
+
+# Resume build artifacts
+resume/build/
+resume/generated-content.tex
+resume/resume.tex
+resume/*.aux
+resume/*.fdb_latexmk
+resume/*.fls
+resume/*.log
+resume/*.out

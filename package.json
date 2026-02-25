@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "resume:generate": "bun run scripts/generate-resume-tex.ts",
+    "resume:build": "bun run resume:generate && bash scripts/build-resume.sh",
+    "resume:clean": "bash scripts/clean-resume.sh"
   },
   "dependencies": {
     "react": "^19.2.0",
