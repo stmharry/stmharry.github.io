@@ -127,7 +127,7 @@ bun run resume:clean
 
 Output PDF path:
 
-- `public/assets/resume/resume.pdf`
+- `public/assets/resume/tzu-ming-harry-hsu-resume.pdf`
 
 ## Commit message format
 

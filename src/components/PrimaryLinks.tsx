@@ -41,18 +41,18 @@ const iconByType = {
 export const PrimaryLinks = ({ links }: PrimaryLinksProps) => {
   return (
     <section aria-label="Primary links" className="mt-8 sm:mt-10">
-      <ul className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+      <ul className="flex flex-wrap items-center gap-2.5 sm:gap-3">
         {links.map((link) => (
           <li key={link.label}>
             <a
               href={link.href}
               target={link.href.startsWith("mailto:") || link.href.startsWith("/") ? undefined : "_blank"}
               rel={link.href.startsWith("mailto:") || link.href.startsWith("/") ? undefined : "noreferrer"}
-              className="inline-flex h-10 items-center gap-2 rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-4 text-sm text-(--ink-700) transition hover:border-(--ink-700) hover:text-(--ink-900) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ink-700)/40"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_10%)] text-(--ink-700) transition hover:border-(--ink-700) hover:text-(--ink-900) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ink-700)/40"
               aria-label={`${link.label}: ${link.description}`}
+              title={`${link.label}: ${link.description}`}
             >
               {iconByType[link.icon]}
-              <span>{link.label}</span>
             </a>
           </li>
         ))}

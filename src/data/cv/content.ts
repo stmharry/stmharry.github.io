@@ -56,7 +56,7 @@ export const cvContent: CvContent = {
       {
         icon: "resume",
         label: "Resume",
-        href: "/assets/resume/resume.pdf",
+        href: "/assets/resume/tzu-ming-harry-hsu-resume.pdf",
         description: "Full PDF",
       },
     ],

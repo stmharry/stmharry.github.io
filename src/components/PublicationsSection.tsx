@@ -150,6 +150,19 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
           return (
             <li key={publication.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
+              {publication.thumbnailPath ? (
+                <figure className="mb-3 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:hidden">
+                  <div className="h-20 w-full">
+                    <img
+                      src={publication.thumbnailPath}
+                      alt={`${publication.title} thumbnail`}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </figure>
+              ) : null}
+
               <div className="flex items-start gap-3">
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tracking-[0.13em] text-(--ink-700) uppercase">
@@ -176,7 +189,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                 </div>
 
                 {publication.thumbnailPath ? (
-                  <figure className="shrink-0 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5">
+                  <figure className="hidden shrink-0 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:block">
                     <div className={`${mediaFrameClassByAspect[mediaAspect]} max-w-full`}>
                       <img
                         src={publication.thumbnailPath}

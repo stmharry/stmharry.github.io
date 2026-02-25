@@ -4,7 +4,8 @@ export type WebProfile = {
   name: string;
   headline: string;
   location: string;
-  summaryBullets: string[];
+  summaryLead: string;
+  summaryNote: string;
 };
 
 export const getWebProfile = (content: CvContent): WebProfile => {
@@ -12,7 +13,9 @@ export const getWebProfile = (content: CvContent): WebProfile => {
     name: content.profile.name,
     headline: content.profile.headline,
     location: content.profile.location,
-    summaryBullets: content.profile.summaryBullets,
+    summaryLead:
+      "Founder and CTO building practical AI systems across healthcare, computer vision, and emerging infrastructure.",
+    summaryNote: "MIT PhD in Computer Science focused on constrained-data modeling and real-world deployment.",
   };
 };
 

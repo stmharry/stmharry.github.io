@@ -15,6 +15,6 @@ mkdir -p "$BUILD_DIR"
 mkdir -p "$OUTPUT_DIR"
 
 latexmk -pdf -interaction=nonstopmode -output-directory="$BUILD_DIR" "$RESUME_DIR/resume.tex"
-cp "$BUILD_DIR/resume.pdf" "$OUTPUT_DIR/resume.pdf"
+cp "$BUILD_DIR/resume.pdf" "$OUTPUT_DIR/tzu-ming-harry-hsu-resume.pdf"
 
-printf "Generated PDF: %s\n" "$OUTPUT_DIR/resume.pdf"
+printf "Generated PDF: %s\n" "$OUTPUT_DIR/tzu-ming-harry-hsu-resume.pdf"
