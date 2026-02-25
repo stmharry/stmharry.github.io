@@ -175,8 +175,8 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                 trigger={({ isExpanded, isDesktop }) => (
                   <>
                     {publication.thumbnailPath ? (
-                      <figure className="mb-3 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:hidden">
-                        <div className="h-20 w-full">
+                      <figure className="mb-3 inline-flex shrink-0 self-start overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:hidden">
+                        <div className={mediaFrameClassByAspect[mediaAspect]}>
                           <img
                             src={toPublicUrl(publication.thumbnailPath)}
                             alt={`${publication.title} thumbnail`}

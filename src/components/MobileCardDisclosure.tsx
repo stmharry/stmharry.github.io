@@ -95,9 +95,11 @@ export const MobileCardDisclosure = ({
         }}
         className={`relative ${!isDesktop ? "cursor-pointer rounded-md p-1 -m-1 transition duration-200 ease-out active:scale-[0.995] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ink-900)" : ""}`}
       >
+        {!isDesktop ? <span aria-hidden="true" className="pointer-events-none float-right h-7 w-7" /> : null}
         {triggerContent}
+        {!isDesktop ? <span aria-hidden="true" className="block clear-both h-0" /> : null}
         {!isDesktop ? (
-          <span className="pointer-events-none absolute top-0 right-0 rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_6%)] p-1.5 text-(--ink-700)">
+          <span className="pointer-events-none absolute top-0.5 right-0.5 z-10 rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_6%)] p-1.5 text-(--ink-700)">
             <ChevronDown expanded={isExpandedOnMobile} />
           </span>
         ) : null}
