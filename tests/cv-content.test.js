@@ -42,4 +42,19 @@ describe("canonical CV content", () => {
       expect(publication.citationCount).toBeGreaterThanOrEqual(0);
     }
   });
+
+  test("internal publication asset paths use semantic naming convention", () => {
+    const publicationAssetPathPattern =
+      /^\/assets\/publications\/\d{4}--[a-z0-9-]+--(thumb|poster|paper-pdf)\.(png|pdf)$/;
+
+    for (const publication of cvContent.publications) {
+      const candidatePaths = [publication.thumbnailPath, publication.posterUrl, publication.href].filter(
+        (value) => typeof value === "string" && value.startsWith("/assets/publications/"),
+      );
+
+      for (const candidatePath of candidatePaths) {
+        expect(publicationAssetPathPattern.test(candidatePath)).toBeTrue();
+      }
+    }
+  });
 });

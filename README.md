@@ -81,6 +81,7 @@ The app keeps data and rendering separate with one source of truth:
 - Publication thumbnails use ratio-aware media frames with `object-contain`
 - Publication citations are stored as numeric `citationCount` values
 - Internal asset links are resolved with `import.meta.env.BASE_URL` for subpath-safe deploys
+- Publication asset filenames follow `<year>--<publication-id>--<type>.<ext>` for maintainability
 
 ### Topic model
 
