@@ -188,6 +188,19 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                     ) : null}
 
                     <div className="flex items-start gap-3">
+                      {publication.thumbnailPath ? (
+                        <figure className="hidden shrink-0 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:block">
+                          <div className={`${mediaFrameClassByAspect[mediaAspect]} max-w-full`}>
+                            <img
+                              src={toPublicUrl(publication.thumbnailPath)}
+                              alt={`${publication.title} thumbnail`}
+                              className="h-full w-full object-contain"
+                              loading="lazy"
+                            />
+                          </div>
+                        </figure>
+                      ) : null}
+
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tracking-[0.13em] text-(--ink-700) uppercase">
                           <span>
@@ -207,19 +220,6 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                           <p className="mt-2 text-sm leading-relaxed text-(--ink-700)">{renderAuthorPreview(publication.authors)}</p>
                         ) : null}
                       </div>
-
-                      {publication.thumbnailPath ? (
-                        <figure className="hidden shrink-0 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:block">
-                          <div className={`${mediaFrameClassByAspect[mediaAspect]} max-w-full`}>
-                            <img
-                              src={toPublicUrl(publication.thumbnailPath)}
-                              alt={`${publication.title} thumbnail`}
-                              className="h-full w-full object-contain"
-                              loading="lazy"
-                            />
-                          </div>
-                        </figure>
-                      ) : null}
                     </div>
                   </>
                 )}
