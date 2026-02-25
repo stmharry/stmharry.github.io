@@ -16,7 +16,7 @@ python3 .agents/skills/google-scholar-cv-sync/scripts/sync_google_scholar_cv.py 
   --content-file src/data/cv/content.ts
 ```
 2. Review the JSON report:
-- `citation_label_changes`: counts of `added`/`updated`/`removed` labels.
+- `citation_count_changes`: counts of `added`/`updated`/`removed` numeric values.
 - `new_scholar_entries`: items present on Scholar but not matched in CV by normalized title.
 - `unmatched_cv_titles`: CV items not found on Scholar.
 3. Apply updates after review:
@@ -28,7 +28,7 @@ python3 .agents/skills/google-scholar-cv-sync/scripts/sync_google_scholar_cv.py 
 ```
 4. For unmatched/new items, add or edit publication objects manually in `src/data/cv/content.ts`:
 - Keep `id`, `kind`, `topics`, `featuredOnWeb`, and `order` aligned with project conventions.
-- Set `citationLabel` using `Cited by <n>` when citations are non-zero.
+- Set `citationCount` using numeric values when citations are non-zero.
 
 ## Options
 
@@ -41,5 +41,5 @@ python3 .agents/skills/google-scholar-cv-sync/scripts/sync_google_scholar_cv.py 
 ## Notes
 
 - Matching uses normalized title strings (case/punctuation-insensitive).
-- Script updates only `citationLabel`; it does not auto-create new publication objects.
+- Script updates only `citationCount`; it does not auto-create new publication objects.
 - Google Scholar HTML can change; if parsing fails, inspect row selectors in the script and patch accordingly.

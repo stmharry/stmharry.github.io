@@ -42,7 +42,7 @@ class PublicationBlock:
     end: int
     text: str
     title: str
-    citation_label: str | None
+    citation_count: int | None
 
 
 def normalize_title(value: str) -> str:
@@ -179,14 +179,14 @@ def parse_publication_blocks(content: str) -> list[PublicationBlock]:
                     raw = body[start:end]
                     title_match = re.search(r'title:\s*"([^"]+)"', raw)
                     if title_match:
-                        citation_match = re.search(r'citationLabel:\s*"([^"]+)"', raw)
+                        citation_match = re.search(r"citationCount:\s*(\d+)", raw)
                         blocks.append(
                             PublicationBlock(
                                 start=arr_start + 1 + start,
                                 end=arr_start + 1 + end,
                                 text=raw,
                                 title=title_match.group(1),
-                                citation_label=citation_match.group(1) if citation_match else None,
+                                citation_count=int(citation_match.group(1)) if citation_match else None,
                             )
                         )
                     i = end
@@ -197,10 +197,10 @@ def parse_publication_blocks(content: str) -> list[PublicationBlock]:
 
 
 def update_publication_block(block_text: str, new_citations: int) -> tuple[str, str]:
-    desired_label = f"Cited by {new_citations}" if new_citations > 0 else None
-    existing = re.search(r'(\n\s*citationLabel:\s*")([^"]+)(",)', block_text)
+    desired_count = new_citations if new_citations > 0 else None
+    existing = re.search(r"(\n\s*citationCount:\s*)(\d+)(,)", block_text)
 
-    if desired_label is None:
+    if desired_count is None:
         if existing:
             return (
                 block_text[: existing.start()] + block_text[existing.end() :],
@@ -209,11 +209,11 @@ def update_publication_block(block_text: str, new_citations: int) -> tuple[str, 
         return block_text, "unchanged"
 
     if existing:
-        current = existing.group(2)
-        if current == desired_label:
+        current = int(existing.group(2))
+        if current == desired_count:
             return block_text, "unchanged"
         return (
-            block_text[: existing.start(2)] + desired_label + block_text[existing.end(2) :],
+            block_text[: existing.start(2)] + str(desired_count) + block_text[existing.end(2) :],
             "updated",
         )
 
@@ -223,7 +223,7 @@ def update_publication_block(block_text: str, new_citations: int) -> tuple[str, 
 
     indent_match = re.search(r'\n(\s*)venue:', venue_line.group(1))
     indent = indent_match.group(1) if indent_match else "      "
-    insertion = f"\n{indent}citationLabel: \"{desired_label}\","
+    insertion = f"\n{indent}citationCount: {desired_count},"
     insert_at = venue_line.end(1)
     return block_text[:insert_at] + insertion + block_text[insert_at:], "added"
 
@@ -280,7 +280,7 @@ def apply_updates(content: str, blocks: list[PublicationBlock], scholar_by_norm:
         "cv_publications": len(blocks),
         "scholar_publications": len(scholar_by_norm),
         "matched_by_normalized_title": matched,
-        "citation_label_changes": {
+        "citation_count_changes": {
             "updated": updated,
             "added": added,
             "removed": removed,
@@ -346,7 +346,7 @@ def run_self_test() -> int:
       title: "Paper B",
       year: 2021,
       venue: "Venue Y",
-      citationLabel: "Cited by 5",
+      citationCount: 5,
       kind: "journal",
       topics: ["medical-ai"],
       featuredOnWeb: false,
@@ -359,10 +359,10 @@ def run_self_test() -> int:
     blocks = parse_publication_blocks(sample_cv)
     merged, report = apply_updates(sample_cv, blocks, by_norm)
 
-    assert 'citationLabel: "Cited by 12"' in merged
-    assert 'citationLabel: "Cited by 5"' not in merged
-    assert report["citation_label_changes"]["added"] == 1
-    assert report["citation_label_changes"]["removed"] == 1
+    assert "citationCount: 12" in merged
+    assert "citationCount: 5" not in merged
+    assert report["citation_count_changes"]["added"] == 1
+    assert report["citation_count_changes"]["removed"] == 1
     print("Self-test passed")
     return 0
 

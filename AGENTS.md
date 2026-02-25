@@ -17,6 +17,8 @@
 - Publication UI behavior: render all publications with topic filter buttons (no subset list)
 - Publication media reuse: use `origin/master` assets selectively in `public/assets/publications/*`
 - Publication thumbnail behavior: ratio-aware media frames with `object-contain`
+- Publication citation data: store numeric `citationCount` values (format labels at render time)
+- Internal asset links in UI: resolve via `import.meta.env.BASE_URL`
 - Experience web behavior: show concise summaries without nested highlight bullets
 
 ## Working agreement

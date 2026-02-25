@@ -79,6 +79,8 @@ The app keeps data and rendering separate with one source of truth:
 - UI components read typed data and avoid embedded hardcoded content
 - Publication records include optional media/action links (slides, poster, video, code, project, dataset)
 - Publication thumbnails use ratio-aware media frames with `object-contain`
+- Publication citations are stored as numeric `citationCount` values
+- Internal asset links are resolved with `import.meta.env.BASE_URL` for subpath-safe deploys
 
 ### Topic model
 
