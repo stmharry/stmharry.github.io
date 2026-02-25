@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { CardHeader } from "./CardHeader";
+import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { toExperienceCardHeader } from "./cardSemantics";
 import type { ExperienceItem } from "../data/cv/types";
 
@@ -26,17 +27,23 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
 
           return (
             <li key={item.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_24%)] p-4 sm:p-5">
-              <CardHeader
-                primary={
-                  <p className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
-                    {header.primary}
-                  </p>
+              <MobileCardDisclosure
+                id={`experience-${item.id}`}
+                trigger={
+                  <CardHeader
+                    primary={
+                      <p className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
+                        {header.primary}
+                      </p>
+                    }
+                    secondary={<p className="text-sm text-(--ink-700)">{header.secondary}</p>}
+                    date={header.date}
+                    location={header.location}
+                  />
                 }
-                secondary={<p className="text-sm text-(--ink-700)">{header.secondary}</p>}
-                date={header.date}
-                location={header.location}
-              />
-              <p className="mt-4 text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
+              >
+                <p className="text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
+              </MobileCardDisclosure>
             </li>
           );
         })}

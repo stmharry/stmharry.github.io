@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 
-import { CardHeader } from "./CardHeader";
-import { toPublicationCardHeader } from "./cardSemantics";
+import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { filterPublicationsByTopic, getTopicLabelBySlug, getUsedTopics, getWebPublications } from "../data/cv/selectors";
 import type { PublicationItem, Topic } from "../data/cv/types";
 import { isExternalUrl, toPublicUrl } from "../lib/url";
@@ -20,6 +19,10 @@ const AUTHOR_VARIANTS = new Set([
   "Tzu Ming Hsu",
   "Harry Hsu",
 ]);
+
+const hasYearInVenue = (venue: string): boolean => {
+  return /\b(19|20)\d{2}\b/.test(venue);
+};
 
 const classifyAspect = (aspectRatio?: number): "panorama" | "wide" | "standard" | "compact" => {
   if (!aspectRatio) {
@@ -42,14 +45,21 @@ const classifyAspect = (aspectRatio?: number): "panorama" | "wide" | "standard" 
 };
 
 const mediaFrameClassByAspect = {
-  panorama: "h-20 w-32 sm:w-40",
-  wide: "h-20 w-28 sm:w-36",
-  standard: "h-20 w-24 sm:w-32",
-  compact: "h-20 w-20 sm:w-24",
+  panorama: "h-12 w-24 sm:h-16 sm:w-32",
+  wide: "h-12 w-20 sm:h-16 sm:w-28",
+  standard: "h-12 w-16 sm:h-16 sm:w-24",
+  compact: "h-14 w-14 sm:h-18 sm:w-18",
 } as const;
 
+const parseAuthors = (authors: string): string[] => {
+  return authors
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
+};
+
 const renderAuthors = (authors: string) => {
-  const parts = authors.split(",").map((part) => part.trim());
+  const parts = parseAuthors(authors);
 
   return parts.map((author, index) => {
     const suffix = index < parts.length - 1 ? ", " : "";
@@ -64,11 +74,34 @@ const renderAuthors = (authors: string) => {
   });
 };
 
+const renderAuthorPreview = (authors: string) => {
+  const parts = parseAuthors(authors);
+  const visibleAuthors = parts.slice(0, 2);
+  const hiddenCount = parts.length - visibleAuthors.length;
+
+  return (
+    <>
+      {visibleAuthors.map((author, index) => {
+        const suffix = index < visibleAuthors.length - 1 ? ", " : "";
+        const isSelf = AUTHOR_VARIANTS.has(author);
+
+        return (
+          <span key={`${author}-${index}`}>
+            {isSelf ? <strong>{author}</strong> : author}
+            {suffix}
+          </span>
+        );
+      })}
+      {hiddenCount > 0 ? <span className="text-(--ink-700)"> +{hiddenCount} more</span> : null}
+    </>
+  );
+};
+
 const actionLinks = (publication: PublicationItem) => {
-  const primaryPaperLink = publication.paperUrl ?? publication.scholarCitationUrl;
+  const primaryPaperHref = publication.paperUrl ?? publication.scholarCitationUrl;
 
   return [
-    { label: "Paper", href: primaryPaperLink },
+    { label: "Paper", href: primaryPaperHref },
     { label: "Slides", href: publication.slidesUrl },
     { label: "Poster", href: publication.posterUrl },
     { label: "Video", href: publication.videoUrl },
@@ -135,56 +168,75 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
           const citationCount = publication.citationCount ?? null;
           const mediaLinks = actionLinks(publication);
           const mediaAspect = classifyAspect(publication.thumbnailAspectRatio);
-          const header = toPublicationCardHeader(publication);
-
           return (
             <li key={publication.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
-                {publication.thumbnailPath ? (
-                  <figure className="shrink-0 self-start overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5">
-                    <div className={`${mediaFrameClassByAspect[mediaAspect]} max-w-full`}>
-                      <img
-                        src={toPublicUrl(publication.thumbnailPath)}
-                        alt={`${publication.title} thumbnail`}
-                        className="h-full w-full object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  </figure>
-                ) : null}
+              <MobileCardDisclosure
+                id={`publication-${publication.id}`}
+                trigger={({ isExpanded, isDesktop }) => (
+                  <>
+                    {publication.thumbnailPath ? (
+                      <figure className="mb-3 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:hidden">
+                        <div className="h-20 w-full">
+                          <img
+                            src={toPublicUrl(publication.thumbnailPath)}
+                            alt={`${publication.title} thumbnail`}
+                            className="h-full w-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                      </figure>
+                    ) : null}
 
-                <div className="min-w-0 flex-1">
-                  <CardHeader
-                    primary={
-                      <h3 className="text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
-                        {publication.paperUrl || publication.scholarCitationUrl ? (
-                          <a
-                            href={toPublicUrl(publication.paperUrl ?? publication.scholarCitationUrl ?? "")}
-                            target={isExternalUrl(toPublicUrl(publication.paperUrl ?? publication.scholarCitationUrl ?? "")) ? "_blank" : undefined}
-                            rel={isExternalUrl(toPublicUrl(publication.paperUrl ?? publication.scholarCitationUrl ?? "")) ? "noreferrer" : undefined}
-                            className="hover:underline"
-                          >
-                            {header.primary}
-                          </a>
-                        ) : (
-                          header.primary
-                        )}
-                      </h3>
-                    }
-                    secondary={
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tracking-[0.13em] text-(--ink-700) uppercase">
-                        <span>{header.secondary}</span>
-                        {citationCount ? (
-                          <span className="rounded-full border border-(--line) px-2 py-0.5 text-[10px] tracking-[0.1em]">{citationCount} cites</span>
+                    <div className="flex items-start gap-3">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tracking-[0.13em] text-(--ink-700) uppercase">
+                          <span>
+                            {publication.venue}
+                            {hasYearInVenue(publication.venue) ? "" : ` - ${publication.year}`}
+                          </span>
+                          {citationCount ? (
+                            <span className="rounded-full border border-(--line) px-2 py-0.5 text-[10px] tracking-[0.1em]">{citationCount} cites</span>
+                          ) : null}
+                        </div>
+
+                        <h3 className="mt-2 text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
+                          {publication.title}
+                        </h3>
+
+                        {!isDesktop && !isExpanded ? (
+                          <p className="mt-2 text-sm leading-relaxed text-(--ink-700)">{renderAuthorPreview(publication.authors)}</p>
                         ) : null}
                       </div>
-                    }
-                    date={header.date}
-                  />
 
-                  <p className="mt-2 text-sm leading-relaxed text-(--ink-700)">{renderAuthors(publication.authors)}</p>
+                      {publication.thumbnailPath ? (
+                        <figure className="hidden shrink-0 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5 sm:block">
+                          <div className={`${mediaFrameClassByAspect[mediaAspect]} max-w-full`}>
+                            <img
+                              src={toPublicUrl(publication.thumbnailPath)}
+                              alt={`${publication.title} thumbnail`}
+                              className="h-full w-full object-contain"
+                              loading="lazy"
+                            />
+                          </div>
+                        </figure>
+                      ) : null}
+                    </div>
+                  </>
+                )}
+              >
+                <p className="text-sm leading-relaxed text-(--ink-700)">{renderAuthors(publication.authors)}</p>
+
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {publication.topics.map((topicSlug) => (
+                    <span
+                      key={topicSlug}
+                      className="rounded-full border border-(--line) px-2 py-1 text-[10px] tracking-[0.1em] text-(--ink-700) uppercase"
+                    >
+                      {getTopicLabelBySlug(topics, topicSlug)}
+                    </span>
+                  ))}
                 </div>
-              </div>
+              </MobileCardDisclosure>
 
               <div className="mt-3 flex flex-wrap gap-2">
                 {mediaLinks.map((link) => (
@@ -201,16 +253,6 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                 ))}
               </div>
 
-              <div className="mt-3 flex flex-wrap gap-2">
-                {publication.topics.map((topicSlug) => (
-                  <span
-                    key={topicSlug}
-                    className="rounded-full border border-(--line) px-2 py-1 text-[10px] tracking-[0.1em] text-(--ink-700) uppercase"
-                  >
-                    {getTopicLabelBySlug(topics, topicSlug)}
-                  </span>
-                ))}
-              </div>
             </li>
           );
         })}
