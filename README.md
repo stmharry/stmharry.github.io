@@ -6,7 +6,7 @@ Minimal personal website scaffold built with React, TypeScript, Vite, Tailwind C
 
 - One-page, modular baseline implemented on `main`
 - Canonical CV data source established at `src/data/cv/content.ts`
-- Theme toggle with system default and persisted preference
+- Theme follows system preference (no manual toggle)
 - Publications section with single-select topic filter over full list
 - SEO baseline in place (meta tags + Open Graph + Twitter + JSON-LD)
 - LaTeX resume pipeline generated from canonical TS data
@@ -64,7 +64,6 @@ bun run lint
 - Canonical CV data and types: `src/data/cv/content.ts`, `src/data/cv/types.ts`
 - CV selectors: `src/data/cv/selectors.ts`
 - UI components: `src/components/*`
-- Theme helpers: `src/lib/theme.ts`
 - Resume LaTeX template: `resume/template.tex`
 - Resume generation script: `scripts/generate-resume-tex.ts`
 - Publication media assets: `public/assets/publications/*`
@@ -79,6 +78,7 @@ The app keeps data and rendering separate with one source of truth:
 - Website and resume are both derived from the same canonical data
 - UI components read typed data and avoid embedded hardcoded content
 - Publication records include optional media/action links (slides, poster, video, code, project, dataset)
+- Publication thumbnails use ratio-aware media frames with `object-contain`
 
 ### Topic model
 
@@ -98,10 +98,8 @@ This supports stable filtering logic while keeping readable UI labels.
   - selected publications
 - Single-select topic filter for publications (`All` + one topic)
 - All publications are rendered by default; filter buttons narrow the list
-- Light/dark theme toggle:
-  - defaults to system preference
-  - persists user choice in `localStorage`
-  - icon-supported toggle control
+- Experience cards remain concise (summary-first, no nested highlights in web view)
+- Light/dark theme follows system preference automatically
 - SEO baseline:
   - title and description
   - Open Graph and Twitter metadata
@@ -129,7 +127,7 @@ bun run resume:clean
 
 Output PDF path:
 
-- `public/resume.pdf`
+- `public/assets/resume/resume.pdf`
 
 ## Commit message format
 

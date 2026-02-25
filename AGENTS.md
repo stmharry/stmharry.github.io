@@ -12,10 +12,12 @@
 - Canonical source of truth: latest long-form resume content in `src/data/cv/content.ts`
 - Content architecture: typed data in `src/data/cv/*`, rendering in `src/components/*`
 - Topics use internal slug + display label (`TopicSlug` + `Topic`)
-- Theme behavior: manual light/dark toggle, system default, persisted preference
+- Theme behavior: system default via `prefers-color-scheme` (no manual toggle)
 - Resume pipeline: preserve LaTeX rendering for PDF fidelity, generated from canonical TS data
 - Publication UI behavior: render all publications with topic filter buttons (no subset list)
 - Publication media reuse: use `origin/master` assets selectively in `public/assets/publications/*`
+- Publication thumbnail behavior: ratio-aware media frames with `object-contain`
+- Experience web behavior: show concise summaries without nested highlight bullets
 
 ## Working agreement
 
@@ -40,5 +42,5 @@
 - Structured sections with predefined fields for profile, experience, and publications
 - Single-select topic filter for full publications list
 - SEO baseline (meta tags + Open Graph + Twitter + JSON-LD Person)
-- Theme system with light/dark mode and local persistence
+- Theme system with automatic system light/dark behavior
 - Dual output targets: minimal website + full resume PDF
