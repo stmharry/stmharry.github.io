@@ -17,6 +17,7 @@ python3 .agents/skills/google-scholar-cv-sync/scripts/sync_google_scholar_cv.py 
 ```
 2. Review the JSON report:
 - `citation_count_changes`: counts of `added`/`updated`/`removed` numeric values.
+- `href_changes`: counts of Scholar link insertions for CV publications missing `href`.
 - `new_scholar_entries`: items present on Scholar but not matched in CV by normalized title.
 - `unmatched_cv_titles`: CV items not found on Scholar.
 3. Apply updates after review:
@@ -30,6 +31,11 @@ python3 .agents/skills/google-scholar-cv-sync/scripts/sync_google_scholar_cv.py 
 - Keep `id`, `kind`, `topics`, and `order` aligned with project conventions.
 - Set `citationCount` using numeric values when citations are non-zero.
 
+Link behavior during apply:
+
+- If a publication has no existing `href` and Scholar provides one, insert Scholar URL into `href`.
+- Existing `href` values are preserved and never overwritten.
+
 ## Options
 
 - `--max-pages`: limit Scholar pagination depth (default `5`).
@@ -41,5 +47,5 @@ python3 .agents/skills/google-scholar-cv-sync/scripts/sync_google_scholar_cv.py 
 ## Notes
 
 - Matching uses normalized title strings (case/punctuation-insensitive).
-- Script updates only `citationCount`; it does not auto-create new publication objects.
+- Script updates `citationCount` and fills missing `href` using Scholar item URLs; it does not auto-create new publication objects.
 - Google Scholar HTML can change; if parsing fails, inspect row selectors in the script and patch accordingly.

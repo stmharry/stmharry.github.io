@@ -34,6 +34,7 @@ class ScholarEntry:
     venue: str
     year: int | None
     citations: int
+    scholar_url: str | None
 
 
 @dataclass
@@ -43,6 +44,7 @@ class PublicationBlock:
     text: str
     title: str
     citation_count: int | None
+    href: str | None
 
 
 def normalize_title(value: str) -> str:
@@ -79,7 +81,7 @@ def fetch_scholar_page(user_id: str, cstart: int, pagesize: int, timeout: int) -
 
 def parse_scholar_rows(page_html: str) -> list[ScholarEntry]:
     row_pattern = re.compile(r"<tr class=\"gsc_a_tr\".*?</tr>", re.S)
-    title_pattern = re.compile(r'<a[^>]*class=\"gsc_a_at\"[^>]*>(.*?)</a>', re.S)
+    title_pattern = re.compile(r'(<a[^>]*class=\"gsc_a_at\"[^>]*>)(.*?)</a>', re.S)
     gray_pattern = re.compile(r'<div[^>]*class=\"gs_gray\"[^>]*>(.*?)</div>', re.S)
     year_pattern = re.compile(r'<span[^>]*class=\"gsc_a_h gsc_a_hc gs_ibl\"[^>]*>(\d{4})</span>')
     cit_pattern = re.compile(r'<a[^>]*class=\"gsc_a_ac[^\"]*\"[^>]*>(\d+)?</a>')
@@ -90,7 +92,12 @@ def parse_scholar_rows(page_html: str) -> list[ScholarEntry]:
         if not title_match:
             continue
 
-        title = strip_tags(title_match.group(1))
+        anchor_tag = title_match.group(1)
+        title = strip_tags(title_match.group(2))
+        href_match = re.search(r'href=\"([^\"]+)\"', anchor_tag)
+        scholar_url = None
+        if href_match:
+            scholar_url = urllib.parse.urljoin("https://scholar.google.com", href_match.group(1))
         gray = gray_pattern.findall(row)
         authors = strip_tags(gray[0]) if len(gray) > 0 else ""
         venue = strip_tags(gray[1]) if len(gray) > 1 else ""
@@ -108,6 +115,7 @@ def parse_scholar_rows(page_html: str) -> list[ScholarEntry]:
                 venue=venue,
                 year=year,
                 citations=citations,
+                scholar_url=scholar_url,
             )
         )
     return rows
@@ -180,6 +188,7 @@ def parse_publication_blocks(content: str) -> list[PublicationBlock]:
                     title_match = re.search(r'title:\s*"([^"]+)"', raw)
                     if title_match:
                         citation_match = re.search(r"citationCount:\s*(\d+)", raw)
+                        href_match = re.search(r'\n\s*href:\s*"([^"]+)"', raw)
                         blocks.append(
                             PublicationBlock(
                                 start=arr_start + 1 + start,
@@ -187,6 +196,7 @@ def parse_publication_blocks(content: str) -> list[PublicationBlock]:
                                 text=raw,
                                 title=title_match.group(1),
                                 citation_count=int(citation_match.group(1)) if citation_match else None,
+                                href=href_match.group(1) if href_match else None,
                             )
                         )
                     i = end
@@ -196,36 +206,56 @@ def parse_publication_blocks(content: str) -> list[PublicationBlock]:
     return blocks
 
 
-def update_publication_block(block_text: str, new_citations: int) -> tuple[str, str]:
+def update_publication_block(block_text: str, new_citations: int, scholar_url: str | None) -> tuple[str, str, str]:
     desired_count = new_citations if new_citations > 0 else None
     existing = re.search(r"(\n\s*citationCount:\s*)(\d+)(,)", block_text)
+    updated_block = block_text
 
     if desired_count is None:
         if existing:
-            return (
-                block_text[: existing.start()] + block_text[existing.end() :],
-                "removed",
-            )
-        return block_text, "unchanged"
-
-    if existing:
+            updated_block = block_text[: existing.start()] + block_text[existing.end() :]
+            citation_state = "removed"
+        else:
+            citation_state = "unchanged"
+    elif existing:
         current = int(existing.group(2))
         if current == desired_count:
-            return block_text, "unchanged"
-        return (
-            block_text[: existing.start(2)] + str(desired_count) + block_text[existing.end(2) :],
-            "updated",
-        )
+            citation_state = "unchanged"
+        else:
+            updated_block = block_text[: existing.start(2)] + str(desired_count) + block_text[existing.end(2) :]
+            citation_state = "updated"
+    else:
+        venue_line = re.search(r'(\n\s*venue:\s*"[^"]+",)', block_text)
+        if not venue_line:
+            citation_state = "unchanged"
+        else:
+            indent_match = re.search(r"\n(\s*)venue:", venue_line.group(1))
+            indent = indent_match.group(1) if indent_match else "      "
+            insertion = f"\n{indent}citationCount: {desired_count},"
+            insert_at = venue_line.end(1)
+            updated_block = block_text[:insert_at] + insertion + block_text[insert_at:]
+            citation_state = "added"
 
-    venue_line = re.search(r'(\n\s*venue:\s*"[^"]+",)', block_text)
-    if not venue_line:
-        return block_text, "unchanged"
+    existing_href = re.search(r'(\n\s*href:\s*")([^"]+)(",)', updated_block)
+    if not scholar_url:
+        href_state = "missing_on_scholar"
+    elif existing_href:
+        href_state = "unchanged"
+    else:
+        citation_line = re.search(r"(\n\s*citationCount:\s*\d+,)", updated_block)
+        venue_line = re.search(r'(\n\s*venue:\s*"[^"]+",)', updated_block)
+        anchor_line = citation_line or venue_line
+        if not anchor_line:
+            href_state = "missing_anchor"
+        else:
+            indent_match = re.search(r"\n(\s*)(citationCount|venue):", anchor_line.group(1))
+            indent = indent_match.group(1) if indent_match else "      "
+            insertion = f'\n{indent}href: "{scholar_url}",'
+            insert_at = anchor_line.end(1)
+            updated_block = updated_block[:insert_at] + insertion + updated_block[insert_at:]
+            href_state = "added"
 
-    indent_match = re.search(r'\n(\s*)venue:', venue_line.group(1))
-    indent = indent_match.group(1) if indent_match else "      "
-    insertion = f"\n{indent}citationCount: {desired_count},"
-    insert_at = venue_line.end(1)
-    return block_text[:insert_at] + insertion + block_text[insert_at:], "added"
+    return updated_block, citation_state, href_state
 
 
 def apply_updates(content: str, blocks: list[PublicationBlock], scholar_by_norm: dict[str, ScholarEntry]) -> tuple[str, dict]:
@@ -235,6 +265,9 @@ def apply_updates(content: str, blocks: list[PublicationBlock], scholar_by_norm:
     added = 0
     removed = 0
     unchanged = 0
+    href_added = 0
+    href_unchanged = 0
+    href_missing_on_scholar = 0
 
     cv_norm_titles: set[str] = set()
     unmatched_cv: list[str] = []
@@ -248,15 +281,22 @@ def apply_updates(content: str, blocks: list[PublicationBlock], scholar_by_norm:
             continue
 
         matched += 1
-        new_text, state = update_publication_block(block.text, scholar.citations)
-        if state == "updated":
+        new_text, citation_state, href_state = update_publication_block(block.text, scholar.citations, scholar.scholar_url)
+        if citation_state == "updated":
             updated += 1
-        elif state == "added":
+        elif citation_state == "added":
             added += 1
-        elif state == "removed":
+        elif citation_state == "removed":
             removed += 1
         else:
             unchanged += 1
+
+        if href_state == "added":
+            href_added += 1
+        elif href_state == "unchanged":
+            href_unchanged += 1
+        elif href_state == "missing_on_scholar":
+            href_missing_on_scholar += 1
 
         replacements.append((block.start, block.end, new_text))
 
@@ -267,6 +307,7 @@ def apply_updates(content: str, blocks: list[PublicationBlock], scholar_by_norm:
             "venue": entry.venue,
             "year": entry.year,
             "citations": entry.citations,
+            "scholar_url": entry.scholar_url,
         }
         for key, entry in scholar_by_norm.items()
         if key not in cv_norm_titles
@@ -285,6 +326,11 @@ def apply_updates(content: str, blocks: list[PublicationBlock], scholar_by_norm:
             "added": added,
             "removed": removed,
             "unchanged": unchanged,
+        },
+        "href_changes": {
+            "added": href_added,
+            "unchanged": href_unchanged,
+            "missing_on_scholar": href_missing_on_scholar,
         },
         "unmatched_cv_titles": unmatched_cv,
         "new_scholar_entries": sorted(new_entries, key=lambda x: (-(x["year"] or 0), x["title"])),
@@ -311,7 +357,7 @@ def run_self_test() -> int:
     sample_html = '''
 <tr class="gsc_a_tr">
   <td class="gsc_a_t">
-    <a class="gsc_a_at">Paper A</a>
+    <a class="gsc_a_at" href="/citations?view_op=view_citation&hl=en&user=dLAxLwUAAAAJ&citation_for_view=dLAxLwUAAAAJ:u5HHmVD_uO8C">Paper A</a>
     <div class="gs_gray">Alice, Bob</div>
     <div class="gs_gray">Venue X</div>
   </td>
@@ -319,7 +365,7 @@ def run_self_test() -> int:
   <td class="gsc_a_y"><span class="gsc_a_h gsc_a_hc gs_ibl">2024</span></td>
 </tr>
 <tr class="gsc_a_tr">
-  <td class="gsc_a_t"><a class="gsc_a_at">Paper B</a><div class="gs_gray">A</div><div class="gs_gray">Venue Y</div></td>
+  <td class="gsc_a_t"><a class="gsc_a_at" href="/citations?view_op=view_citation&hl=en&user=dLAxLwUAAAAJ&citation_for_view=dLAxLwUAAAAJ:2osOgNQ5qMEC">Paper B</a><div class="gs_gray">A</div><div class="gs_gray">Venue Y</div></td>
   <td class="gsc_a_c"><a class="gsc_a_ac gs_ibl"></a></td>
   <td class="gsc_a_y"><span class="gsc_a_h gsc_a_hc gs_ibl">2021</span></td>
 </tr>
@@ -346,6 +392,7 @@ def run_self_test() -> int:
       year: 2021,
       venue: "Venue Y",
       citationCount: 5,
+      href: "https://example.com/paper-b",
       kind: "journal",
       topics: ["medical-ai"],
       order: 2,
@@ -359,8 +406,12 @@ def run_self_test() -> int:
 
     assert "citationCount: 12" in merged
     assert "citationCount: 5" not in merged
+    assert "href: \"https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dLAxLwUAAAAJ&citation_for_view=dLAxLwUAAAAJ:u5HHmVD_uO8C\"" in merged
+    assert "href: \"https://example.com/paper-b\"" in merged
     assert report["citation_count_changes"]["added"] == 1
     assert report["citation_count_changes"]["removed"] == 1
+    assert report["href_changes"]["added"] == 1
+    assert report["href_changes"]["unchanged"] == 1
     print("Self-test passed")
     return 0
 
