@@ -108,6 +108,8 @@ export const cvContent: CvContent = {
     {
       id: "dentscape",
       organization: "Dentscape",
+      organizationDescription: "automated 3D dental crown design",
+      organizationUrl: "https://dentscape.ai",
       period: "Apr 2025 -- Present",
       role: "Machine Learning & Software Engineering Consultant",
       location: "Taipei / Remote",
@@ -141,6 +143,8 @@ export const cvContent: CvContent = {
     {
       id: "clarq-ai",
       organization: "Clarq AI",
+      organizationDescription: "AI-optimized resistance training",
+      organizationUrl: "https://clarq-ai.com",
       period: "Dec 2024 -- Present",
       role: "Co-founder & CTO",
       location: "Taipei / Remote",

@@ -52,6 +52,8 @@ export type EducationItem = {
 export type ExperienceItem = {
   id: string;
   organization: string;
+  organizationDescription?: string;
+  organizationUrl?: string;
   period: string;
   role: string;
   location: string;
