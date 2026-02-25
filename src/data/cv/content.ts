@@ -72,7 +72,7 @@ export const cvContent: CvContent = {
   education: [
     {
       id: "mit-phd",
-      institution: "Massachusetts Institute of Technology (MIT)",
+      institution: "Massachusetts Institute of Technology",
       period: "Jun 2020 -- Jun 2022",
       degree: "Ph.D., Computer Science",
       location: "Cambridge, MA",
@@ -83,7 +83,7 @@ export const cvContent: CvContent = {
     },
     {
       id: "mit-sm",
-      institution: "Massachusetts Institute of Technology (MIT)",
+      institution: "Massachusetts Institute of Technology",
       period: "Sep 2017 -- May 2020",
       degree: "S.M., Electrical Engineering and Computer Science",
       location: "Cambridge, MA",
@@ -94,7 +94,7 @@ export const cvContent: CvContent = {
     },
     {
       id: "ntu-bs",
-      institution: "National Taiwan University (NTU)",
+      institution: "National Taiwan University",
       period: "Sep 2011 -- Jun 2016",
       degree: "B.S., Physics; B.S.E., Electrical Engineering",
       location: "Taipei, Taiwan",
@@ -142,7 +142,7 @@ export const cvContent: CvContent = {
       id: "clarq-ai",
       organization: "Clarq AI",
       period: "Dec 2024 -- Present",
-      role: "Co-founder and Chief Technology Officer (CTO)",
+      role: "Co-founder & CTO",
       location: "Taipei / Remote",
       summary:
         "Helped reposition Clarq from hardware product to force-intelligence platform with 100+ deployments, 15M+ force-time samples, and 150K labeled motion sets, while driving investor narrative and US-facing fundraising readiness.",
@@ -161,6 +161,71 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: true,
+    },
+    {
+      id: "codegreen-labs",
+      organization: "CodeGreen Labs PBC",
+      period: "Sep 2023 -- Nov 2024",
+      role: "Co-founder & CTO",
+      location: "Boston / Taipei",
+      summary:
+        "Built decentralized software for climate-conscious investors and UN 2030-aligned initiatives, scaling to projected $1MM annual revenue with a 10-person team and major ecosystem partnerships.",
+      highlights: [
+        { text: "Reached projected annual revenue of $1MM USD by Q2 2024 with a 10-person team." },
+        {
+          text: "Established partnerships with Microsoft, Global Blockchain Business Council, Gold Standard, SDG Data Alliance, and PVBLIC.",
+        },
+        {
+          text: "Built a cross-functional team across climate, finance, and software to address complex data, auditability, and compliance challenges.",
+        },
+        {
+          text: "Designed and shipped decentralized systems with end-to-end auditability, regulatory compliance, and interoperability with existing ecosystems.",
+        },
+      ],
+      highlighted: true,
+    },
+    {
+      id: "hashgreen-labs",
+      organization: "Hashgreen Labs",
+      period: "Sep 2022 -- Aug 2023",
+      role: "Co-founder & CTO",
+      location: "Boston / Taipei",
+      summary:
+        "Scaled Hashgreen from inception to a 20-person team, raised $1MM+ in capital, and delivered flagship green-blockchain and DeFi products for global clients.",
+      highlights: [
+        { text: "Raised over $1MM USD in capital and grew the team from 0 to 20 employees." },
+        {
+          text: "Built hiring, onboarding, and performance review systems to support a high-performing engineering organization.",
+        },
+        {
+          text: "Secured and delivered high-impact projects for clients including The World Bank and Chia Network.",
+        },
+        {
+          text: "Led development of DeFi protocols (DEX and AMM), becoming the first team on the Chia blockchain to launch these primitives.",
+        },
+      ],
+      highlighted: true,
+    },
+    {
+      id: "iabit",
+      organization: "International Academia of Biomedical Innovation Technology",
+      period: "2021 -- Present",
+      role: "Consultant & Convener",
+      location: "Taipei, Taiwan",
+      summary:
+        "Supported a 50+ member biomedical innovation community through project mentorship, dental AI research collaboration, and large-scale technology outreach events.",
+      highlights: [
+        {
+          text: "Helped grow a community of 50+ members while supporting 8+ academic projects and 15+ publications.",
+        },
+        {
+          text: "Led a dental AI research team in collaboration with National Taiwan University Hospital.",
+        },
+        {
+          text: "Co-organized demo events with 100+ participants to showcase biomedical technologies and educate the broader community.",
+        },
+      ],
+      highlighted: false,
     },
     {
       id: "mit-ra",
