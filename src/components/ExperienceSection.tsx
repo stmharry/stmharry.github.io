@@ -1,13 +1,11 @@
 import { useMemo, useState } from "react";
 
+import { CardHeader } from "./CardHeader";
+import { toExperienceCardHeader } from "./cardSemantics";
 import type { ExperienceItem } from "../data/cv/types";
 
 type ExperienceSectionProps = {
   items: ExperienceItem[];
-};
-
-const renderPeriod = (period: string): string => {
-  return period.replace(/\s--\s/g, " – ");
 };
 
 export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
@@ -23,21 +21,25 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
         Experience
       </h2>
       <ul className="mt-5 space-y-3 sm:space-y-4">
-        {visibleItems.map((item) => (
-          <li key={item.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_24%)] p-4 sm:p-5">
-            <div className="flex flex-col gap-1.5 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <p className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
-                  {item.role}
-                </p>
-                <p className="mt-1 text-sm text-(--ink-700)">{item.organization}</p>
-                <p className="mt-1 text-xs tracking-[0.12em] text-(--ink-700) uppercase">{item.location}</p>
-              </div>
-              <p className="text-xs tracking-[0.12em] text-(--ink-700) uppercase">{renderPeriod(item.period)}</p>
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
-          </li>
-        ))}
+        {visibleItems.map((item) => {
+          const header = toExperienceCardHeader(item);
+
+          return (
+            <li key={item.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_24%)] p-4 sm:p-5">
+              <CardHeader
+                primary={
+                  <p className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
+                    {header.primary}
+                  </p>
+                }
+                secondary={<p className="text-sm text-(--ink-700)">{header.secondary}</p>}
+                date={header.date}
+                location={header.location}
+              />
+              <p className="mt-4 text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
+            </li>
+          );
+        })}
       </ul>
 
       {hasExpandableItems ? (
