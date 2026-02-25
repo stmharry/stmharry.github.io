@@ -169,6 +169,7 @@ export const cvContent: CvContent = {
     {
       id: "codegreen-labs",
       organization: "CodeGreen Labs PBC",
+      organizationDescription: "trusted transactions for bio and ESG",
       period: "Sep 2023 -- Nov 2024",
       role: "Co-founder & CTO",
       location: "Boston / Taipei",
@@ -191,6 +192,7 @@ export const cvContent: CvContent = {
     {
       id: "hashgreen-labs",
       organization: "Hashgreen Labs",
+      organizationDescription: "sustainable blockchain infra",
       period: "Sep 2022 -- Aug 2023",
       role: "Co-founder & CTO",
       location: "Boston / Taipei",
