@@ -45,10 +45,10 @@ const classifyAspect = (aspectRatio?: number): "panorama" | "wide" | "standard" 
 };
 
 const mediaFrameClassByAspect = {
-  panorama: "h-12 w-24 sm:h-16 sm:w-32",
-  wide: "h-12 w-20 sm:h-16 sm:w-28",
-  standard: "h-12 w-16 sm:h-16 sm:w-24",
-  compact: "h-14 w-14 sm:h-18 sm:w-18",
+  panorama: "h-12 w-34 sm:h-16 sm:w-32",
+  wide: "h-12 w-28 sm:h-16 sm:w-28",
+  standard: "h-12 w-22 sm:h-16 sm:w-24",
+  compact: "h-14 w-18 sm:h-18 sm:w-18",
 } as const;
 
 const parseAuthors = (authors: string): string[] => {
@@ -227,29 +227,29 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                 <p className="text-sm leading-relaxed text-(--ink-700)">{renderAuthors(publication.authors)}</p>
 
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {publication.topics.map((topicSlug) => (
-                    <span
-                      key={topicSlug}
-                      className="rounded-full border border-(--line) px-2 py-1 text-[10px] tracking-[0.1em] text-(--ink-700) uppercase"
+                  {mediaLinks.map((link) => (
+                      <a
+                        key={`${publication.id}-${link.label}`}
+                        href={toPublicUrl(link.href)}
+                        target={isExternalUrl(toPublicUrl(link.href)) ? "_blank" : undefined}
+                        rel={isExternalUrl(toPublicUrl(link.href)) ? "noreferrer" : undefined}
+                      className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
                     >
-                      {getTopicLabelBySlug(topics, topicSlug)}
-                    </span>
+                      <ExternalLinkIcon />
+                      {link.label}
+                    </a>
                   ))}
                 </div>
               </MobileCardDisclosure>
 
               <div className="mt-3 flex flex-wrap gap-2">
-                {mediaLinks.map((link) => (
-                    <a
-                      key={`${publication.id}-${link.label}`}
-                      href={toPublicUrl(link.href)}
-                      target={isExternalUrl(toPublicUrl(link.href)) ? "_blank" : undefined}
-                      rel={isExternalUrl(toPublicUrl(link.href)) ? "noreferrer" : undefined}
-                    className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                {publication.topics.map((topicSlug) => (
+                  <span
+                    key={topicSlug}
+                    className="rounded-full border border-(--line) px-2 py-1 text-[10px] tracking-[0.1em] text-(--ink-700) uppercase"
                   >
-                    <ExternalLinkIcon />
-                    {link.label}
-                  </a>
+                    {getTopicLabelBySlug(topics, topicSlug)}
+                  </span>
                 ))}
               </div>
 
