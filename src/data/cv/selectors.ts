@@ -30,10 +30,6 @@ export const sortPublicationsByYear = (publications: PublicationItem[]): Publica
   });
 };
 
-export const getFeaturedPublications = (publications: PublicationItem[]): PublicationItem[] => {
-  return sortPublicationsByYear(publications.filter((publication) => publication.featuredOnWeb));
-};
-
 export const getWebPublications = (publications: PublicationItem[]): PublicationItem[] => {
   return sortPublicationsByYear(publications);
 };

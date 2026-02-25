@@ -3,19 +3,18 @@ import { describe, expect, test } from "bun:test";
 import { cvContent } from "../src/data/cv/content";
 import {
   filterPublicationsByTopic,
-  getFeaturedPublications,
+  getWebPublications,
   getUsedTopics,
 } from "../src/data/cv/selectors";
 
 describe("publication selectors", () => {
-  test("returns featured publications sorted by descending year", () => {
-    const featured = getFeaturedPublications(cvContent.publications);
+  test("returns publications sorted by descending year", () => {
+    const sorted = getWebPublications(cvContent.publications);
 
-    expect(featured.length).toBeGreaterThan(0);
-    expect(featured.every((publication) => publication.featuredOnWeb)).toBeTrue();
+    expect(sorted.length).toBe(cvContent.publications.length);
 
-    for (let index = 0; index < featured.length - 1; index += 1) {
-      expect(featured[index].year).toBeGreaterThanOrEqual(featured[index + 1].year);
+    for (let index = 0; index < sorted.length - 1; index += 1) {
+      expect(sorted[index].year).toBeGreaterThanOrEqual(sorted[index + 1].year);
     }
   });
 

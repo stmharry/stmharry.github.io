@@ -367,8 +367,9 @@ export const cvContent: CvContent = {
       authors:
         "Yin-Chih Chelsea Wang, Tsao-Lun Chen, Shankeeth Vinayahalingam, Tai-Hsien Wu, Chu Wei Chang, Hsuan Hao Chang, Hung-Jen Wei, Mu-Hsiung Chen, Ching-Chang Ko, David Anssari Moin, Bram van Ginneken, Tong Xi, Hsiao-Cheng Tsai, Min-Huey Chen, Tzu-Ming Harry Hsu, Hye Chou",
       kind: "preprint",
+      href: "https://arxiv.org/pdf/2502.10277",
+      codeUrl: "https://github.com/stmharry/dental-pano-ai",
       topics: ["medical-ai"],
-      featuredOnWeb: false,
       order: 1,
     },
     {
@@ -381,7 +382,6 @@ export const cvContent: CvContent = {
         "Shankeeth Vinayahalingam, Steven Kempers, Julian Schoep, Tzu-Ming Harry Hsu, David Anssari Moin, Bram van Ginneken, Tabea Flugge, Marcel Hanisch, Tong Xi",
       kind: "journal",
       topics: ["medical-ai", "computer-vision"],
-      featuredOnWeb: false,
       order: 2,
     },
     {
@@ -394,7 +394,6 @@ export const cvContent: CvContent = {
         "Steven Kempers, Pieter van Lierop, Tzu-Ming Harry Hsu, David Anssari Moin, Stefaan Berge, Hossein Ghaeminia, Tong Xi, Shankeeth Vinayahalingam",
       kind: "journal",
       topics: ["medical-ai"],
-      featuredOnWeb: false,
       order: 3,
     },
     {
@@ -410,7 +409,6 @@ export const cvContent: CvContent = {
       thumbnailPath: "/assets/publications/2022--jaw-cysts-2022--thumb.png",
       thumbnailAspectRatio: 2.086,
       topics: ["medical-ai"],
-      featuredOnWeb: true,
       order: 4,
     },
     {
@@ -422,7 +420,6 @@ export const cvContent: CvContent = {
       authors: "Unsoo Ha, Junshan Leng, Alaa Khaddaj, Yunfei Ma, Tzu Ming Hsu, Zexuan Zhong, Fadel Adib",
       kind: "patent",
       topics: ["wireless-sensing"],
-      featuredOnWeb: false,
       order: 5,
     },
     {
@@ -433,7 +430,6 @@ export const cvContent: CvContent = {
       authors: "Tzu-Ming Harry Hsu",
       kind: "thesis",
       topics: ["medical-ai", "computer-vision"],
-      featuredOnWeb: false,
       order: 6,
     },
     {
@@ -449,7 +445,6 @@ export const cvContent: CvContent = {
       thumbnailPath: "/assets/publications/2021--body-composition-2021--thumb.png",
       thumbnailAspectRatio: 2.131,
       topics: ["medical-ai"],
-      featuredOnWeb: true,
       order: 7,
     },
     {
@@ -464,7 +459,6 @@ export const cvContent: CvContent = {
       thumbnailPath: "/assets/publications/2021--visceral-adiposity-2021--thumb.png",
       thumbnailAspectRatio: 1.537,
       topics: ["medical-ai"],
-      featuredOnWeb: false,
       order: 8,
     },
     {
@@ -479,7 +473,6 @@ export const cvContent: CvContent = {
       thumbnailPath: "/assets/publications/2021--adversarial-protein-2021--thumb.png",
       thumbnailAspectRatio: 1.16,
       topics: ["ml-systems"],
-      featuredOnWeb: false,
       order: 9,
     },
     {
@@ -497,7 +490,6 @@ export const cvContent: CvContent = {
       posterUrl: "/assets/publications/2021--deepopg-2021--poster.pdf",
       videoUrl: "https://www.youtube.com/watch?v=fT_9Pq2hWA4",
       topics: ["medical-ai", "computer-vision"],
-      featuredOnWeb: true,
       order: 10,
     },
     {
@@ -509,7 +501,6 @@ export const cvContent: CvContent = {
       authors: "Unsoo Ha, Junshan Leng, Alaa Khaddaj, Yunfei Ma, Tzu Ming Hsu, Zexuan Zhong, Fadel Adib",
       kind: "patent",
       topics: ["wireless-sensing"],
-      featuredOnWeb: false,
       order: 11,
     },
     {
@@ -525,7 +516,6 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 2.775,
       codeUrl: "https://github.com/stmharry/liver-lesion-detection",
       topics: ["medical-ai"],
-      featuredOnWeb: false,
       order: 12,
     },
     {
@@ -540,7 +530,6 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 1.423,
       codeUrl: "https://github.com/mmcdermott/chexpertplusplus",
       topics: ["medical-ai", "ml-systems"],
-      featuredOnWeb: false,
       order: 13,
     },
     {
@@ -552,7 +541,6 @@ export const cvContent: CvContent = {
       authors: "Tzu-Ming Harry Hsu",
       kind: "thesis",
       topics: ["medical-ai"],
-      featuredOnWeb: false,
       order: 14,
     },
     {
@@ -567,7 +555,6 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 1.928,
       posterUrl: "/assets/publications/2020--cxr-baselines-2020--poster.pdf",
       topics: ["medical-ai", "ml-systems"],
-      featuredOnWeb: false,
       order: 15,
     },
     {
@@ -585,7 +572,6 @@ export const cvContent: CvContent = {
       videoUrl: "https://www.youtube.com/watch?v=Rc67rZzPDDY",
       datasetUrl: "https://github.com/google-research/google-research/tree/master/federated_vision_datasets",
       topics: ["federated-learning", "computer-vision"],
-      featuredOnWeb: true,
       order: 16,
     },
     {
@@ -601,7 +587,6 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 3.408,
       posterUrl: "/assets/publications/2019--fedavgm-2019--poster.pdf",
       topics: ["federated-learning", "ml-systems"],
-      featuredOnWeb: true,
       order: 17,
     },
     {
@@ -613,7 +598,6 @@ export const cvContent: CvContent = {
       authors: "Wei-Yu Chen, Tzu-Ming Harry Hsu, Yao-Hung Hubert Tsai, Ming-Syan Chen, Yu-Chiang Frank Wang",
       kind: "journal",
       topics: ["computer-vision", "ml-systems"],
-      featuredOnWeb: false,
       order: 18,
     },
     {
@@ -631,7 +615,6 @@ export const cvContent: CvContent = {
       posterUrl: "/assets/publications/2019--ccr-2019--poster.pdf",
       codeUrl: "https://github.com/stmharry/interpretable-report-gen",
       topics: ["medical-ai", "ml-systems"],
-      featuredOnWeb: true,
       order: 19,
     },
     {
@@ -646,7 +629,6 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 1.994,
       posterUrl: "/assets/publications/2018--multimodal-2018--poster.pdf",
       topics: ["medical-ai", "ml-systems"],
-      featuredOnWeb: false,
       order: 20,
     },
     {
@@ -660,7 +642,6 @@ export const cvContent: CvContent = {
       thumbnailPath: "/assets/publications/2018--wireless-stickers-2018--thumb.png",
       thumbnailAspectRatio: 2.563,
       topics: ["wireless-sensing", "ml-systems"],
-      featuredOnWeb: false,
       order: 21,
     },
     {
@@ -679,7 +660,6 @@ export const cvContent: CvContent = {
       codeUrl: "https://github.com/ysymyth/3D-SDN",
       projectUrl: "http://3dsdn.csail.mit.edu/",
       topics: ["computer-vision", "ml-systems"],
-      featuredOnWeb: true,
       order: 22,
     },
     {
@@ -693,7 +673,6 @@ export const cvContent: CvContent = {
       thumbnailPath: "/assets/publications/2016--transfer-neural-trees-eccv-2016--thumb.png",
       thumbnailAspectRatio: 1.324,
       topics: ["computer-vision"],
-      featuredOnWeb: false,
       order: 23,
     },
     {
@@ -708,7 +687,6 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 1.233,
       href: "/assets/publications/2015--connecting-dots-2015--paper-pdf.pdf",
       topics: ["computer-vision"],
-      featuredOnWeb: false,
       order: 24,
     },
     {
@@ -722,7 +700,6 @@ export const cvContent: CvContent = {
       thumbnailPath: "/assets/publications/2015--imbalanced-domain-2015--thumb.png",
       thumbnailAspectRatio: 1.359,
       topics: ["computer-vision"],
-      featuredOnWeb: false,
       order: 25,
     },
   ],
