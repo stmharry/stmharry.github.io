@@ -1,3 +1,4 @@
+import { EducationSection } from "./components/EducationSection";
 import { ExperienceSection } from "./components/ExperienceSection";
 import { Hero } from "./components/Hero";
 import { PrimaryLinks } from "./components/PrimaryLinks";
@@ -14,6 +15,7 @@ function App() {
       <Hero profile={webProfile} />
       <PrimaryLinks links={cvContent.profile.links} />
       <ExperienceSection items={webExperience} />
+      <EducationSection items={cvContent.education} />
       <PublicationsSection publications={cvContent.publications} topics={cvContent.topics} />
     </main>
   );
