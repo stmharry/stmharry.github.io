@@ -69,21 +69,23 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
                   />
                 }
               >
-                <p className="text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
+                <div className="border-l border-(--rail) pl-3.5">
+                  <p className="text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
 
-                {item.organizationUrl ? (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <a
-                      href={toPublicUrl(item.organizationUrl)}
-                      target={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "_blank" : undefined}
-                      rel={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "noreferrer" : undefined}
-                      className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
-                    >
-                      <ExternalLinkIcon />
-                      Website
-                    </a>
-                  </div>
-                ) : null}
+                  {item.organizationUrl ? (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <a
+                        href={toPublicUrl(item.organizationUrl)}
+                        target={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "_blank" : undefined}
+                        rel={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "noreferrer" : undefined}
+                        className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                      >
+                        <ExternalLinkIcon />
+                        Website
+                      </a>
+                    </div>
+                  ) : null}
+                </div>
               </MobileCardDisclosure>
             </li>
           );

@@ -68,24 +68,26 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                     />
                   }
                 >
-                  {labeledDetails.length > 0 ? (
-                    <dl className="space-y-2">
-                      {labeledDetails.map((detail, index) => (
-                        <div key={`${item.id}-label-${index}`} className="grid gap-y-1 sm:grid-cols-[6.75rem_minmax(0,1fr)] sm:gap-x-3 sm:gap-y-0">
-                          <dt className="text-[11px] font-semibold tracking-[0.1em] text-(--ink-700) uppercase">{normalizeDetailLabel(detail.label ?? "")}</dt>
-                          <dd className="text-sm leading-relaxed text-(--ink-700)">{normalizeDetailText(detail.label ?? "", detail.text)}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  ) : null}
+                  <div className="border-l border-(--rail) pl-3.5">
+                    {labeledDetails.length > 0 ? (
+                      <dl className="space-y-2">
+                        {labeledDetails.map((detail, index) => (
+                          <div key={`${item.id}-label-${index}`} className="grid gap-y-1 sm:grid-cols-[6.75rem_minmax(0,1fr)] sm:gap-x-3 sm:gap-y-0">
+                            <dt className="text-[11px] font-semibold tracking-[0.1em] text-(--ink-700) uppercase">{normalizeDetailLabel(detail.label ?? "")}</dt>
+                            <dd className="text-sm leading-relaxed text-(--ink-700)">{normalizeDetailText(detail.label ?? "", detail.text)}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    ) : null}
 
-                  {narrativeDetails.length > 0 ? (
-                    <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-(--ink-700)">
-                      {narrativeDetails.map((detail, index) => (
-                        <li key={`${item.id}-detail-${index}`}>{detail.text}</li>
-                      ))}
-                    </ul>
-                  ) : null}
+                    {narrativeDetails.length > 0 ? (
+                      <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-(--ink-700)">
+                        {narrativeDetails.map((detail, index) => (
+                          <li key={`${item.id}-detail-${index}`}>{detail.text}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
                 </MobileCardDisclosure>
               ) : (
                 <CardHeader

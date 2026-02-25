@@ -9,6 +9,7 @@
   --paper: #f8f7f4;
   --paper-accent: #f3f2ef;
   --line: #d1d5db;
+  --rail: #c4c8cf;
   --mobile-sticky-name-height: 2.25rem;
   color-scheme: light dark;
 }
@@ -20,6 +21,7 @@
     --paper: #111827;
     --paper-accent: #1f2937;
     --line: #374151;
+    --rail: #9ca3af;
   }
 }
 
