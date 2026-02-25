@@ -30,6 +30,16 @@ bun dev
 
 Open the local URL shown by Vite.
 
+## Deploy to GitHub Pages
+
+Publish the built site (`dist`) to the `gh-pages` branch:
+
+```bash
+bun run deploy
+```
+
+The deploy command automatically runs `bun run build` first.
+
 ## Quality checks
 
 Run these before commits:
