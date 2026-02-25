@@ -71,3 +71,6 @@
 - `google-scholar-cv-sync` (`./.agents/skills/google-scholar-cv-sync/SKILL.md`)
 - Purpose (`google-scholar-cv-sync`): extract Google Scholar publications/citation counts and reconcile them with `src/data/cv/content.ts`
 - Trigger (`google-scholar-cv-sync`): requests to sync/update Scholar citations, detect new Scholar publications, or merge Scholar publication metadata into CV source-of-truth
+- `experience-narrative-distiller` (`./.agents/skills/experience-narrative-distiller/SKILL.md`)
+- Purpose (`experience-narrative-distiller`): convert freeform role narratives into recruiter-facing summaries, optional bullets, and structured `experience[]` entries for `src/data/cv/content.ts`
+- Trigger (`experience-narrative-distiller`): requests to talk through what the user did in a role and distill it into concise CV-ready content with metadata

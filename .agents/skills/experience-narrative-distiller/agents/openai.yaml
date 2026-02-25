@@ -1,0 +1,4 @@
+interface:
+  display_name: "Experience Distiller"
+  short_description: "Turn narrative work history into CV-ready entries"
+  default_prompt: "Help me narrate what I did in a role, ask focused follow-ups, and produce recruiter-facing summary, optional bullets, and structured content.ts fields."
