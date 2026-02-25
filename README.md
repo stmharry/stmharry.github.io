@@ -99,10 +99,12 @@ This supports stable filtering logic while keeping readable UI labels.
   - profile
   - links
   - experience
-  - selected publications
+  - education
+  - publications
 - Single-select topic filter for publications (`All` + one topic)
 - All publications are rendered by default; filter buttons narrow the list
-- Experience cards remain concise (summary-first, no nested highlights in web view)
+- Experience section shows highlighted entries first, with an expand-all control for full history
+- Education is rendered as a standalone section between experience and publications
 - Light/dark theme follows system preference automatically
 - SEO baseline:
   - title and description

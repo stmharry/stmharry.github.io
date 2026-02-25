@@ -21,7 +21,8 @@
 - Publication asset naming: use `<year>--<publication-id>--<type>.<ext>` for internal media
 - Publication URL fields: prefer explicit `paperUrl` and `scholarCitationUrl` over generic `href`
 - Internal asset links in UI: resolve via `import.meta.env.BASE_URL`
-- Experience web behavior: show concise summaries without nested highlight bullets
+- Experience web behavior: show highlighted entries first with expand-all toggle for full history
+- Education web behavior: render standalone section between experience and publications
 
 ## Working agreement
 
@@ -58,6 +59,7 @@
 ## Core features for current baseline
 
 - Structured sections with predefined fields for profile, experience, and publications
+- Structured sections with predefined fields for profile, experience, education, and publications
 - Single-select topic filter for full publications list
 - SEO baseline (meta tags + Open Graph + Twitter + JSON-LD Person)
 - Theme system with automatic system light/dark behavior
