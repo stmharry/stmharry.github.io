@@ -5,8 +5,8 @@ import {
   getFeaturedPublications,
   getTopicLabelBySlug,
   getUsedTopics,
-} from "../data/selectors";
-import type { PublicationItem, Topic } from "../data/types";
+} from "../data/cv/selectors";
+import type { PublicationItem, Topic } from "../data/cv/types";
 
 type PublicationsSectionProps = {
   publications: PublicationItem[];
@@ -66,12 +66,15 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
               {publication.venue} • {publication.year}
             </p>
             <h3 className="mt-2 text-xl leading-snug" style={{ fontFamily: "var(--font-serif)" }}>
-              <a href={publication.href} target="_blank" rel="noreferrer" className="hover:underline">
+              <a href={publication.href ?? "#"} target={publication.href ? "_blank" : undefined} rel="noreferrer" className="hover:underline">
                 {publication.title}
               </a>
             </h3>
-            <p className="mt-2 text-sm text-(--ink-700)">{publication.authors}</p>
-            <p className="mt-3 text-sm leading-relaxed text-(--ink-700)">{publication.description}</p>
+            <p className="mt-2 text-sm text-(--ink-700)">
+              {publication.venue}
+              {publication.citationLabel ? ` - ${publication.citationLabel}` : ""}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-(--ink-700)">{publication.authors}</p>
             <div className="mt-4 flex flex-wrap gap-2">
               {publication.topics.map((topicSlug) => (
                 <span

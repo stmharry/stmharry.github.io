@@ -5,7 +5,8 @@ import { Hero } from "./components/Hero";
 import { PrimaryLinks } from "./components/PrimaryLinks";
 import { PublicationsSection } from "./components/PublicationsSection";
 import { ThemeToggle } from "./components/ThemeToggle";
-import { siteContent } from "./data/content";
+import { cvContent } from "./data/cv/content";
+import { getWebExperience, getWebProfile } from "./data/cv/selectors";
 import {
   applyTheme,
   getInitialTheme,
@@ -38,15 +39,18 @@ function App() {
     setTheme(nextTheme);
   };
 
+  const webProfile = getWebProfile(cvContent);
+  const webExperience = getWebExperience(cvContent);
+
   return (
     <main className="mx-auto w-full max-w-5xl px-6 py-12 sm:px-10 sm:py-16">
       <div className="flex items-center justify-end">
         <ThemeToggle mode={theme} onToggle={handleToggleTheme} />
       </div>
-      <Hero profile={siteContent.profile} />
-      <PrimaryLinks links={siteContent.links} />
-      <ExperienceSection items={siteContent.experience} />
-      <PublicationsSection publications={siteContent.publications} topics={siteContent.topics} />
+      <Hero profile={webProfile} />
+      <PrimaryLinks links={cvContent.profile.links} />
+      <ExperienceSection items={webExperience} />
+      <PublicationsSection publications={cvContent.publications} topics={cvContent.topics} />
     </main>
   );
 }

@@ -1,11 +1,7 @@
-import type { ExperienceItem } from "../data/types";
+import type { ExperienceItem } from "../data/cv/types";
 
 type ExperienceSectionProps = {
   items: ExperienceItem[];
-};
-
-const formatYearRange = (startYear: number, endYear: number | null) => {
-  return `${startYear} - ${endYear ?? "Present"}`;
 };
 
 export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
@@ -23,12 +19,11 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
                   {item.role}
                 </p>
                 <p className="mt-1 text-sm text-(--ink-700)">{item.organization}</p>
+                <p className="mt-1 text-xs tracking-[0.12em] text-(--ink-700) uppercase">{item.location}</p>
               </div>
-              <p className="text-xs tracking-[0.12em] text-(--ink-700) uppercase">
-                {formatYearRange(item.startYear, item.endYear)}
-              </p>
+              <p className="text-xs tracking-[0.12em] text-(--ink-700) uppercase">{item.period}</p>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-(--ink-700)">{item.description}</p>
+            <p className="mt-4 text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
           </li>
         ))}
       </ul>

@@ -1,7 +1,7 @@
-import type { ExternalLink } from "../data/types";
+import type { LinkItem } from "../data/cv/types";
 
 type PrimaryLinksProps = {
-  links: ExternalLink[];
+  links: LinkItem[];
 };
 
 export const PrimaryLinks = ({ links }: PrimaryLinksProps) => {

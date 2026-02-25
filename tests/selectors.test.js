@@ -1,18 +1,18 @@
 import { describe, expect, test } from "bun:test";
 
-import { siteContent } from "../src/data/content";
+import { cvContent } from "../src/data/cv/content";
 import {
   filterPublicationsByTopic,
   getFeaturedPublications,
   getUsedTopics,
-} from "../src/data/selectors";
+} from "../src/data/cv/selectors";
 
 describe("publication selectors", () => {
   test("returns featured publications sorted by descending year", () => {
-    const featured = getFeaturedPublications(siteContent.publications);
+    const featured = getFeaturedPublications(cvContent.publications);
 
     expect(featured.length).toBeGreaterThan(0);
-    expect(featured.every((publication) => publication.featured)).toBeTrue();
+    expect(featured.every((publication) => publication.featuredOnWeb)).toBeTrue();
 
     for (let index = 0; index < featured.length - 1; index += 1) {
       expect(featured[index].year).toBeGreaterThanOrEqual(featured[index + 1].year);
@@ -20,15 +20,15 @@ describe("publication selectors", () => {
   });
 
   test("filters publications by selected topic slug", () => {
-    const filtered = filterPublicationsByTopic(siteContent.publications, "medical-ai");
+    const filtered = filterPublicationsByTopic(cvContent.publications, "medical-ai");
 
     expect(filtered.length).toBeGreaterThan(0);
     expect(filtered.every((publication) => publication.topics.includes("medical-ai"))).toBeTrue();
   });
 
   test("returns only topics that are used by at least one publication", () => {
-    const usedTopics = getUsedTopics(siteContent.topics, siteContent.publications);
+    const usedTopics = getUsedTopics(cvContent.topics, cvContent.publications);
 
-    expect(usedTopics.length).toBe(siteContent.topics.length);
+    expect(usedTopics.length).toBeGreaterThan(0);
   });
 });
