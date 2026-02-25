@@ -6,6 +6,33 @@ type EducationSectionProps = {
   items: EducationItem[];
 };
 
+const splitDetailValues = (text: string): string[] => {
+  return text
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+};
+
+const normalizeDetailLabel = (label: string): string => {
+  const trimmed = label.trim().toLowerCase();
+
+  if (trimmed === "gpa") {
+    return "GPA";
+  }
+
+  return trimmed.replace(/\b\w/g, (char) => char.toUpperCase());
+};
+
+const normalizeDetailText = (label: string, text: string): string => {
+  if (label.trim().toLowerCase() === "research areas") {
+    return splitDetailValues(text)
+      .map((value) => value.toLowerCase())
+      .join(", ");
+  }
+
+  return text;
+};
+
 export const EducationSection = ({ items }: EducationSectionProps) => {
   return (
     <section aria-labelledby="education-heading" className="mt-14 sm:mt-18">
@@ -32,16 +59,14 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
               />
 
               {labeledDetails.length > 0 ? (
-                <div className="mt-3 flex flex-wrap gap-2">
+                <dl className="mt-3 space-y-2">
                   {labeledDetails.map((detail, index) => (
-                    <span
-                      key={`${item.id}-label-${index}`}
-                      className="inline-flex rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_5%)] px-2.5 py-1 text-[11px] tracking-[0.08em] text-(--ink-700) uppercase"
-                    >
-                      {detail.label}: {detail.text}
-                    </span>
+                    <div key={`${item.id}-label-${index}`} className="grid gap-y-1 sm:grid-cols-[6.75rem_minmax(0,1fr)] sm:gap-x-3 sm:gap-y-0">
+                      <dt className="text-[11px] font-semibold tracking-[0.1em] text-(--ink-700) uppercase">{normalizeDetailLabel(detail.label ?? "")}</dt>
+                      <dd className="text-sm leading-relaxed text-(--ink-700)">{normalizeDetailText(detail.label ?? "", detail.text)}</dd>
+                    </div>
                   ))}
-                </div>
+                </dl>
               ) : null}
 
               {narrativeDetails.length > 0 ? (
