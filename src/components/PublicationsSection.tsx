@@ -150,42 +150,29 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
           return (
             <li key={publication.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tracking-[0.13em] text-(--ink-700) uppercase">
-                <span>
-                  {publication.venue}
-                  {hasYearInVenue(publication.venue) ? "" : ` - ${publication.year}`}
-                </span>
-                {citationCount ? (
-                  <span className="rounded-full border border-(--line) px-2 py-0.5 text-[10px] tracking-[0.1em]">{citationCount} cites</span>
-                ) : null}
-              </div>
+              <div className="flex items-start gap-3">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tracking-[0.13em] text-(--ink-700) uppercase">
+                    <span>
+                      {publication.venue}
+                      {hasYearInVenue(publication.venue) ? "" : ` - ${publication.year}`}
+                    </span>
+                    {citationCount ? (
+                      <span className="rounded-full border border-(--line) px-2 py-0.5 text-[10px] tracking-[0.1em]">{citationCount} cites</span>
+                    ) : null}
+                  </div>
 
-              <h3 className="mt-2 text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
-                {publication.href ? (
-                  <a href={publication.href} target="_blank" rel="noreferrer" className="hover:underline">
-                    {publication.title}
-                  </a>
-                ) : (
-                  publication.title
-                )}
-              </h3>
+                  <h3 className="mt-2 text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
+                    {publication.href ? (
+                      <a href={publication.href} target="_blank" rel="noreferrer" className="hover:underline">
+                        {publication.title}
+                      </a>
+                    ) : (
+                      publication.title
+                    )}
+                  </h3>
 
-              <p className="mt-2 text-sm leading-relaxed text-(--ink-700)">{renderAuthors(publication.authors)}</p>
-
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div className="flex min-w-0 flex-1 flex-wrap gap-2">
-                  {mediaLinks.map((link) => (
-                    <a
-                      key={`${publication.id}-${link.label}`}
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
-                    >
-                      <ExternalLinkIcon />
-                      {link.label}
-                    </a>
-                  ))}
+                  <p className="mt-2 text-sm leading-relaxed text-(--ink-700)">{renderAuthors(publication.authors)}</p>
                 </div>
 
                 {publication.thumbnailPath ? (
@@ -200,6 +187,21 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                     </div>
                   </figure>
                 ) : null}
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {mediaLinks.map((link) => (
+                  <a
+                    key={`${publication.id}-${link.label}`}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                  >
+                    <ExternalLinkIcon />
+                    {link.label}
+                  </a>
+                ))}
               </div>
 
               <div className="mt-3 flex flex-wrap gap-2">
