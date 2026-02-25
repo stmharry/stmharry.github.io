@@ -4,6 +4,10 @@ type ExperienceSectionProps = {
   items: ExperienceItem[];
 };
 
+const renderPeriod = (period: string): string => {
+  return period.replace(/\s--\s/g, " - ");
+};
+
 export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
   return (
     <section aria-labelledby="experience-heading" className="mt-20">
@@ -21,9 +25,19 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
                 <p className="mt-1 text-sm text-(--ink-700)">{item.organization}</p>
                 <p className="mt-1 text-xs tracking-[0.12em] text-(--ink-700) uppercase">{item.location}</p>
               </div>
-              <p className="text-xs tracking-[0.12em] text-(--ink-700) uppercase">{item.period}</p>
+              <p className="text-xs tracking-[0.12em] text-(--ink-700) uppercase">{renderPeriod(item.period)}</p>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
+            {item.highlights.length > 0 ? (
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-(--ink-700)">
+                {item.highlights.slice(0, 2).map((highlight, index) => (
+                  <li key={`${item.id}-${index}`}>
+                    {highlight.label ? <strong>{highlight.label}: </strong> : null}
+                    {highlight.text}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </li>
         ))}
       </ul>

@@ -13,7 +13,11 @@ export const Hero = ({ profile }: HeroProps) => {
       </h1>
       <p className="mt-4 text-sm tracking-[0.16em] text-(--ink-700) uppercase">{profile.headline}</p>
       <p className="mt-1 text-sm text-(--ink-700)">{profile.location}</p>
-      <p className="mt-6 max-w-2xl text-base leading-relaxed sm:text-lg">{profile.summary}</p>
+      <ul className="mt-6 max-w-3xl space-y-2 text-base leading-relaxed sm:text-lg">
+        {profile.summaryLines.map((line) => (
+          <li key={line}>{line}</li>
+        ))}
+      </ul>
     </header>
   );
 };

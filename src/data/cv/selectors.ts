@@ -4,16 +4,15 @@ export type WebProfile = {
   name: string;
   headline: string;
   location: string;
-  summary: string;
+  summaryLines: string[];
 };
 
 export const getWebProfile = (content: CvContent): WebProfile => {
-  const summary = content.profile.summaryBullets.slice(0, 2).join(" ");
   return {
     name: content.profile.name,
     headline: content.profile.headline,
     location: content.profile.location,
-    summary,
+    summaryLines: content.profile.summaryBullets,
   };
 };
 
@@ -33,6 +32,10 @@ export const sortPublicationsByYear = (publications: PublicationItem[]): Publica
 
 export const getFeaturedPublications = (publications: PublicationItem[]): PublicationItem[] => {
   return sortPublicationsByYear(publications.filter((publication) => publication.featuredOnWeb));
+};
+
+export const getWebPublications = (publications: PublicationItem[]): PublicationItem[] => {
+  return sortPublicationsByYear(publications);
 };
 
 export const filterPublicationsByTopic = (publications: PublicationItem[], topicSlug: TopicSlug | "all"): PublicationItem[] => {

@@ -12,6 +12,7 @@ export type Topic = {
 };
 
 export type LinkItem = {
+  icon: "email" | "github" | "scholar" | "linkedin";
   label: string;
   href: string;
   description: string;
@@ -87,6 +88,13 @@ export type PublicationItem = {
   authors: string;
   kind: PublicationKind;
   href?: string;
+  thumbnailPath?: string;
+  slidesUrl?: string;
+  posterUrl?: string;
+  videoUrl?: string;
+  codeUrl?: string;
+  projectUrl?: string;
+  datasetUrl?: string;
   topics: TopicSlug[];
   featuredOnWeb: boolean;
   order: number;
