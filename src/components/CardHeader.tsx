@@ -20,13 +20,13 @@ export const CardHeader = ({
   locationClassName = CARD_LOCATION_TEXT_CLASS,
 }: CardHeaderProps) => {
   return (
-    <div className="flex flex-col gap-1.5 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
-      <div className="order-2 min-w-0 flex-1 space-y-1.5 sm:order-1">
+    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
+      <div className="order-2 min-w-0 flex-1 space-y-1 sm:order-1 sm:space-y-1.5">
         <div className="min-w-0">{primary}</div>
         <div className="min-w-0">{secondary}</div>
       </div>
 
-      <div className="order-1 shrink-0 space-y-1 text-left leading-tight sm:order-2 sm:text-right">
+      <div className="order-1 shrink-0 space-y-0.5 text-left leading-tight sm:order-2 sm:space-y-1 sm:text-right">
         <p className={dateClassName}>{date}</p>
         {location ? <p className={locationClassName}>{location}</p> : null}
       </div>
