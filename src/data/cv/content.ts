@@ -79,9 +79,6 @@ export const cvContent: CvContent = {
       details: [
         { label: "Advisor", text: "Peter Szolovits" },
         { label: "Research areas", text: "Computer vision, federated learning, machine learning for healthcare" },
-        {
-          text: "See Research Pillars 1-3 for detailed narratives on medical language models, clinically validated imaging, and robust visual learning under distribution shift",
-        },
       ],
     },
     {
@@ -93,9 +90,6 @@ export const cvContent: CvContent = {
       details: [
         { label: "Advisors", text: "Peter Szolovits, Fadel Adib" },
         { label: "Research areas", text: "Computer vision, machine learning, wireless signal, signal processing" },
-        {
-          text: "See Research Pillars 3-4 for detailed narratives on robust visual learning and wireless sensing / RF-based intelligence",
-        },
       ],
     },
     {
