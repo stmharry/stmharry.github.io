@@ -19,6 +19,7 @@
 - Publication thumbnail behavior: ratio-aware media frames with `object-contain`
 - Publication citation data: store numeric `citationCount` values (format labels at render time)
 - Publication asset naming: use `<year>--<publication-id>--<type>.<ext>` for internal media
+- Publication URL fields: prefer explicit `paperUrl` and `scholarCitationUrl` over generic `href`
 - Internal asset links in UI: resolve via `import.meta.env.BASE_URL`
 - Experience web behavior: show concise summaries without nested highlight bullets
 

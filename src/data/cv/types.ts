@@ -87,7 +87,8 @@ export type PublicationItem = {
   citationCount?: number;
   authors: string;
   kind: PublicationKind;
-  href?: string;
+  paperUrl?: string;
+  scholarCitationUrl?: string;
   thumbnailPath?: string;
   thumbnailAspectRatio?: number;
   slidesUrl?: string;

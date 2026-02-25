@@ -48,7 +48,7 @@ describe("canonical CV content", () => {
       /^\/assets\/publications\/\d{4}--[a-z0-9-]+--(thumb|poster|paper-pdf)\.(png|pdf)$/;
 
     for (const publication of cvContent.publications) {
-      const candidatePaths = [publication.thumbnailPath, publication.posterUrl, publication.href].filter(
+      const candidatePaths = [publication.thumbnailPath, publication.posterUrl, publication.paperUrl].filter(
         (value) => typeof value === "string" && value.startsWith("/assets/publications/"),
       );
 

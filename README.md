@@ -82,6 +82,7 @@ The app keeps data and rendering separate with one source of truth:
 - Publication citations are stored as numeric `citationCount` values
 - Internal asset links are resolved with `import.meta.env.BASE_URL` for subpath-safe deploys
 - Publication asset filenames follow `<year>--<publication-id>--<type>.<ext>` for maintainability
+- Publication links use explicit fields: `paperUrl` and `scholarCitationUrl`
 
 ### Topic model
 

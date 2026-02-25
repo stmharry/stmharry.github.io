@@ -67,8 +67,10 @@ const renderAuthors = (authors: string) => {
 };
 
 const actionLinks = (publication: PublicationItem) => {
+  const primaryPaperLink = publication.paperUrl ?? publication.scholarCitationUrl;
+
   return [
-    { label: "Paper", href: publication.href },
+    { label: "Paper", href: primaryPaperLink },
     { label: "Slides", href: publication.slidesUrl },
     { label: "Poster", href: publication.posterUrl },
     { label: "Video", href: publication.videoUrl },
@@ -163,15 +165,15 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                     ) : null}
                   </div>
 
-                  <h3 className="mt-2 text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
-                    {publication.href ? (
-                      <a
-                        href={toPublicUrl(publication.href)}
-                        target={isExternalUrl(toPublicUrl(publication.href)) ? "_blank" : undefined}
-                        rel={isExternalUrl(toPublicUrl(publication.href)) ? "noreferrer" : undefined}
-                        className="hover:underline"
-                      >
-                        {publication.title}
+                <h3 className="mt-2 text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
+                  {publication.paperUrl || publication.scholarCitationUrl ? (
+                    <a
+                      href={toPublicUrl(publication.paperUrl ?? publication.scholarCitationUrl ?? "")}
+                      target={isExternalUrl(toPublicUrl(publication.paperUrl ?? publication.scholarCitationUrl ?? "")) ? "_blank" : undefined}
+                      rel={isExternalUrl(toPublicUrl(publication.paperUrl ?? publication.scholarCitationUrl ?? "")) ? "noreferrer" : undefined}
+                      className="hover:underline"
+                    >
+                      {publication.title}
                       </a>
                     ) : (
                       publication.title
