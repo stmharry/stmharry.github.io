@@ -4,8 +4,7 @@ export type WebProfile = {
   name: string;
   headline: string;
   location: string;
-  summaryLead: string;
-  summaryNote: string;
+  summaryBullets: string[];
 };
 
 export const getWebProfile = (content: CvContent): WebProfile => {
@@ -13,9 +12,7 @@ export const getWebProfile = (content: CvContent): WebProfile => {
     name: content.profile.name,
     headline: content.profile.headline,
     location: content.profile.location,
-    summaryLead:
-      "I build practical AI systems across healthcare, computer vision, and emerging infrastructure.",
-    summaryNote: "Founder and CTO with MIT PhD training in machine learning and medical imaging.",
+    summaryBullets: content.profile.summaryBullets,
   };
 };
 
