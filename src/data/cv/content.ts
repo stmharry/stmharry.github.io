@@ -118,7 +118,7 @@ export const cvContent: CvContent = {
       role: "Machine Learning & Software Engineering Consultant",
       location: "Taipei / Remote",
       summary:
-        "Part-time senior ML and software engineering consultant (10-30 hours/week) focusing on large-scale dental data pipelines, model deployment, and production engineering practices.",
+        "Led ML platform and production engineering upgrades that cut data access from ~3 days to minutes, reduced end-to-end labeling turnaround from ~4 weeks to ~1 week, improved core backend throughput by ~110%, and lowered infrastructure cost by ~50%.",
       highlights: [
         {
           text: "Reorganized a fragmented ~10 TB dental dataset into a standardized ~4 TB ML-ready registry, reducing raw-data access from ~3 days to minutes.",
@@ -151,7 +151,7 @@ export const cvContent: CvContent = {
       role: "Co-founder and Chief Technology Officer (CTO)",
       location: "Taipei / Remote",
       summary:
-        "Founding technical and fundraising partner helping reposition Clarq from hardware product to human force intelligence data and model company.",
+        "Helped reposition Clarq from hardware product to force-intelligence platform with 100+ deployments, 15M+ force-time samples, and 150K labeled motion sets, while driving investor narrative and US-facing fundraising readiness.",
       highlights: [
         {
           text: "Co-led fundraising and positioning narrative around a three-layer strategy: hardware wedge, SaaS profit engine, and long-term data/model moat.",
@@ -175,7 +175,7 @@ export const cvContent: CvContent = {
       role: "Research Assistant",
       location: "Cambridge, MA",
       summary:
-        "Pioneered medical AI and computer vision research through top-tier publications, interdisciplinary partnerships, and clinically grounded system development.",
+        "Produced 14 conference papers, 5 journal papers, and 1 U.S. patent across medical AI and computer vision, while collaborating with top research and healthcare partners to move models toward real-world clinical use.",
       highlights: [
         {
           text: "Published 14 conference articles, 5 journal articles, one U.S. patent, and two degree theses.",
@@ -195,7 +195,7 @@ export const cvContent: CvContent = {
       period: "Jun 2021 -- Aug 2021",
       role: "Data Science Intern",
       location: "Taipei, Taiwan",
-      summary: "Researched and optimized market front-running strategies, delivering a +1.5% increase in market correlation for an existing strategy.",
+      summary: "Improved an existing quantitative strategy by +1.5% market correlation through targeted modeling and optimization work.",
       highlights: [],
       highlighted: false,
     },
@@ -206,7 +206,7 @@ export const cvContent: CvContent = {
       role: "Lead Machine Learning Scientist",
       location: "Taipei, Taiwan",
       summary:
-        "Built production mobile intelligence capabilities by combining image-recognition models with maintainable backend APIs for real-world deployment.",
+        "Built and deployed deep learning systems and backend APIs that moved computer vision features from experimentation into production mobile experiences.",
       highlights: [
         { text: "Built deep neural networks for cuisine recognition and matching using TensorFlow on multi-GPU machines." },
         { text: "Designed and maintained backend APIs to serve model predictions in production settings." },
@@ -219,7 +219,8 @@ export const cvContent: CvContent = {
       period: "Jun 2020 -- Sep 2020",
       role: "Software Engineer Intern",
       location: "Remote",
-      summary: "Contributed to software and experimentation infrastructure supporting applied machine learning efforts.",
+      summary:
+        "Contributed production software and experimentation tooling that improved reliability and iteration speed for applied machine learning workflows.",
       highlights: [],
       highlighted: false,
     },
@@ -230,7 +231,7 @@ export const cvContent: CvContent = {
       role: "Student Researcher",
       location: "Seattle, WA / Cambridge, MA",
       summary:
-        "Mobile Vision and Medical AI research groups.",
+        "Built large-scale ML experimentation infrastructure spanning 1,000+ GPUs and 1M+ machine hours, and published 2 peer-reviewed papers in deep federated learning with open-source outputs for broader adoption.",
       highlights: [
         { text: "Conducted foundational research in deep federated learning, contributing to early growth of the field." },
         { text: "Published 2 peer-reviewed papers and presented findings at top conferences and workshops." },
@@ -247,7 +248,8 @@ export const cvContent: CvContent = {
       period: "2019 -- 2020",
       role: "Research Trainee",
       location: "Boston, MA",
-      summary: "Research and deployment in clinical AI workflows.",
+      summary:
+        "Built clinical AI screening workflows used across 1,000+ patient cases and supported deep-learning infrastructure for a 10+ member research unit.",
       highlights: [
         { text: "Co-authored research on liver tumor assessment, COVID-19 clinical risk prediction, and automatic pancreatic cancer assessment." },
         {
@@ -263,7 +265,8 @@ export const cvContent: CvContent = {
       period: "Sep 2011 -- Jun 2015",
       role: "Private Tutor",
       location: "Taipei, Taiwan",
-      summary: "Tutored high school physics, competition physics, GRE Physics, and SAT II Physics.",
+      summary:
+        "Mentored advanced physics students from fundamentals through competition-level performance, including pathways to Taiwan's national Olympiad representation.",
       highlights: [
         {
           text: "Mentored students who became Taiwan national representatives in the International Physics Olympiad (IPhO).",
