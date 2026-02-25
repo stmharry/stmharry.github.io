@@ -37,7 +37,10 @@ const normalizeDetailText = (label: string, text: string): string => {
 export const EducationSection = ({ items }: EducationSectionProps) => {
   return (
     <section aria-labelledby="education-heading" className="mt-14 sm:mt-18">
-      <h2 id="education-heading" className="text-base font-medium tracking-[0.18em] uppercase sm:text-sm sm:font-normal">
+      <h2
+        id="education-heading"
+        className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 py-1.5 text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current sm:shadow-none sm:backdrop-blur-none"
+      >
         Education
       </h2>
       <ul className="mt-5 space-y-3 sm:space-y-4">

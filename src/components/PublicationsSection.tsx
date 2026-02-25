@@ -127,12 +127,15 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
   return (
     <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
-      <div>
-        <h2 id="publications-heading" className="text-base font-medium tracking-[0.18em] uppercase sm:text-sm sm:font-normal">
+      <div className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 pt-1.5 pb-2 shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:pb-0 sm:shadow-none sm:backdrop-blur-none">
+        <h2
+          id="publications-heading"
+          className="text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current"
+        >
           Publications
         </h2>
         <div
-          className="mt-3 flex flex-nowrap gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden"
+          className="mt-2.5 flex flex-nowrap gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden sm:mt-3"
           style={{ scrollbarWidth: "none" }}
           role="group"
           aria-label="Filter by topic"
