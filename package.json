@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "predeploy": "bun run build",
-    "deploy": "gh-pages -d dist -c stmharry.io",
+    "deploy": "gh-pages -d dist --cname stmharry.io",
     "lint": "eslint .",
     "preview": "vite preview",
     "resume:generate": "bun run scripts/generate-resume-tex.ts",
