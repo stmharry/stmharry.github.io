@@ -21,7 +21,7 @@
 - Publication asset naming: use `<year>--<publication-id>--<type>.<ext>` for internal media
 - Publication URL fields: prefer explicit `paperUrl` and `scholarCitationUrl` over generic `href`
 - Internal asset links in UI: resolve via `import.meta.env.BASE_URL`
-- Experience web behavior: show highlighted entries first with expand-all toggle for full history
+- Experience web behavior: summary-only cards, highlighted entries first, with a See more/See less toggle that reveals full history at once
 - Education web behavior: render standalone section between experience and publications
 
 ## Working agreement

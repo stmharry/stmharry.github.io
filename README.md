@@ -103,7 +103,7 @@ This supports stable filtering logic while keeping readable UI labels.
   - publications
 - Single-select topic filter for publications (`All` + one topic)
 - All publications are rendered by default; filter buttons narrow the list
-- Experience section shows highlighted entries first, with an expand-all control for full history
+- Experience section uses summary-only cards, shows highlighted entries first, and uses a See more/See less control that reveals full history at once
 - Education is rendered as a standalone section between experience and publications
 - Light/dark theme follows system preference automatically
 - SEO baseline:
