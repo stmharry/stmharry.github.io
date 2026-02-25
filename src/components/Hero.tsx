@@ -4,6 +4,28 @@ type HeroProps = {
   profile: WebProfile;
 };
 
+const SUMMARY_TITLES = ["Builder", "Research", "Mission", "Life"];
+
+type SummaryShowcaseProps = {
+  bullets: string[];
+};
+
+const StatementRail = ({ bullets }: SummaryShowcaseProps) => (
+  <section>
+    <ol className="space-y-3.5">
+      {bullets.map((bullet, index) => (
+        <li key={`rail-${index}`} className="grid grid-cols-[2.4rem_1fr] gap-x-3">
+          <span className="pt-0.5 text-xs tracking-[0.14em] text-(--ink-700) uppercase">{String(index + 1).padStart(2, "0")}</span>
+          <div className="border-l border-(--line) pl-3">
+            <p className="text-[11px] tracking-[0.14em] text-(--ink-700) uppercase">{SUMMARY_TITLES[index] ?? `Point ${index + 1}`}</p>
+            <p className="mt-1 text-sm leading-relaxed text-(--ink-700)">{bullet}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+);
+
 export const Hero = ({ profile }: HeroProps) => {
   return (
     <header className="mt-2 w-full sm:mt-4">
@@ -12,15 +34,9 @@ export const Hero = ({ profile }: HeroProps) => {
         {profile.name}
       </h1>
       <p className="mt-3 text-xs tracking-[0.16em] text-(--ink-700) uppercase sm:mt-4 sm:text-sm">{profile.headline}</p>
-      <p className="mt-1 text-sm text-(--ink-700)">{profile.location}</p>
-      <ul className="mt-5 max-w-3xl space-y-2.5">
-        {profile.summaryBullets.map((bullet, i) => (
-          <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed text-(--ink-700)">
-            <span className="mt-[0.2em] shrink-0 select-none text-xs opacity-35">-</span>
-            <span>{bullet}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="mt-6 max-w-4xl">
+        <StatementRail bullets={profile.summaryBullets} />
+      </div>
     </header>
   );
 };

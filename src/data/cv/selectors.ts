@@ -3,7 +3,6 @@ import type { CvContent, ExperienceItem, PublicationItem, Topic, TopicSlug } fro
 export type WebProfile = {
   name: string;
   headline: string;
-  location: string;
   summaryBullets: string[];
 };
 
@@ -11,7 +10,6 @@ export const getWebProfile = (content: CvContent): WebProfile => {
   return {
     name: content.profile.name,
     headline: content.profile.headline,
-    location: content.profile.location,
     summaryBullets: content.profile.summaryBullets,
   };
 };
