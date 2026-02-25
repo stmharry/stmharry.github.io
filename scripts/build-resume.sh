@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 RESUME_DIR="$ROOT_DIR/resume"
 BUILD_DIR="$RESUME_DIR/build"
-OUTPUT_DIR="$ROOT_DIR/public"
+OUTPUT_DIR="$ROOT_DIR/public/assets/resume"
 
 if ! command -v latexmk >/dev/null 2>&1; then
   printf "latexmk is not installed. Please install a LaTeX distribution with latexmk.\n" >&2

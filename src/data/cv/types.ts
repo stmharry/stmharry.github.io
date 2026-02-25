@@ -12,7 +12,7 @@ export type Topic = {
 };
 
 export type LinkItem = {
-  icon: "email" | "github" | "scholar" | "linkedin";
+  icon: "email" | "github" | "scholar" | "linkedin" | "resume";
   label: string;
   href: string;
   description: string;
@@ -89,6 +89,7 @@ export type PublicationItem = {
   kind: PublicationKind;
   href?: string;
   thumbnailPath?: string;
+  thumbnailAspectRatio?: number;
   slidesUrl?: string;
   posterUrl?: string;
   videoUrl?: string;

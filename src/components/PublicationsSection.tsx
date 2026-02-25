@@ -1,11 +1,6 @@
 import { useMemo, useState } from "react";
 
-import {
-  filterPublicationsByTopic,
-  getTopicLabelBySlug,
-  getUsedTopics,
-  getWebPublications,
-} from "../data/cv/selectors";
+import { filterPublicationsByTopic, getTopicLabelBySlug, getUsedTopics, getWebPublications } from "../data/cv/selectors";
 import type { PublicationItem, Topic } from "../data/cv/types";
 
 type PublicationsSectionProps = {
@@ -40,16 +35,43 @@ const hasYearInVenue = (venue: string): boolean => {
   return /\b(19|20)\d{2}\b/.test(venue);
 };
 
+const classifyAspect = (aspectRatio?: number): "panorama" | "wide" | "standard" | "compact" => {
+  if (!aspectRatio) {
+    return "standard";
+  }
+
+  if (aspectRatio >= 2.4) {
+    return "panorama";
+  }
+
+  if (aspectRatio >= 1.75) {
+    return "wide";
+  }
+
+  if (aspectRatio < 1.35) {
+    return "compact";
+  }
+
+  return "standard";
+};
+
+const mediaFrameClassByAspect = {
+  panorama: "h-16 w-32",
+  wide: "h-16 w-28",
+  standard: "h-16 w-24",
+  compact: "h-18 w-18",
+} as const;
+
 const renderAuthors = (authors: string) => {
   const parts = authors.split(",").map((part) => part.trim());
 
   return parts.map((author, index) => {
-    const displayAuthor = AUTHOR_VARIANTS.has(author) ? <strong key={`${author}-${index}`}>{author}</strong> : author;
     const suffix = index < parts.length - 1 ? ", " : "";
+    const isSelf = AUTHOR_VARIANTS.has(author);
 
     return (
       <span key={`${author}-${index}`}>
-        {displayAuthor}
+        {isSelf ? <strong>{author}</strong> : author}
         {suffix}
       </span>
     );
@@ -68,6 +90,13 @@ const actionLinks = (publication: PublicationItem) => {
   ].filter((item): item is { label: string; href: string } => Boolean(item.href));
 };
 
+const ExternalLinkIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3 w-3">
+    <path fill="currentColor" d="M14 4h6v6h-1.5V6.56l-8.97 8.97-1.06-1.06 8.97-8.97H14z" />
+    <path fill="currentColor" d="M5.75 6A1.75 1.75 0 0 0 4 7.75v10.5C4 19.22 4.78 20 5.75 20h10.5c.97 0 1.75-.78 1.75-1.75V11h-1.5v7.25a.25.25 0 0 1-.25.25H5.75a.25.25 0 0 1-.25-.25V7.75c0-.14.11-.25.25-.25H13V6z" />
+  </svg>
+);
+
 export const PublicationsSection = ({ publications, topics }: PublicationsSectionProps) => {
   const [topicFilter, setTopicFilter] = useState<TopicFilter>("all");
 
@@ -76,7 +105,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
   const visiblePublications = useMemo(() => filterPublicationsByTopic(allPublications, topicFilter), [allPublications, topicFilter]);
 
   return (
-    <section aria-labelledby="publications-heading" className="mt-20">
+    <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
       <div>
         <h2 id="publications-heading" className="text-sm tracking-[0.2em] uppercase">
           Publications
@@ -112,71 +141,74 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
       <ul className="mt-6 space-y-4">
         {visiblePublications.map((publication) => {
           const citationCount = parseCitationCount(publication.citationLabel);
+          const mediaLinks = actionLinks(publication);
+          const mediaAspect = classifyAspect(publication.thumbnailAspectRatio);
 
           return (
-            <li key={publication.id} className="rounded-xl border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_40%)] p-5">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div className="min-w-0">
-                <p className="text-xs tracking-[0.14em] text-(--ink-700) uppercase">
+            <li key={publication.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs tracking-[0.13em] text-(--ink-700) uppercase">
+                <span>
                   {publication.venue}
                   {hasYearInVenue(publication.venue) ? "" : ` - ${publication.year}`}
-                </p>
-                <h3 className="mt-2 text-xl leading-snug" style={{ fontFamily: "var(--font-serif)" }}>
-                  {publication.href ? (
-                    <a href={publication.href} target="_blank" rel="noreferrer" className="hover:underline">
-                      {publication.title}
-                    </a>
-                  ) : (
-                    publication.title
-                  )}
-                </h3>
+                </span>
+                {citationCount ? (
+                  <span className="rounded-full border border-(--line) px-2 py-0.5 text-[10px] tracking-[0.1em]">{citationCount} cites</span>
+                ) : null}
               </div>
-              {citationCount ? (
-                <p className="inline-flex min-w-20 shrink-0 flex-col items-center rounded-lg border border-(--line) px-3 py-2 text-center">
-                  <span className="text-lg leading-none font-semibold text-(--ink-900)">{citationCount}</span>
-                  <span className="mt-1 text-[10px] tracking-[0.12em] text-(--ink-700) uppercase">Citations</span>
-                </p>
-              ) : null}
-            </div>
 
-            <p className="mt-3 text-sm leading-relaxed text-(--ink-700)">{renderAuthors(publication.authors)}</p>
-
-            {publication.thumbnailPath ? (
-              <img
-                src={publication.thumbnailPath}
-                alt={`${publication.title} thumbnail`}
-                className="mt-4 h-24 w-24 rounded-md border border-(--line) object-cover"
-                loading="lazy"
-              />
-            ) : null}
-
-            {actionLinks(publication).length > 0 ? (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {actionLinks(publication).map((link) => (
-                  <a
-                    key={`${publication.id}-${link.label}`}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-full border border-(--line) px-2 py-1 text-[11px] tracking-[0.12em] text-(--ink-700) uppercase hover:border-(--ink-700) hover:text-(--ink-900)"
-                  >
-                    {link.label}
+              <h3 className="mt-2 text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
+                {publication.href ? (
+                  <a href={publication.href} target="_blank" rel="noreferrer" className="hover:underline">
+                    {publication.title}
                   </a>
+                ) : (
+                  publication.title
+                )}
+              </h3>
+
+              <p className="mt-2 text-sm leading-relaxed text-(--ink-700)">{renderAuthors(publication.authors)}</p>
+
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="flex min-w-0 flex-1 flex-wrap gap-2">
+                  {mediaLinks.map((link) => (
+                    <a
+                      key={`${publication.id}-${link.label}`}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                    >
+                      <ExternalLinkIcon />
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+
+                {publication.thumbnailPath ? (
+                  <figure className="shrink-0 overflow-hidden rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),black_4%)] p-1.5">
+                    <div className={`${mediaFrameClassByAspect[mediaAspect]} max-w-full`}>
+                      <img
+                        src={publication.thumbnailPath}
+                        alt={`${publication.title} thumbnail`}
+                        className="h-full w-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                  </figure>
+                ) : null}
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {publication.topics.map((topicSlug) => (
+                  <span
+                    key={topicSlug}
+                    className="rounded-full border border-(--line) px-2 py-1 text-[10px] tracking-[0.1em] text-(--ink-700) uppercase"
+                  >
+                    {getTopicLabelBySlug(topics, topicSlug)}
+                  </span>
                 ))}
               </div>
-            ) : null}
-
-            <div className="mt-4 flex flex-wrap gap-2">
-              {publication.topics.map((topicSlug) => (
-                <span
-                  key={topicSlug}
-                  className="rounded-full border border-(--line) px-2 py-1 text-[11px] tracking-[0.12em] text-(--ink-700) uppercase"
-                >
-                  {getTopicLabelBySlug(topics, topicSlug)}
-                </span>
-              ))}
-            </div>
-          </li>
+            </li>
           );
         })}
       </ul>

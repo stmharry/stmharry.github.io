@@ -11,12 +11,14 @@
   --line: #d1d5db;
 }
 
-:root[data-theme="dark"] {
-  --ink-900: #f3f4f6;
-  --ink-700: #d1d5db;
-  --paper: #111827;
-  --paper-accent: #1f2937;
-  --line: #374151;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink-900: #f3f4f6;
+    --ink-700: #d1d5db;
+    --paper: #111827;
+    --paper-accent: #1f2937;
+    --line: #374151;
+  }
 }
 
 @layer base {
