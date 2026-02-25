@@ -1,0 +1,22 @@
+# Gitmoji Commit Message Template
+# <emoji> [(scope)]: <subject>
+
+# ✨ feat       Introduce new features
+# 🐛 fix        Fix a bug
+# 📝 docs       Documentation only changes
+# 💄 style      Code style changes (formatting, whitespace)
+# ♻️ refactor   Code refactoring without behavior change
+# ⚡️ perf       Improve performance
+# ✅ test       Add or update tests
+# 🔧 build      Changes to build system or dependencies
+# 👷 ci         CI configuration and scripts
+# 🔒 chore      Other changes not affecting src or tests
+# ⏪️ revert     Revert a previous commit
+
+# Body (optional)
+# - Explain *what* and *why*, not *how*
+# - Wrap text at 72 characters
+
+# Footer (optional)
+# - Issue tracker or task ID, e.g.: JIRA-1234
+# - Co-authored-by: Name <email@example.com>
