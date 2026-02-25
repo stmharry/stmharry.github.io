@@ -110,10 +110,14 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
         <h2 id="publications-heading" className="text-sm tracking-[0.2em] uppercase">
           Publications
         </h2>
-        <p className="mt-2 text-sm text-(--ink-700)">Filter by topic.</p>
-        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by topic">
+        <div
+          className="mt-3 flex flex-nowrap gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden"
+          style={{ scrollbarWidth: "none" }}
+          role="group"
+          aria-label="Filter by topic"
+        >
           <button
-            className={`rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
+            className={`shrink-0 rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
               topicFilter === "all"
                 ? "border-(--ink-900) bg-(--ink-900) text-(--paper)"
                 : "border-(--line) text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
@@ -125,7 +129,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
           {availableTopics.map((topic) => (
             <button
               key={topic.slug}
-              className={`rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
+              className={`shrink-0 rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
                 topicFilter === topic.slug
                   ? "border-(--ink-900) bg-(--ink-900) text-(--paper)"
                   : "border-(--line) text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
