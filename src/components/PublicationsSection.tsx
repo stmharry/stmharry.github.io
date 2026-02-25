@@ -107,7 +107,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
   return (
     <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
       <div>
-        <h2 id="publications-heading" className="text-sm tracking-[0.2em] uppercase">
+        <h2 id="publications-heading" className="text-base font-medium tracking-[0.18em] uppercase sm:text-sm sm:font-normal">
           Publications
         </h2>
         <div

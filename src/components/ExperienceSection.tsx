@@ -11,7 +11,7 @@ const renderPeriod = (period: string): string => {
 export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
   return (
     <section aria-labelledby="experience-heading" className="mt-14 sm:mt-18">
-      <h2 id="experience-heading" className="text-sm tracking-[0.2em] uppercase">
+      <h2 id="experience-heading" className="text-base font-medium tracking-[0.18em] uppercase sm:text-sm sm:font-normal">
         Experience
       </h2>
       <ul className="mt-5 space-y-3 sm:space-y-4">
