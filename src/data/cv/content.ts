@@ -9,9 +9,9 @@ export const cvContent: CvContent = {
     location: "Taiwan and Boston",
     summaryBullets: [
       "Expert in technologies including AI and blockchain, with the mission to scale human civilization and liberate humanity from repetitive labor.",
-      "Emerging entrepreneur with extensive experience in fundraising ($1MM+ USD raised), team leadership (20+ employees), and product building (3+ products to the market).",
+      "Entrepreneurial builder with experience leading cross-functional teams, scaling products from idea to launch, and turning research into practical impact.",
       "Taiwan-born, US-educated innovator seeking to elevate Taiwan's role as a global engineering powerhouse and promoting a culture of rapid iterative innovation.",
-      "Ocean lover with an AIDA 3-star free-diving certification and an SDI open water scuba diving certification.",
+      "Ocean lover with an AIDA Instructor Certification and an SDI Open Water Scuba Diving Certification.",
     ],
     contacts: [
       {
