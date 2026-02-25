@@ -30,6 +30,20 @@
 - Push after each successful commit
 - Follow `.gitmessage.txt` gitmoji commit style
 
+## Worktree merge strategy
+
+- Implement changes on a feature worktree branch (for example, `opencode/*`)
+- Keep `main` checked out in `/workspace/stmharry.github.io`
+- Before commit and before integrating, run:
+  - `bun test`
+  - `bun run build`
+  - `bun run resume:generate`
+- Integrate feature work into `main` using this fallback order:
+  - Fast-forward merge on main worktree (`git merge --ff-only <feature-branch>`)
+  - Rebase feature branch onto `origin/main` when fast-forward is not possible
+  - Manual merge only when both fast-forward and rebase cannot complete cleanly
+- After integration, confirm `main` and feature branch point to the same commit
+
 ## Style guidance
 
 - Keep layout minimal but intentional
