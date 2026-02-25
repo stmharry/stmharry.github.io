@@ -9,9 +9,9 @@ export default defineConfig(({ mode }) => {
     .map((host) => host.trim())
     .filter(Boolean)
   const basePath = env.BASE_PATH?.trim()
-  const normalizedBasePath = basePath
-    ? `/${basePath.replace(/^\/+/, "").replace(/\/+$/, "")}/`
-    : "/"
+  const normalizedBasePath = !basePath || basePath === "/"
+    ? "/"
+    : `/${basePath.replace(/^\/+/, "").replace(/\/+$/, "")}/`
 
   return {
     base: normalizedBasePath,
