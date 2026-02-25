@@ -7,7 +7,7 @@ Minimal personal website scaffold built with React, TypeScript, Vite, Tailwind C
 - One-page, modular baseline implemented on `main`
 - Canonical CV data source established at `src/data/cv/content.ts`
 - Theme toggle with system default and persisted preference
-- Selected publications section with single-select topic filter
+- Publications section with single-select topic filter over full list
 - SEO baseline in place (meta tags + Open Graph + Twitter + JSON-LD)
 - LaTeX resume pipeline generated from canonical TS data
 - Legacy content and assets should be sourced only from `origin/master` as needed
@@ -57,6 +57,7 @@ bun run lint
 - Theme helpers: `src/lib/theme.ts`
 - Resume LaTeX template: `resume/template.tex`
 - Resume generation script: `scripts/generate-resume-tex.ts`
+- Publication media assets: `public/assets/publications/*`
 - Agent memory and workflow: `AGENTS.md`
 
 ## Content architecture
@@ -67,6 +68,7 @@ The app keeps data and rendering separate with one source of truth:
 - Data contracts are defined in `src/data/cv/types.ts`
 - Website and resume are both derived from the same canonical data
 - UI components read typed data and avoid embedded hardcoded content
+- Publication records include optional media/action links (slides, poster, video, code, project, dataset)
 
 ### Topic model
 
@@ -85,9 +87,11 @@ This supports stable filtering logic while keeping readable UI labels.
   - experience
   - selected publications
 - Single-select topic filter for publications (`All` + one topic)
+- All publications are rendered by default; filter buttons narrow the list
 - Light/dark theme toggle:
   - defaults to system preference
   - persists user choice in `localStorage`
+  - icon-supported toggle control
 - SEO baseline:
   - title and description
   - Open Graph and Twitter metadata

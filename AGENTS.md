@@ -14,6 +14,8 @@
 - Topics use internal slug + display label (`TopicSlug` + `Topic`)
 - Theme behavior: manual light/dark toggle, system default, persisted preference
 - Resume pipeline: preserve LaTeX rendering for PDF fidelity, generated from canonical TS data
+- Publication UI behavior: render all publications with topic filter buttons (no subset list)
+- Publication media reuse: use `origin/master` assets selectively in `public/assets/publications/*`
 
 ## Working agreement
 
@@ -36,7 +38,7 @@
 ## Core features for current baseline
 
 - Structured sections with predefined fields for profile, experience, and publications
-- Single-select topic filter for selected publications
+- Single-select topic filter for full publications list
 - SEO baseline (meta tags + Open Graph + Twitter + JSON-LD Person)
 - Theme system with light/dark mode and local persistence
 - Dual output targets: minimal website + full resume PDF
