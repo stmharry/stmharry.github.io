@@ -127,7 +127,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
   return (
     <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
-      <div className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 pt-1.5 pb-2 shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:pb-0 sm:shadow-none sm:backdrop-blur-none">
+      <div className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 pt-2 pb-2 shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:pb-0 sm:shadow-none sm:backdrop-blur-none">
         <h2
           id="publications-heading"
           className="text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current"
