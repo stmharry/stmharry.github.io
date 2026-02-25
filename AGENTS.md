@@ -9,9 +9,11 @@
 - Scope for v1: one-page essentials (hero, short bio, links, selected publications)
 - Legacy usage rule: use `origin/master` only as a source of content/assets
 - `CNAME` is intentionally not included during scaffold stage
-- Content architecture: typed data in `src/data/*`, rendering in `src/components/*`
+- Canonical source of truth: latest long-form resume content in `src/data/cv/content.ts`
+- Content architecture: typed data in `src/data/cv/*`, rendering in `src/components/*`
 - Topics use internal slug + display label (`TopicSlug` + `Topic`)
 - Theme behavior: manual light/dark toggle, system default, persisted preference
+- Resume pipeline: preserve LaTeX rendering for PDF fidelity, generated from canonical TS data
 
 ## Working agreement
 
@@ -20,6 +22,7 @@
 - Before each commit, run checks:
   - `bun test`
   - `bun run build`
+  - `bun run resume:generate`
 - Push after each successful commit
 - Follow `.gitmessage.txt` gitmoji commit style
 
@@ -36,3 +39,4 @@
 - Single-select topic filter for selected publications
 - SEO baseline (meta tags + Open Graph + Twitter + JSON-LD Person)
 - Theme system with light/dark mode and local persistence
+- Dual output targets: minimal website + full resume PDF

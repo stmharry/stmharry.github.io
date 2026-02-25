@@ -5,10 +5,11 @@ Minimal personal website scaffold built with React, TypeScript, Vite, Tailwind C
 ## Current status
 
 - One-page, modular baseline implemented on `main`
-- Typed data layer separated from UI rendering
+- Canonical CV data source established at `src/data/cv/content.ts`
 - Theme toggle with system default and persisted preference
 - Selected publications section with single-select topic filter
 - SEO baseline in place (meta tags + Open Graph + Twitter + JSON-LD)
+- LaTeX resume pipeline generated from canonical TS data
 - Legacy content and assets should be sourced only from `origin/master` as needed
 - `CNAME` is intentionally excluded for now
 
@@ -36,6 +37,7 @@ Run these before commits:
 ```bash
 bun test
 bun run build
+bun run resume:generate
 ```
 
 Optional additional check:
@@ -49,18 +51,21 @@ bun run lint
 - App entry: `src/main.tsx`
 - Page composition: `src/App.tsx`
 - Base styles and tokens: `src/index.css`
-- Content data and types: `src/data/content.ts`, `src/data/types.ts`
-- Content selectors: `src/data/selectors.ts`
+- Canonical CV data and types: `src/data/cv/content.ts`, `src/data/cv/types.ts`
+- CV selectors: `src/data/cv/selectors.ts`
 - UI components: `src/components/*`
 - Theme helpers: `src/lib/theme.ts`
+- Resume LaTeX template: `resume/template.tex`
+- Resume generation script: `scripts/generate-resume-tex.ts`
 - Agent memory and workflow: `AGENTS.md`
 
 ## Content architecture
 
-The app keeps data and rendering separate:
+The app keeps data and rendering separate with one source of truth:
 
-- All editable content is defined in `src/data/content.ts`
-- Data contracts are defined in `src/data/types.ts`
+- All canonical CV content is defined in `src/data/cv/content.ts`
+- Data contracts are defined in `src/data/cv/types.ts`
+- Website and resume are both derived from the same canonical data
 - UI components read typed data and avoid embedded hardcoded content
 
 ### Topic model
@@ -87,6 +92,30 @@ This supports stable filtering logic while keeping readable UI labels.
   - title and description
   - Open Graph and Twitter metadata
   - JSON-LD `Person` schema
+
+## Resume pipeline
+
+Generate LaTeX from canonical CV data:
+
+```bash
+bun run resume:generate
+```
+
+Build PDF (requires local `latexmk`):
+
+```bash
+bun run resume:build
+```
+
+Clean generated resume artifacts:
+
+```bash
+bun run resume:clean
+```
+
+Output PDF path:
+
+- `public/resume.pdf`
 
 ## Commit message format
 
