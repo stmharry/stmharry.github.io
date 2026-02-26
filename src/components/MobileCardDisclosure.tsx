@@ -18,7 +18,7 @@ const ChevronDown = ({ expanded }: { expanded: boolean }) => (
   <svg
     viewBox="0 0 20 20"
     aria-hidden="true"
-    className={`h-3.5 w-3.5 transition-transform duration-200 [transition-timing-function:var(--ease-standard)] motion-reduce:transition-none ${expanded ? "rotate-180" : "rotate-0"}`}
+    className={`h-3.5 w-3.5 transition-transform duration-200 ease-out motion-reduce:transition-none ${expanded ? "rotate-180" : "rotate-0"}`}
   >
     <path fill="currentColor" d="M5.2 7.4 10 12.2l4.8-4.8 1 1L10 14.2 4.2 8.4z" />
   </svg>
@@ -107,10 +107,10 @@ export const MobileCardDisclosure = ({
       <div
         id={panelId}
         className={`${panelSpacingClass} grid transition-[grid-template-rows,opacity,margin] duration-200 ease-out motion-reduce:transition-none ${
-          isExpanded ? "motion-disclosure-expanded grid-rows-[1fr] opacity-100" : "motion-disclosure-collapsed grid-rows-[0fr] opacity-0"
+          isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className={`motion-disclosure-content min-h-0 overflow-hidden ${isExpanded ? "pointer-events-auto" : "pointer-events-none"}`}>{children}</div>
+        <div className={`min-h-0 overflow-hidden ${isExpanded ? "pointer-events-auto" : "pointer-events-none"}`}>{children}</div>
       </div>
     </>
   );
