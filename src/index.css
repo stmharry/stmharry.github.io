@@ -11,6 +11,13 @@
   --line: #d1d5db;
   --rail: #c4c8cf;
   --mobile-sticky-name-height: 2.25rem;
+  --motion-fast: 140ms;
+  --motion-base: 200ms;
+  --motion-reveal: 280ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-micro: ease-out;
+  --reveal-y: 12px;
+  --reveal-y-sm: 8px;
   color-scheme: light dark;
 }
 
@@ -72,4 +79,82 @@
 
 #root {
   min-height: 100vh;
+}
+
+@layer utilities {
+  .motion-fade-up-init {
+    opacity: 0;
+    transform: translateY(var(--reveal-y));
+  }
+
+  .motion-fade-up-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity var(--motion-reveal) var(--ease-standard),
+      transform var(--motion-reveal) var(--ease-standard);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .motion-hover-lift {
+    transition:
+      transform var(--motion-fast) var(--ease-micro),
+      box-shadow var(--motion-fast) var(--ease-micro),
+      border-color var(--motion-fast) var(--ease-micro);
+  }
+
+  @media (hover: hover) {
+    .motion-hover-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px color-mix(in oklab, var(--ink-900), transparent 92%);
+    }
+  }
+
+  .motion-press {
+    transition: transform var(--motion-fast) var(--ease-micro);
+  }
+
+  .motion-press:active {
+    transform: scale(0.99);
+  }
+
+  .motion-icon-shift .motion-icon {
+    transition: transform var(--motion-fast) var(--ease-micro);
+  }
+
+  @media (hover: hover) {
+    .motion-icon-shift:hover .motion-icon {
+      transform: translateX(1.5px);
+    }
+  }
+
+  .motion-disclosure-content {
+    transition:
+      transform var(--motion-base) var(--ease-standard),
+      opacity var(--motion-base) var(--ease-standard);
+  }
+
+  .motion-disclosure-collapsed .motion-disclosure-content {
+    opacity: 0.68;
+    transform: translateY(calc(-1 * var(--reveal-y-sm)));
+  }
+
+  .motion-disclosure-expanded .motion-disclosure-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-fade-up-init,
+  .motion-fade-up-in,
+  .motion-hover-lift,
+  .motion-press,
+  .motion-icon-shift .motion-icon,
+  .motion-disclosure-content {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
 }
