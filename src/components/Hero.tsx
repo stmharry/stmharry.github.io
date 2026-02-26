@@ -33,9 +33,12 @@ export const Hero = ({ profile, links }: HeroProps) => {
   return (
     <header className="mt-2 w-full sm:mt-4">
       <p className="text-xs tracking-[0.24em] text-(--ink-700) uppercase">Personal site</p>
-      <h1 className="mt-3 text-4xl leading-tight font-medium sm:mt-4 sm:text-6xl" style={{ fontFamily: "var(--font-serif)" }}>
-        {profile.name}
-      </h1>
+      <div className="mt-3 flex flex-col gap-1.5 sm:mt-4 sm:flex-row sm:items-baseline sm:justify-start sm:gap-4">
+        <h1 className="text-4xl leading-tight font-medium sm:text-6xl" style={{ fontFamily: "var(--font-serif)" }}>
+          {profile.name}
+        </h1>
+        <p className="text-left text-lg tracking-[0.08em] text-(--ink-700) sm:text-2xl">@stmharry</p>
+      </div>
       <p className="mt-3 text-xs tracking-[0.16em] text-(--ink-700) uppercase sm:mt-4 sm:text-sm">{profile.headline}</p>
       <PrimaryLinks links={links} className="mt-5 sm:mt-6" />
       <div className="mt-6 max-w-4xl">
