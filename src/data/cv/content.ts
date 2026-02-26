@@ -210,7 +210,7 @@ export const cvContent: CvContent = {
           text: "Led development of DeFi protocols (DEX and AMM), becoming the first team on the Chia blockchain to launch these primitives.",
         },
       ],
-      highlighted: true,
+      highlighted: false,
     },
     {
       id: "iabit",
@@ -236,7 +236,7 @@ export const cvContent: CvContent = {
     {
       id: "mit-ra",
       organization: "Massachusetts Institute of Technology",
-      period: "2018 -- 2022",
+      period: "Sep 2018 -- Jun 2022",
       role: "Research Assistant",
       location: "Cambridge, MA",
       summary:
@@ -252,7 +252,7 @@ export const cvContent: CvContent = {
         },
         { text: "Awarded scholarships totaling 4 years in duration." },
       ],
-      highlighted: true,
+      highlighted: false,
     },
     {
       id: "worldquant",
