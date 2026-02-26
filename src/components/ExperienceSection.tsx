@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 
 import { CardHeader } from "./CardHeader";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
+import { Reveal } from "./Reveal";
 import { toExperienceCardHeader } from "./cardSemantics";
 import type { ExperienceItem } from "../data/cv/types";
 import { isExternalUrl, toPublicUrl } from "../lib/url";
@@ -11,7 +12,7 @@ type ExperienceSectionProps = {
 };
 
 const ExternalLinkIcon = () => (
-  <svg viewBox="0 0 20 20" aria-hidden="true" className="h-3.5 w-3.5">
+  <svg viewBox="0 0 20 20" aria-hidden="true" className="motion-icon h-3.5 w-3.5">
     <path
       fill="currentColor"
       d="M5.5 5a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V10a.75.75 0 0 1 1.5 0v4.5A2 2 0 0 1 14.5 16h-9a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2H10a.75.75 0 0 1 0 1.5z"
@@ -34,16 +35,21 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
     <section aria-labelledby="experience-heading" className="mt-14 sm:mt-18">
       <h2
         id="experience-heading"
-        className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 py-2 text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current sm:shadow-none sm:backdrop-blur-none"
+        className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 py-2 text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase shadow-[0_1px_0_0_var(--line)] backdrop-blur-md transition-[background-color,box-shadow] duration-200 sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current sm:shadow-none sm:backdrop-blur-none"
       >
         Experience
       </h2>
       <ul className="mt-5 space-y-3 sm:space-y-4">
-        {visibleItems.map((item) => {
+        {visibleItems.map((item, index) => {
           const header = toExperienceCardHeader(item);
 
           return (
-            <li key={item.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_24%)] p-4 sm:p-5">
+            <Reveal
+              as="li"
+              key={item.id}
+              delayMs={index * 45}
+              className="motion-hover-lift rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_24%)] p-4 sm:p-5"
+            >
               <MobileCardDisclosure
                 id={`experience-${item.id}`}
                 trigger={
@@ -78,7 +84,7 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
                         href={toPublicUrl(item.organizationUrl)}
                         target={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "_blank" : undefined}
                         rel={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "noreferrer" : undefined}
-                        className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                        className="motion-hover-lift motion-icon-shift motion-press inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
                       >
                         <ExternalLinkIcon />
                         Website
@@ -87,7 +93,7 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
                   ) : null}
                 </div>
               </MobileCardDisclosure>
-            </li>
+            </Reveal>
           );
         })}
       </ul>

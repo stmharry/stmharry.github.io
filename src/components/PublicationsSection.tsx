@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
+import { Reveal } from "./Reveal";
 import { filterPublicationsByTopic, getTopicLabelBySlug, getUsedTopics, getWebPublications } from "../data/cv/selectors";
 import type { PublicationItem, Topic } from "../data/cv/types";
 import { isExternalUrl, toPublicUrl } from "../lib/url";
@@ -112,7 +113,7 @@ const actionLinks = (publication: PublicationItem) => {
 };
 
 const ExternalLinkIcon = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3 w-3">
+  <svg viewBox="0 0 24 24" aria-hidden="true" className="motion-icon h-3 w-3">
     <path fill="currentColor" d="M14 4h6v6h-1.5V6.56l-8.97 8.97-1.06-1.06 8.97-8.97H14z" />
     <path fill="currentColor" d="M5.75 6A1.75 1.75 0 0 0 4 7.75v10.5C4 19.22 4.78 20 5.75 20h10.5c.97 0 1.75-.78 1.75-1.75V11h-1.5v7.25a.25.25 0 0 1-.25.25H5.75a.25.25 0 0 1-.25-.25V7.75c0-.14.11-.25.25-.25H13V6z" />
   </svg>
@@ -127,7 +128,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
   return (
     <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
-      <div className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 pt-2 pb-2 shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:pb-0 sm:shadow-none sm:backdrop-blur-none">
+      <div className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 pt-2 pb-2 shadow-[0_1px_0_0_var(--line)] backdrop-blur-md transition-[background-color,box-shadow] duration-200 sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:pb-0 sm:shadow-none sm:backdrop-blur-none">
         <h2
           id="publications-heading"
           className="text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current"
@@ -141,7 +142,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
           aria-label="Filter by topic"
         >
           <button
-            className={`shrink-0 rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
+            className={`motion-press shrink-0 rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
               topicFilter === "all"
                 ? "border-(--ink-900) bg-(--ink-900) text-(--paper)"
                 : "border-(--line) text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
@@ -153,7 +154,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
           {availableTopics.map((topic) => (
             <button
               key={topic.slug}
-              className={`shrink-0 rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
+              className={`motion-press shrink-0 rounded-full border px-3 py-1 text-[11px] tracking-[0.12em] uppercase transition ${
                 topicFilter === topic.slug
                   ? "border-(--ink-900) bg-(--ink-900) text-(--paper)"
                   : "border-(--line) text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
@@ -167,12 +168,17 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
       </div>
 
       <ul className="mt-6 space-y-4">
-        {visiblePublications.map((publication) => {
+        {visiblePublications.map((publication, index) => {
           const citationCount = publication.citationCount ?? null;
           const mediaLinks = actionLinks(publication);
           const mediaAspect = classifyAspect(publication.thumbnailAspectRatio);
           return (
-            <li key={publication.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
+            <Reveal
+              as="li"
+              key={publication.id}
+              delayMs={index * 45}
+              className="motion-hover-lift rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5"
+            >
               <MobileCardDisclosure
                 id={`publication-${publication.id}`}
                 trigger={({ isExpanded, isDesktop }) => (
@@ -237,7 +243,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                           href={toPublicUrl(link.href)}
                           target={isExternalUrl(toPublicUrl(link.href)) ? "_blank" : undefined}
                           rel={isExternalUrl(toPublicUrl(link.href)) ? "noreferrer" : undefined}
-                        className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                        className="motion-hover-lift motion-icon-shift motion-press inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
                       >
                         <ExternalLinkIcon />
                         {link.label}
@@ -258,7 +264,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                 ))}
               </div>
 
-            </li>
+            </Reveal>
           );
         })}
       </ul>
