@@ -55,11 +55,11 @@ export const PrimaryLinks = ({ links, className = "mt-8 sm:mt-10" }: PrimaryLink
               href={resolvedHref}
               target={external ? "_blank" : undefined}
               rel={external ? "noreferrer" : undefined}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_10%)] text-(--ink-700) transition hover:border-(--ink-700) hover:text-(--ink-900) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ink-700)/40"
+              className="motion-hover-lift motion-icon-shift motion-press inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_10%)] text-(--ink-700) transition hover:border-(--ink-700) hover:text-(--ink-900) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ink-700)/40"
               aria-label={`${link.label}: ${link.description}`}
               title={`${link.label}: ${link.description}`}
             >
-              {iconByType[link.icon]}
+              <span className="motion-icon">{iconByType[link.icon]}</span>
             </a>
               );
             })()}
