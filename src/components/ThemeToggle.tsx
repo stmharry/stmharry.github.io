@@ -3,6 +3,7 @@ import type { ReactElement } from "react";
 type ThemeToggleProps = {
   value: ThemePreference;
   onCycle: () => void;
+  className?: string;
 };
 
 type ThemePreference = "light" | "dark";
@@ -34,14 +35,14 @@ const iconByPreference: Record<ThemePreference, ReactElement> = {
   dark: <MoonIcon />,
 };
 
-export const ThemeToggle = ({ value, onCycle }: ThemeToggleProps) => {
+export const ThemeToggle = ({ value, onCycle, className = "" }: ThemeToggleProps) => {
   const nextModeLabel = value === "dark" ? "Light" : "Dark";
 
   return (
     <button
       type="button"
       onClick={onCycle}
-      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_10%)] text-(--ink-700) transition hover:border-(--ink-700) hover:text-(--ink-900) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ink-700)/35"
+      className={`inline-flex h-8 w-8 items-center justify-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_10%)] text-(--ink-700) transition hover:border-(--ink-700) hover:text-(--ink-900) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--ink-700)/35 ${className}`}
       aria-label={`Switch to ${nextModeLabel} mode`}
       title={`Switch to ${nextModeLabel} mode`}
     >

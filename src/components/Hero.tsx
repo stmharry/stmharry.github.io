@@ -41,19 +41,19 @@ export const Hero = ({ profile, links, themePreference, onCycleTheme }: HeroProp
         <p className="text-xs tracking-[0.24em] text-(--ink-700) uppercase">Personal site</p>
         <ThemeToggle value={themePreference} onCycle={onCycleTheme} />
       </div>
-      <div className="mt-3 flex flex-col gap-5 sm:mt-4 md:flex-row md:items-start md:justify-between md:gap-8">
-        <div className="order-2 min-w-0 md:order-1">
-          <div className="flex flex-col gap-1.5 md:flex-row md:items-baseline md:justify-start md:gap-4">
-            <h1 className="text-4xl leading-tight font-medium sm:text-5xl md:text-6xl" style={{ fontFamily: "var(--font-serif)" }}>
+      <div className="mt-3 flex flex-col gap-5 sm:mt-4 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+        <div className="order-2 min-w-0 lg:order-1">
+          <div className="flex flex-col gap-1.5 lg:flex-row lg:items-baseline lg:justify-start lg:gap-4">
+            <h1 className="text-4xl leading-tight font-medium sm:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-serif)" }}>
               {profile.name}
             </h1>
-            <p className="text-left text-lg tracking-[0.08em] text-(--ink-700) sm:text-xl md:text-2xl">@stmharry</p>
+            <p className="text-left text-lg tracking-[0.08em] text-(--ink-700) sm:text-xl lg:text-2xl">@stmharry</p>
           </div>
           <p className="mt-3 text-xs tracking-[0.16em] text-(--ink-700) uppercase sm:mt-4 sm:text-sm">{profile.headline}</p>
           <PrimaryLinks links={links} className="mt-5 sm:mt-6" />
         </div>
 
-        <figure className="order-1 shrink-0 self-start md:order-2 md:-mt-4">
+        <figure className="order-1 shrink-0 self-start lg:order-2">
           <img
             src={toPublicUrl("/assets/profile/harry-avatar.jpg")}
             alt="Portrait of Tzu-Ming Harry Hsu"
