@@ -321,20 +321,55 @@ export const cvContent: CvContent = {
       highlighted: true,
     },
     {
-      id: "bwh-bidmc",
-      organization: "Brigham and Women's Hospital and Beth Israel Deaconess Medical Center",
-      organizationLogoPath: "/assets/organizations/bwh-bidmc-logo.png",
+      id: "bwh-research-trainee",
+      organization: "Brigham and Women's Hospital",
+      organizationLogoPath: "/assets/organizations/bwh-logo.png",
+      period: "2019 -- 2020",
+      role: "Research Trainee",
+      location: "Boston, MA",
+      summary: "",
+      highlights: [],
+      highlighted: false,
+    },
+    {
+      id: "bidmc-research-trainee",
+      organization: "Beth Israel Deaconess Medical Center",
+      organizationLogoPath: "/assets/organizations/bidmc-logo.png",
       period: "2019 -- 2020",
       role: "Research Trainee",
       location: "Boston, MA",
       summary:
-        "Built clinical AI screening workflows used across 1,000+ patient cases and supported deep-learning infrastructure for a 10+ member research unit.",
+        "Published impactful clinical AI research and deployed a PACS-integrated screening workflow across 1,000+ patients while managing shared deep-learning compute for a 10+ member research unit.",
       highlights: [
-        { text: "Co-authored research on liver tumor assessment, COVID-19 clinical risk prediction, and automatic pancreatic cancer assessment." },
         {
-          text: "Built and deployed an AI-driven patient screening pipeline in PACS workflows, screening 1,000+ patients and improving diagnostic workflows.",
+          text: "Published three impactful research articles on critical medical topics, including liver tumor assessment, COVID-19 clinical risk prediction, and automatic pancreatic cancer assessment.",
         },
-        { text: "Managed compute infrastructure for a deep learning research unit of 10+ members." },
+        {
+          text: "Developed and implemented an AI-driven patient screening pipeline in the hospital's PACS workflow, screening over 1,000 patients and improving disease diagnosis accuracy.",
+        },
+        {
+          text: "Managed the computation resources for a research unit of 10+ members, streamlining deep learning processes and maximizing resource sharing.",
+        },
+      ],
+      highlighted: false,
+    },
+    {
+      id: "academia-sinica-student-researcher",
+      organization: "Academia Sinica, Taiwan",
+      organizationLogoPath: "/assets/organizations/academia-sinica-logo.png",
+      organizationDescription: "Part-time",
+      period: "2014 -- 2016",
+      role: "Student Researcher",
+      location: "Taipei City, Taiwan",
+      summary:
+        "Researched heterogeneous, unsupervised, and semi-supervised domain adaptation for visual classification and published three peer-reviewed papers presented at top conferences and workshops.",
+      highlights: [
+        {
+          text: "Researched heterogeneous, unsupervised, and semi-supervised domain adaptation for visual classification.",
+        },
+        {
+          text: "Published 3 peer-reviewed academic papers and presented findings at top conferences and workshops.",
+        },
       ],
       highlighted: false,
     },
