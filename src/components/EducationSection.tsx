@@ -59,7 +59,7 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                   trigger={
                     <CardHeader
                       primary={
-                        <h3 className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
+                        <h3 className="text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
                           {header.primary}
                         </h3>
                       }
@@ -100,7 +100,7 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
               ) : (
                 <CardHeader
                   primary={
-                    <h3 className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
+                    <h3 className="text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
                       {header.primary}
                     </h3>
                   }

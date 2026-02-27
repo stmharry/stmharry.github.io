@@ -48,7 +48,7 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
           const headerContent = (
             <CardHeader
               primary={
-                <p className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
+                <p className="text-lg leading-snug sm:text-xl" style={{ fontFamily: "var(--font-serif)" }}>
                   {header.primary}
                 </p>
               }
