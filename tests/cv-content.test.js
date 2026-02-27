@@ -31,6 +31,14 @@ describe("canonical CV content", () => {
     expect(new Set(orders).size).toBe(orders.length);
   });
 
+  test("publication order values are sequential and start at one", () => {
+    const orders = cvContent.publications.map((publication) => publication.order).sort((left, right) => left - right);
+
+    for (let index = 0; index < orders.length; index += 1) {
+      expect(orders[index]).toBe(index + 1);
+    }
+  });
+
   test("citation count values use numeric representation", () => {
     for (const publication of cvContent.publications) {
       if (publication.citationCount === undefined) {
@@ -54,6 +62,16 @@ describe("canonical CV content", () => {
 
       for (const candidatePath of candidatePaths) {
         expect(publicationAssetPathPattern.test(candidatePath)).toBeTrue();
+      }
+    }
+  });
+
+  test("related publication experience ids refer to existing experience entries", () => {
+    const experienceIds = new Set(cvContent.experience.map((item) => item.id));
+
+    for (const publication of cvContent.publications) {
+      for (const experienceId of publication.relatedExperienceIds ?? []) {
+        expect(experienceIds.has(experienceId)).toBeTrue();
       }
     }
   });
