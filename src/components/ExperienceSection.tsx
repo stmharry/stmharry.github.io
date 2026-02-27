@@ -59,7 +59,7 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
                           <img
                             src={toPublicUrl(item.organizationLogoPath)}
                             alt={`${header.secondary} logo`}
-                            className="h-5 w-5 shrink-0 rounded-sm border border-(--line) bg-(--paper) object-contain p-0.5"
+                            className="h-5 w-5 shrink-0 rounded-full border border-(--line) bg-(--paper) object-contain p-0.5"
                             loading="lazy"
                           />
                         ) : null}

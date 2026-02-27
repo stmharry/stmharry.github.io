@@ -69,7 +69,7 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                             <img
                               src={toPublicUrl(item.institutionLogoPath)}
                               alt={`${header.secondary} logo`}
-                              className="h-5 w-5 shrink-0 rounded-sm border border-(--line) bg-(--paper) object-contain p-0.5"
+                              className="h-5 w-5 shrink-0 rounded-full border border-(--line) bg-(--paper) object-contain p-0.5"
                               loading="lazy"
                             />
                           ) : null}
@@ -115,7 +115,7 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                         <img
                           src={toPublicUrl(item.institutionLogoPath)}
                           alt={`${header.secondary} logo`}
-                          className="h-5 w-5 shrink-0 rounded-sm border border-(--line) bg-(--paper) object-contain p-0.5"
+                          className="h-5 w-5 shrink-0 rounded-full border border-(--line) bg-(--paper) object-contain p-0.5"
                           loading="lazy"
                         />
                       ) : null}
