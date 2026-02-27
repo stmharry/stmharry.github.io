@@ -1,10 +1,15 @@
 import { PrimaryLinks } from "./PrimaryLinks";
+import { ThemeToggle } from "./ThemeToggle";
 import type { LinkItem, Profile } from "../data/cv/types";
 import { toPublicUrl } from "../lib/url";
+
+type ThemePreference = "light" | "dark";
 
 type HeroProps = {
   profile: Pick<Profile, "name" | "headline" | "summaryBullets">;
   links: LinkItem[];
+  themePreference: ThemePreference;
+  onCycleTheme: () => void;
 };
 
 const SUMMARY_TITLES = ["Builder", "Research", "Mission", "Life"];
@@ -29,10 +34,13 @@ const StatementRail = ({ bullets }: SummaryShowcaseProps) => (
   </section>
 );
 
-export const Hero = ({ profile, links }: HeroProps) => {
+export const Hero = ({ profile, links, themePreference, onCycleTheme }: HeroProps) => {
   return (
     <header className="mt-2 w-full sm:mt-4">
-      <p className="text-xs tracking-[0.24em] text-(--ink-700) uppercase">Personal site</p>
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-xs tracking-[0.24em] text-(--ink-700) uppercase">Personal site</p>
+        <ThemeToggle value={themePreference} onCycle={onCycleTheme} />
+      </div>
       <div className="mt-3 flex flex-col gap-5 sm:mt-4 md:flex-row md:items-start md:justify-between md:gap-8">
         <div className="order-2 min-w-0 md:order-1">
           <div className="flex flex-col gap-1.5 md:flex-row md:items-baseline md:justify-start md:gap-4">

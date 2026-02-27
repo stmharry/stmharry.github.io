@@ -7,9 +7,70 @@ import { PublicationsSection } from "./components/PublicationsSection";
 import { cvContent } from "./data/cv/content";
 import { getExperiencePublicationLinks } from "./data/cv/selectors";
 
+type ThemePreference = "system" | "light" | "dark";
+
+const THEME_STORAGE_KEY = "theme-preference";
+const SYSTEM_DARK_QUERY = "(prefers-color-scheme: dark)";
+
+const isThemePreference = (value: unknown): value is Exclude<ThemePreference, "system"> => {
+  return value === "light" || value === "dark";
+};
+
+const getOppositeTheme = (value: Exclude<ThemePreference, "system">): Exclude<ThemePreference, "system"> => {
+  return value === "dark" ? "light" : "dark";
+};
+
 function App() {
   const experiencePublicationLinks = getExperiencePublicationLinks(cvContent.publications);
   const [stickyNameOpacity, setStickyNameOpacity] = useState(0);
+  const [systemTheme, setSystemTheme] = useState<Exclude<ThemePreference, "system">>(() => {
+    if (typeof window === "undefined") {
+      return "light";
+    }
+
+    return window.matchMedia(SYSTEM_DARK_QUERY).matches ? "dark" : "light";
+  });
+  const [themePreference, setThemePreference] = useState<Exclude<ThemePreference, "system"> | null>(() => {
+    if (typeof window === "undefined") {
+      return null;
+    }
+
+    const storedValue = window.localStorage.getItem(THEME_STORAGE_KEY);
+    return isThemePreference(storedValue) ? storedValue : null;
+  });
+  const effectiveTheme = themePreference ?? systemTheme;
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(SYSTEM_DARK_QUERY);
+
+    const updateSystemTheme = (isDark: boolean) => {
+      setSystemTheme(isDark ? "dark" : "light");
+    };
+
+    updateSystemTheme(mediaQuery.matches);
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      updateSystemTheme(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (themePreference === null) {
+      delete root.dataset.theme;
+      window.localStorage.removeItem(THEME_STORAGE_KEY);
+      return;
+    }
+
+    root.dataset.theme = themePreference;
+    window.localStorage.setItem(THEME_STORAGE_KEY, themePreference);
+  }, [themePreference]);
 
   useEffect(() => {
     const fadeStart = 16;
@@ -41,7 +102,14 @@ function App() {
           </p>
         </div>
       </div>
-      <Hero profile={cvContent.profile} links={cvContent.profile.links} />
+      <Hero
+        profile={cvContent.profile}
+        links={cvContent.profile.links}
+        themePreference={effectiveTheme}
+        onCycleTheme={() => {
+          setThemePreference((current) => getOppositeTheme(current ?? effectiveTheme));
+        }}
+      />
       <ExperienceSection items={cvContent.experience} publicationLinksByExperienceId={experiencePublicationLinks} />
       <EducationSection items={cvContent.education} />
       <PublicationsSection publications={cvContent.publications} topics={cvContent.topics} />
