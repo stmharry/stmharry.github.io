@@ -1,4 +1,5 @@
 import type { EducationItem } from "../data/cv/types";
+import { toPublicUrl } from "../lib/url";
 import { CardHeader } from "./CardHeader";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { toEducationCardHeader } from "./cardSemantics";
@@ -62,7 +63,19 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                           {header.primary}
                         </h3>
                       }
-                      secondary={<p className="text-sm text-(--ink-900)">{header.secondary}</p>}
+                      secondary={
+                        <div className="flex items-center gap-2">
+                          {item.institutionLogoPath ? (
+                            <img
+                              src={toPublicUrl(item.institutionLogoPath)}
+                              alt={`${header.secondary} logo`}
+                              className="h-5 w-5 shrink-0 rounded-sm border border-(--line) bg-(--paper) object-contain p-0.5"
+                              loading="lazy"
+                            />
+                          ) : null}
+                          <p className="min-w-0 text-sm text-(--ink-900)">{header.secondary}</p>
+                        </div>
+                      }
                       date={header.date}
                       location={header.location}
                     />
@@ -96,7 +109,19 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                       {header.primary}
                     </h3>
                   }
-                  secondary={<p className="text-sm text-(--ink-900)">{header.secondary}</p>}
+                  secondary={
+                    <div className="flex items-center gap-2">
+                      {item.institutionLogoPath ? (
+                        <img
+                          src={toPublicUrl(item.institutionLogoPath)}
+                          alt={`${header.secondary} logo`}
+                          className="h-5 w-5 shrink-0 rounded-sm border border-(--line) bg-(--paper) object-contain p-0.5"
+                          loading="lazy"
+                        />
+                      ) : null}
+                      <p className="min-w-0 text-sm text-(--ink-900)">{header.secondary}</p>
+                    </div>
+                  }
                   date={header.date}
                   location={header.location}
                 />

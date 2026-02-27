@@ -54,15 +54,25 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
                       </p>
                     }
                     secondary={
-                      <p className="text-sm text-(--ink-700)">
-                        {header.secondary}
-                        {item.organizationDescription ? (
-                          <>
-                            <span className="px-1.5 text-(--ink-700)">·</span>
-                            <span>{item.organizationDescription}</span>
-                          </>
+                      <div className="flex items-center gap-2">
+                        {item.organizationLogoPath ? (
+                          <img
+                            src={toPublicUrl(item.organizationLogoPath)}
+                            alt={`${header.secondary} logo`}
+                            className="h-5 w-5 shrink-0 rounded-sm border border-(--line) bg-(--paper) object-contain p-0.5"
+                            loading="lazy"
+                          />
                         ) : null}
-                      </p>
+                        <p className="min-w-0 text-sm text-(--ink-700)">
+                          {header.secondary}
+                          {item.organizationDescription ? (
+                            <>
+                              <span className="px-1.5 text-(--ink-700)">·</span>
+                              <span>{item.organizationDescription}</span>
+                            </>
+                          ) : null}
+                        </p>
+                      </div>
                     }
                     date={header.date}
                     location={header.location}

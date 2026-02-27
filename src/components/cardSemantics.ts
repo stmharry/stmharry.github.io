@@ -25,8 +25,8 @@ export const toExperienceCardHeader = (item: ExperienceItem): CardHeaderSemantic
 
 export const toEducationCardHeader = (item: EducationItem): CardHeaderSemantics => {
   return {
-    primary: item.institution,
-    secondary: item.degree,
+    primary: item.degree,
+    secondary: item.institution,
     date: formatPeriodLabel(item.period),
     location: item.location,
   };
