@@ -357,7 +357,6 @@ export const cvContent: CvContent = {
       id: "academia-sinica-student-researcher",
       organization: "Academia Sinica, Taiwan",
       organizationLogoPath: "/assets/organizations/academia-sinica-logo.png",
-      organizationDescription: "Part-time",
       period: "2014 -- 2016",
       role: "Student Researcher",
       location: "Taipei City, Taiwan",
