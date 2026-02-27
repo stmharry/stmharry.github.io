@@ -45,6 +45,12 @@ The deploy command automatically runs `bun run build` first.
 Run these before commits:
 
 ```bash
+bun run check
+```
+
+Equivalent expanded commands:
+
+```bash
 bun test
 bun run build
 bun run resume:generate

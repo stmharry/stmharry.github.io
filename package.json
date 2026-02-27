@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "typecheck": "tsc -b",
     "build": "NODE_ENV=production tsc -b && NODE_ENV=production vite build",
+    "check": "bun test && bun run build && bun run resume:generate",
     "predeploy": "bun run build",
     "deploy": "gh-pages -d dist --cname www.stmharry.io",
     "lint": "eslint .",
