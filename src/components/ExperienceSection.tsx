@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { CardHeader } from "./CardHeader";
+import { LogoBadge } from "./LogoBadge";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { toExperienceCardHeader } from "./cardSemantics";
 import type { ExperienceItem } from "../data/cv/types";
@@ -41,62 +42,60 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
       <ul className="mt-5 space-y-3 sm:space-y-4">
         {visibleItems.map((item) => {
           const header = toExperienceCardHeader(item);
+          const hasSummary = item.summary.trim().length > 0;
+          const hasBodyContent = hasSummary || Boolean(item.organizationUrl);
+
+          const headerContent = (
+            <CardHeader
+              primary={
+                <p className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
+                  {header.primary}
+                </p>
+              }
+              secondary={
+                <div className="flex items-center gap-2">
+                  {item.organizationLogoPath ? <LogoBadge path={item.organizationLogoPath} alt={`${header.secondary} logo`} /> : null}
+                  <p className="min-w-0 text-sm text-(--ink-700)">
+                    {header.secondary}
+                    {item.organizationDescription ? (
+                      <>
+                        <span className="px-1.5 text-(--ink-700)">·</span>
+                        <span>{item.organizationDescription}</span>
+                      </>
+                    ) : null}
+                  </p>
+                </div>
+              }
+              date={header.date}
+              location={header.location}
+            />
+          );
 
           return (
             <li key={item.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_24%)] p-4 sm:p-5">
-              <MobileCardDisclosure
-                id={`experience-${item.id}`}
-                trigger={
-                  <CardHeader
-                    primary={
-                      <p className="text-lg" style={{ fontFamily: "var(--font-serif)" }}>
-                        {header.primary}
-                      </p>
-                    }
-                    secondary={
-                      <div className="flex items-center gap-2">
-                        {item.organizationLogoPath ? (
-                          <img
-                            src={toPublicUrl(item.organizationLogoPath)}
-                            alt={`${header.secondary} logo`}
-                            className="h-5 w-5 shrink-0 rounded-full border border-(--line) bg-(--paper) object-contain p-0.5"
-                            loading="lazy"
-                          />
-                        ) : null}
-                        <p className="min-w-0 text-sm text-(--ink-700)">
-                          {header.secondary}
-                          {item.organizationDescription ? (
-                            <>
-                              <span className="px-1.5 text-(--ink-700)">·</span>
-                              <span>{item.organizationDescription}</span>
-                            </>
-                          ) : null}
-                        </p>
-                      </div>
-                    }
-                    date={header.date}
-                    location={header.location}
-                  />
-                }
-              >
-                <div className="border-l border-(--rail) pl-3.5">
-                  <p className="text-sm leading-relaxed text-(--ink-700)">{item.summary}</p>
+              {hasBodyContent ? (
+                <MobileCardDisclosure id={`experience-${item.id}`} trigger={headerContent}>
+                  <div className="border-l border-(--rail) pl-3.5">
+                    {hasSummary ? <p className="text-sm leading-relaxed text-(--ink-700)">{item.summary}</p> : null}
 
-                  {item.organizationUrl ? (
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      <a
-                        href={toPublicUrl(item.organizationUrl)}
-                        target={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "_blank" : undefined}
-                        rel={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "noreferrer" : undefined}
-                        className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
-                      >
-                        <ExternalLinkIcon />
-                        Website
-                      </a>
-                    </div>
-                  ) : null}
-                </div>
-              </MobileCardDisclosure>
+                    {item.organizationUrl ? (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <a
+                          href={toPublicUrl(item.organizationUrl)}
+                          target={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "_blank" : undefined}
+                          rel={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "noreferrer" : undefined}
+                          className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                        >
+                          <ExternalLinkIcon />
+                          Website
+                        </a>
+                      </div>
+                    ) : null}
+                  </div>
+                </MobileCardDisclosure>
+              ) : (
+                headerContent
+              )}
             </li>
           );
         })}

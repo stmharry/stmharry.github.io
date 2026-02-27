@@ -1,6 +1,6 @@
 import type { EducationItem } from "../data/cv/types";
-import { toPublicUrl } from "../lib/url";
 import { CardHeader } from "./CardHeader";
+import { LogoBadge } from "./LogoBadge";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { toEducationCardHeader } from "./cardSemantics";
 
@@ -66,12 +66,7 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                       secondary={
                         <div className="flex items-center gap-2">
                           {item.institutionLogoPath ? (
-                            <img
-                              src={toPublicUrl(item.institutionLogoPath)}
-                              alt={`${header.secondary} logo`}
-                              className="h-5 w-5 shrink-0 rounded-full border border-(--line) bg-(--paper) object-contain p-0.5"
-                              loading="lazy"
-                            />
+                            <LogoBadge path={item.institutionLogoPath} alt={`${header.secondary} logo`} />
                           ) : null}
                           <p className="min-w-0 text-sm text-(--ink-900)">{header.secondary}</p>
                         </div>
@@ -112,12 +107,7 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                   secondary={
                     <div className="flex items-center gap-2">
                       {item.institutionLogoPath ? (
-                        <img
-                          src={toPublicUrl(item.institutionLogoPath)}
-                          alt={`${header.secondary} logo`}
-                          className="h-5 w-5 shrink-0 rounded-full border border-(--line) bg-(--paper) object-contain p-0.5"
-                          loading="lazy"
-                        />
+                        <LogoBadge path={item.institutionLogoPath} alt={`${header.secondary} logo`} />
                       ) : null}
                       <p className="min-w-0 text-sm text-(--ink-900)">{header.secondary}</p>
                     </div>

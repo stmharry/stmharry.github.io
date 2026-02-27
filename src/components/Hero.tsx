@@ -50,7 +50,7 @@ export const Hero = ({ profile, links }: HeroProps) => {
           <img
             src={toPublicUrl("/assets/profile/harry-avatar.jpg")}
             alt="Portrait of Tzu-Ming Harry Hsu"
-            className="h-24 w-24 rounded-full border border-(--line) object-cover object-[50%_26%] shadow-[0_8px_22px_color-mix(in_oklab,var(--ink-900),transparent_90%)] sm:h-32 sm:w-32"
+            className="h-24 w-24 rounded-full object-cover object-[50%_26%] shadow-[0_8px_22px_color-mix(in_oklab,var(--ink-900),transparent_90%)] sm:h-32 sm:w-32"
             loading="eager"
             decoding="async"
           />
