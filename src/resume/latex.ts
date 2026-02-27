@@ -1,3 +1,5 @@
+import { emphasizeSelfAuthors } from "../data/cv/authors";
+
 const BACKSLASH_PLACEHOLDER = "LATEXBACKSLASHPLACEHOLDERX";
 
 const LATEX_REPLACEMENTS: Array<[RegExp, string]> = [
@@ -23,8 +25,5 @@ export const escapeLatex = (value: string): string => {
 };
 
 export const highlightSelfInAuthors = (authors: string): string => {
-  return authors.replace(
-    /\b(Tzu-Ming Harry Hsu|Tzu Ming Harry Hsu|Tzu-Ming Hsu|Tzu Ming Hsu|Harry Hsu)\b/g,
-    "\\textbf{$1}",
-  );
+  return emphasizeSelfAuthors(authors, (author) => `\\textbf{${author}}`);
 };

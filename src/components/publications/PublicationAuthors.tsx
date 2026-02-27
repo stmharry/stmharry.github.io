@@ -1,10 +1,4 @@
-const AUTHOR_VARIANTS = new Set([
-  "Tzu-Ming Harry Hsu",
-  "Tzu Ming Harry Hsu",
-  "Tzu-Ming Hsu",
-  "Tzu Ming Hsu",
-  "Harry Hsu",
-]);
+import { isSelfAuthor } from "../../data/cv/authors";
 
 const parseAuthors = (authors: string): string[] => {
   return authors
@@ -24,7 +18,7 @@ export const PublicationAuthors = ({ authors }: PublicationAuthorsProps) => {
     <>
       {parts.map((author, index) => {
         const suffix = index < parts.length - 1 ? ", " : "";
-        const isSelf = AUTHOR_VARIANTS.has(author);
+        const isSelf = isSelfAuthor(author);
 
         return (
           <span key={`${author}-${index}`}>
@@ -46,7 +40,7 @@ export const PublicationAuthorPreview = ({ authors }: PublicationAuthorsProps) =
     <>
       {visibleAuthors.map((author, index) => {
         const suffix = index < visibleAuthors.length - 1 ? ", " : "";
-        const isSelf = AUTHOR_VARIANTS.has(author);
+        const isSelf = isSelfAuthor(author);
 
         return (
           <span key={`${author}-${index}`}>
