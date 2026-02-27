@@ -6,6 +6,12 @@ export type WebProfile = {
   summaryBullets: string[];
 };
 
+export type ExperiencePublicationLink = {
+  id: string;
+  title: string;
+  year: number;
+};
+
 export const getWebProfile = (content: CvContent): WebProfile => {
   return {
     name: content.profile.name,
@@ -30,6 +36,29 @@ export const sortPublicationsByYear = (publications: PublicationItem[]): Publica
 
 export const getWebPublications = (publications: PublicationItem[]): PublicationItem[] => {
   return sortPublicationsByYear(publications);
+};
+
+export const getExperiencePublicationLinks = (
+  publications: PublicationItem[],
+): Record<string, ExperiencePublicationLink[]> => {
+  const sortedPublications = sortPublicationsByYear(publications);
+  const linksByExperienceId: Record<string, ExperiencePublicationLink[]> = {};
+
+  sortedPublications.forEach((publication) => {
+    publication.relatedExperienceIds?.forEach((experienceId) => {
+      if (!linksByExperienceId[experienceId]) {
+        linksByExperienceId[experienceId] = [];
+      }
+
+      linksByExperienceId[experienceId].push({
+        id: publication.id,
+        title: publication.title,
+        year: publication.year,
+      });
+    });
+  });
+
+  return linksByExperienceId;
 };
 
 export const filterPublicationsByTopic = (publications: PublicationItem[], topicSlug: TopicSlug | "all"): PublicationItem[] => {

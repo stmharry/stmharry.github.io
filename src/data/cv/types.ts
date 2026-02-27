@@ -102,6 +102,7 @@ export type PublicationItem = {
   codeUrl?: string;
   projectUrl?: string;
   datasetUrl?: string;
+  relatedExperienceIds?: ExperienceItem["id"][];
   topics: TopicSlug[];
   order: number;
 };
