@@ -1,10 +1,9 @@
 import { PrimaryLinks } from "./PrimaryLinks";
-import type { LinkItem } from "../data/cv/types";
-import type { WebProfile } from "../data/cv/selectors";
+import type { LinkItem, Profile } from "../data/cv/types";
 import { toPublicUrl } from "../lib/url";
 
 type HeroProps = {
-  profile: WebProfile;
+  profile: Pick<Profile, "name" | "headline" | "summaryBullets">;
   links: LinkItem[];
 };
 

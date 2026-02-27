@@ -1,27 +1,9 @@
-import type { CvContent, ExperienceItem, PublicationItem, Topic, TopicSlug } from "./types";
-
-export type WebProfile = {
-  name: string;
-  headline: string;
-  summaryBullets: string[];
-};
+import type { PublicationItem, Topic, TopicSlug } from "./types";
 
 export type ExperiencePublicationLink = {
   id: string;
   title: string;
   year: number;
-};
-
-export const getWebProfile = (content: CvContent): WebProfile => {
-  return {
-    name: content.profile.name,
-    headline: content.profile.headline,
-    summaryBullets: content.profile.summaryBullets,
-  };
-};
-
-export const getWebExperience = (content: CvContent): ExperienceItem[] => {
-  return content.experience;
 };
 
 export const sortPublicationsByYear = (publications: PublicationItem[]): PublicationItem[] => {

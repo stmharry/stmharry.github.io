@@ -887,11 +887,4 @@ export const cvContent: CvContent = {
       order: 25,
     },
   ],
-  seo: {
-    title: "Tzu-Ming Harry Hsu",
-    description:
-      "Founder and CTO with a background in AI, healthcare, blockchain, and computer vision. MIT PhD in Computer Science.",
-    siteUrl: "https://stmharry.github.io",
-    image: "https://stmharry.github.io/og-image.jpg",
-  },
 };

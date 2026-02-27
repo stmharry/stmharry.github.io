@@ -1,4 +1,4 @@
-import type { EducationItem, ExperienceItem, PublicationItem } from "../data/cv/types";
+import type { EducationItem, ExperienceItem } from "../data/cv/types";
 
 export type CardHeaderSemantics = {
   primary: string;
@@ -29,13 +29,5 @@ export const toEducationCardHeader = (item: EducationItem): CardHeaderSemantics 
     secondary: item.institution,
     date: formatPeriodLabel(item.period),
     location: item.location,
-  };
-};
-
-export const toPublicationCardHeader = (item: PublicationItem): CardHeaderSemantics => {
-  return {
-    primary: item.title,
-    secondary: item.venue,
-    date: String(item.year),
   };
 };

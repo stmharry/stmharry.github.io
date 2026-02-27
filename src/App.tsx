@@ -5,11 +5,9 @@ import { ExperienceSection } from "./components/ExperienceSection";
 import { Hero } from "./components/Hero";
 import { PublicationsSection } from "./components/PublicationsSection";
 import { cvContent } from "./data/cv/content";
-import { getExperiencePublicationLinks, getWebExperience, getWebProfile } from "./data/cv/selectors";
+import { getExperiencePublicationLinks } from "./data/cv/selectors";
 
 function App() {
-  const webProfile = getWebProfile(cvContent);
-  const webExperience = getWebExperience(cvContent);
   const experiencePublicationLinks = getExperiencePublicationLinks(cvContent.publications);
   const [stickyNameOpacity, setStickyNameOpacity] = useState(0);
 
@@ -39,12 +37,12 @@ function App() {
           style={{ opacity: stickyNameOpacity }}
         >
           <p className="text-[13px] font-medium text-(--ink-900)" style={{ fontFamily: "var(--font-serif)" }}>
-            {webProfile.name} · MIT Ph.D.
+            {cvContent.profile.name} · MIT Ph.D.
           </p>
         </div>
       </div>
-      <Hero profile={webProfile} links={cvContent.profile.links} />
-      <ExperienceSection items={webExperience} publicationLinksByExperienceId={experiencePublicationLinks} />
+      <Hero profile={cvContent.profile} links={cvContent.profile.links} />
+      <ExperienceSection items={cvContent.experience} publicationLinksByExperienceId={experiencePublicationLinks} />
       <EducationSection items={cvContent.education} />
       <PublicationsSection publications={cvContent.publications} topics={cvContent.topics} />
     </main>

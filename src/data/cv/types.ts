@@ -107,13 +107,6 @@ export type PublicationItem = {
   order: number;
 };
 
-export type SeoConfig = {
-  title: string;
-  description: string;
-  siteUrl: string;
-  image: string;
-};
-
 export type CvContent = {
   profile: Profile;
   topics: Topic[];
@@ -122,5 +115,4 @@ export type CvContent = {
   leadership: LeadershipItem[];
   awards: AwardItem[];
   publications: PublicationItem[];
-  seo: SeoConfig;
 };
