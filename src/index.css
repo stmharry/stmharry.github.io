@@ -4,12 +4,12 @@
   --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino,
     "Times New Roman", serif;
   --font-sans: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
-  --ink-900: #111827;
-  --ink-700: #374151;
-  --paper: #f8f7f4;
-  --paper-accent: #f3f2ef;
-  --line: #d1d5db;
-  --rail: #c4c8cf;
+  --ink-900: #1f2937;
+  --ink-700: #4b5563;
+  --paper: #ebe8e1;
+  --paper-accent: #e2ddd4;
+  --line: #d5d8df;
+  --rail: #c8ccd4;
   --mobile-sticky-name-height: 2.25rem;
   color-scheme: light dark;
 }
@@ -26,12 +26,12 @@
 }
 
 :root[data-theme="light"] {
-  --ink-900: #111827;
-  --ink-700: #374151;
-  --paper: #f8f7f4;
-  --paper-accent: #f3f2ef;
-  --line: #d1d5db;
-  --rail: #c4c8cf;
+  --ink-900: #1f2937;
+  --ink-700: #4b5563;
+  --paper: #ebe8e1;
+  --paper-accent: #e2ddd4;
+  --line: #d5d8df;
+  --rail: #c8ccd4;
   color-scheme: light;
 }
 
@@ -61,7 +61,7 @@
   body {
     font-family: var(--font-sans);
     color: var(--ink-900);
-    background: radial-gradient(circle at top left, #ffffff 0%, var(--paper) 60%, var(--paper-accent) 100%);
+    background: radial-gradient(circle at top left, #f1ede5 0%, var(--paper) 60%, var(--paper-accent) 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -74,7 +74,7 @@
   }
 
   :root[data-theme="light"] body {
-    background: radial-gradient(circle at top left, #ffffff 0%, var(--paper) 60%, var(--paper-accent) 100%);
+    background: radial-gradient(circle at top left, #f1ede5 0%, var(--paper) 60%, var(--paper-accent) 100%);
   }
 
   :root[data-theme="dark"] body {
