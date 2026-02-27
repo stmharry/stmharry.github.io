@@ -5,11 +5,12 @@ import { ExperienceSection } from "./components/ExperienceSection";
 import { Hero } from "./components/Hero";
 import { PublicationsSection } from "./components/PublicationsSection";
 import { cvContent } from "./data/cv/content";
-import { getWebExperience, getWebProfile } from "./data/cv/selectors";
+import { getExperiencePublicationLinks, getWebExperience, getWebProfile } from "./data/cv/selectors";
 
 function App() {
   const webProfile = getWebProfile(cvContent);
   const webExperience = getWebExperience(cvContent);
+  const experiencePublicationLinks = getExperiencePublicationLinks(cvContent.publications);
   const [stickyNameOpacity, setStickyNameOpacity] = useState(0);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ function App() {
         </div>
       </div>
       <Hero profile={webProfile} links={cvContent.profile.links} />
-      <ExperienceSection items={webExperience} />
+      <ExperienceSection items={webExperience} publicationLinksByExperienceId={experiencePublicationLinks} />
       <EducationSection items={cvContent.education} />
       <PublicationsSection publications={cvContent.publications} topics={cvContent.topics} />
     </main>

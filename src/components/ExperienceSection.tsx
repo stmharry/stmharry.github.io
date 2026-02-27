@@ -4,11 +4,13 @@ import { CardHeader } from "./CardHeader";
 import { LogoBadge } from "./LogoBadge";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { toExperienceCardHeader } from "./cardSemantics";
+import type { ExperiencePublicationLink } from "../data/cv/selectors";
 import type { ExperienceItem } from "../data/cv/types";
 import { isExternalUrl, toPublicUrl } from "../lib/url";
 
 type ExperienceSectionProps = {
   items: ExperienceItem[];
+  publicationLinksByExperienceId: Record<string, ExperiencePublicationLink[]>;
 };
 
 const ExternalLinkIcon = () => (
@@ -24,7 +26,7 @@ const ExternalLinkIcon = () => (
   </svg>
 );
 
-export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
+export const ExperienceSection = ({ items, publicationLinksByExperienceId }: ExperienceSectionProps) => {
   const [showAll, setShowAll] = useState(false);
 
   const highlightedItems = useMemo(() => items.filter((item) => item.highlighted), [items]);
@@ -42,8 +44,9 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
       <ul className="mt-5 space-y-3 sm:space-y-4">
         {visibleItems.map((item) => {
           const header = toExperienceCardHeader(item);
+          const relatedPublications = publicationLinksByExperienceId[item.id] ?? [];
           const hasSummary = item.summary.trim().length > 0;
-          const hasBodyContent = hasSummary || Boolean(item.organizationUrl);
+          const hasBodyContent = hasSummary || Boolean(item.organizationUrl) || relatedPublications.length > 0;
 
           const headerContent = (
             <CardHeader
@@ -89,6 +92,23 @@ export const ExperienceSection = ({ items }: ExperienceSectionProps) => {
                           <ExternalLinkIcon />
                           Website
                         </a>
+                      </div>
+                    ) : null}
+
+                    {relatedPublications.length > 0 ? (
+                      <div className="mt-3 space-y-1.5">
+                        <p className="text-[11px] font-semibold tracking-[0.1em] text-(--ink-700) uppercase">Related Publications</p>
+                        <div className="flex flex-wrap gap-2">
+                          {relatedPublications.map((publication) => (
+                            <a
+                              key={publication.id}
+                              href={`#publication-${publication.id}`}
+                              className="inline-flex items-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_6%)] px-2.5 py-1 text-[11px] text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
+                            >
+                              {publication.title} ({publication.year})
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     ) : null}
                   </div>

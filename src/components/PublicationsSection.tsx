@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { filterPublicationsByTopic, getTopicLabelBySlug, getUsedTopics, getWebPublications } from "../data/cv/selectors";
@@ -120,10 +120,57 @@ const ExternalLinkIcon = () => (
 
 export const PublicationsSection = ({ publications, topics }: PublicationsSectionProps) => {
   const [topicFilter, setTopicFilter] = useState<TopicFilter>("all");
+  const pendingHashTargetIdRef = useRef<string | null>(null);
 
   const allPublications = useMemo(() => getWebPublications(publications), [publications]);
   const availableTopics = useMemo(() => getUsedTopics(topics, allPublications), [topics, allPublications]);
   const visiblePublications = useMemo(() => filterPublicationsByTopic(allPublications, topicFilter), [allPublications, topicFilter]);
+
+  useEffect(() => {
+    const handleHashNavigation = () => {
+      const hash = window.location.hash;
+      if (!hash.startsWith("#publication-")) {
+        return;
+      }
+
+      const targetId = hash.slice(1);
+      const publicationId = targetId.replace(/^publication-/, "");
+      const isVisible = visiblePublications.some((publication) => publication.id === publicationId);
+
+      if (!isVisible && topicFilter !== "all") {
+        pendingHashTargetIdRef.current = targetId;
+        setTopicFilter("all");
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        document.getElementById(targetId)?.scrollIntoView({ block: "start", behavior: "smooth" });
+      });
+    };
+
+    handleHashNavigation();
+    window.addEventListener("hashchange", handleHashNavigation);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashNavigation);
+    };
+  }, [topicFilter, visiblePublications]);
+
+  useEffect(() => {
+    if (topicFilter !== "all") {
+      return;
+    }
+
+    const pendingTargetId = pendingHashTargetIdRef.current;
+    if (!pendingTargetId) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      document.getElementById(pendingTargetId)?.scrollIntoView({ block: "start", behavior: "smooth" });
+      pendingHashTargetIdRef.current = null;
+    });
+  }, [topicFilter, visiblePublications]);
 
   return (
     <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
@@ -172,7 +219,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
           const mediaLinks = actionLinks(publication);
           const mediaAspect = classifyAspect(publication.thumbnailAspectRatio);
           return (
-            <li key={publication.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
+            <li id={`publication-${publication.id}`} key={publication.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
               <MobileCardDisclosure
                 id={`publication-${publication.id}`}
                 trigger={({ isExpanded, isDesktop }) => (
