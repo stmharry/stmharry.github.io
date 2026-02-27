@@ -1,5 +1,7 @@
+const EXTERNAL_URL_PATTERN = /^https?:\/\//;
+
 export const toPublicUrl = (href: string): string => {
-  if (/^https?:\/\//.test(href) || href.startsWith("mailto:")) {
+  if (EXTERNAL_URL_PATTERN.test(href) || href.startsWith("mailto:")) {
     return href;
   }
 
@@ -15,5 +17,24 @@ export const toPublicUrl = (href: string): string => {
 };
 
 export const isExternalUrl = (href: string): boolean => {
-  return /^https?:\/\//.test(href);
+  return EXTERNAL_URL_PATTERN.test(href);
+};
+
+export type ResolvedLink = {
+  href: string;
+  external: boolean;
+  target?: "_blank";
+  rel?: "noreferrer";
+};
+
+export const resolveLink = (href: string): ResolvedLink => {
+  const resolvedHref = toPublicUrl(href);
+  const external = isExternalUrl(resolvedHref);
+
+  return {
+    href: resolvedHref,
+    external,
+    target: external ? "_blank" : undefined,
+    rel: external ? "noreferrer" : undefined,
+  };
 };

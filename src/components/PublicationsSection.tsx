@@ -5,7 +5,7 @@ import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { SectionHeading } from "./SectionHeading";
 import { filterPublicationsByTopic, getTopicLabelBySlug, getUsedTopics, getWebPublications } from "../data/cv/selectors";
 import type { PublicationItem, Topic } from "../data/cv/types";
-import { isExternalUrl, toPublicUrl } from "../lib/url";
+import { resolveLink, toPublicUrl } from "../lib/url";
 
 type PublicationsSectionProps = {
   publications: PublicationItem[];
@@ -275,18 +275,22 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                   <p className="text-sm leading-relaxed text-(--ink-700)">{renderAuthors(publication.authors)}</p>
 
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {mediaLinks.map((link) => (
+                    {mediaLinks.map((link) => {
+                      const resolvedLink = resolveLink(link.href);
+
+                      return (
                         <a
                           key={`${publication.id}-${link.label}`}
-                          href={toPublicUrl(link.href)}
-                          target={isExternalUrl(toPublicUrl(link.href)) ? "_blank" : undefined}
-                          rel={isExternalUrl(toPublicUrl(link.href)) ? "noreferrer" : undefined}
-                        className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
-                      >
-                        <ExternalLinkIcon />
-                        {link.label}
-                      </a>
-                    ))}
+                          href={resolvedLink.href}
+                          target={resolvedLink.target}
+                          rel={resolvedLink.rel}
+                          className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                        >
+                          <ExternalLinkIcon />
+                          {link.label}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               </MobileCardDisclosure>

@@ -8,7 +8,7 @@ import { SectionHeading } from "./SectionHeading";
 import { toExperienceCardHeader } from "./cardSemantics";
 import type { ExperiencePublicationLink } from "../data/cv/selectors";
 import type { ExperienceItem } from "../data/cv/types";
-import { isExternalUrl, toPublicUrl } from "../lib/url";
+import { resolveLink } from "../lib/url";
 
 type ExperienceSectionProps = {
   items: ExperienceItem[];
@@ -44,6 +44,7 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
           const relatedPublications = publicationLinksByExperienceId[item.id] ?? [];
           const hasSummary = item.summary.trim().length > 0;
           const hasBodyContent = hasSummary || Boolean(item.organizationUrl) || relatedPublications.length > 0;
+          const organizationLink = item.organizationUrl ? resolveLink(item.organizationUrl) : null;
 
           const headerContent = (
             <CardHeader
@@ -79,12 +80,12 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
                   <div className="border-l border-(--rail) pl-3.5">
                     {hasSummary ? <p className="text-sm leading-relaxed text-(--ink-700)">{item.summary}</p> : null}
 
-                    {item.organizationUrl ? (
+                    {organizationLink ? (
                       <div className="mt-3 flex flex-wrap gap-2">
                         <a
-                          href={toPublicUrl(item.organizationUrl)}
-                          target={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "_blank" : undefined}
-                          rel={isExternalUrl(toPublicUrl(item.organizationUrl)) ? "noreferrer" : undefined}
+                          href={organizationLink.href}
+                          target={organizationLink.target}
+                          rel={organizationLink.rel}
                           className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
                         >
                           <ExternalLinkIcon />
