@@ -1,7 +1,9 @@
 import type { EducationItem } from "../data/cv/types";
+import { CardSurface } from "./CardSurface";
 import { CardHeader } from "./CardHeader";
 import { LogoBadge } from "./LogoBadge";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
+import { SectionHeading } from "./SectionHeading";
 import { toEducationCardHeader } from "./cardSemantics";
 
 type EducationSectionProps = {
@@ -38,12 +40,7 @@ const normalizeDetailText = (label: string, text: string): string => {
 export const EducationSection = ({ items }: EducationSectionProps) => {
   return (
     <section aria-labelledby="education-heading" className="mt-14 sm:mt-18">
-      <h2
-        id="education-heading"
-        className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 py-2 text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current sm:shadow-none sm:backdrop-blur-none"
-      >
-        Education
-      </h2>
+      <SectionHeading id="education-heading" title="Education" />
       <ul className="mt-5 space-y-3 sm:space-y-4">
         {items.map((item) => {
           const header = toEducationCardHeader(item);
@@ -52,7 +49,8 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
           const hasDetails = labeledDetails.length > 0 || narrativeDetails.length > 0;
 
           return (
-            <li key={item.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_24%)] p-4 sm:p-5">
+            <li key={item.id}>
+              <CardSurface>
               {hasDetails ? (
                 <MobileCardDisclosure
                   id={`education-${item.id}`}
@@ -116,6 +114,7 @@ export const EducationSection = ({ items }: EducationSectionProps) => {
                   location={header.location}
                 />
               )}
+              </CardSurface>
             </li>
           );
         })}

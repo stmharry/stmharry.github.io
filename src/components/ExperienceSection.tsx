@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 
+import { CardSurface } from "./CardSurface";
 import { CardHeader } from "./CardHeader";
 import { LogoBadge } from "./LogoBadge";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
+import { SectionHeading } from "./SectionHeading";
 import { toExperienceCardHeader } from "./cardSemantics";
 import type { ExperiencePublicationLink } from "../data/cv/selectors";
 import type { ExperienceItem } from "../data/cv/types";
@@ -35,12 +37,7 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
 
   return (
     <section aria-labelledby="experience-heading" className="mt-14 sm:mt-18">
-      <h2
-        id="experience-heading"
-        className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 py-2 text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:py-0 sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current sm:shadow-none sm:backdrop-blur-none"
-      >
-        Experience
-      </h2>
+      <SectionHeading id="experience-heading" title="Experience" />
       <ul className="mt-5 space-y-3 sm:space-y-4">
         {visibleItems.map((item) => {
           const header = toExperienceCardHeader(item);
@@ -75,7 +72,8 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
           );
 
           return (
-            <li key={item.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_24%)] p-4 sm:p-5">
+            <li key={item.id}>
+              <CardSurface>
               {hasBodyContent ? (
                 <MobileCardDisclosure id={`experience-${item.id}`} trigger={headerContent}>
                   <div className="border-l border-(--rail) pl-3.5">
@@ -116,6 +114,7 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
               ) : (
                 headerContent
               )}
+              </CardSurface>
             </li>
           );
         })}

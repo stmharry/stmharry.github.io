@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { CardSurface } from "./CardSurface";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
+import { SectionHeading } from "./SectionHeading";
 import { filterPublicationsByTopic, getTopicLabelBySlug, getUsedTopics, getWebPublications } from "../data/cv/selectors";
 import type { PublicationItem, Topic } from "../data/cv/types";
 import { isExternalUrl, toPublicUrl } from "../lib/url";
@@ -174,13 +176,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
   return (
     <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
-      <div className="sticky top-[var(--mobile-sticky-name-height)] z-40 -mx-5 bg-[color:color-mix(in_oklab,var(--paper),white_10%)] px-5 pt-2 pb-2 shadow-[0_1px_0_0_var(--line)] backdrop-blur-md sm:static sm:mx-0 sm:bg-transparent sm:px-0 sm:pt-0 sm:pb-0 sm:shadow-none sm:backdrop-blur-none">
-        <h2
-          id="publications-heading"
-          className="text-[11px] font-medium tracking-[0.16em] text-(--ink-700) uppercase sm:text-sm sm:font-normal sm:tracking-[0.18em] sm:text-current"
-        >
-          Publications
-        </h2>
+      <SectionHeading id="publications-heading" title="Publications">
         <div
           className="mt-2.5 flex flex-nowrap gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden sm:mt-3"
           style={{ scrollbarWidth: "none" }}
@@ -211,7 +207,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
             </button>
           ))}
         </div>
-      </div>
+      </SectionHeading>
 
       <ul className="mt-6 space-y-4">
         {visiblePublications.map((publication) => {
@@ -219,7 +215,8 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
           const mediaLinks = actionLinks(publication);
           const mediaAspect = classifyAspect(publication.thumbnailAspectRatio);
           return (
-            <li id={`publication-${publication.id}`} key={publication.id} className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
+            <li id={`publication-${publication.id}`} key={publication.id}>
+              <CardSurface className="rounded-lg border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),white_18%)] p-4 sm:p-5">
               <MobileCardDisclosure
                 id={`publication-${publication.id}`}
                 trigger={({ isExpanded, isDesktop }) => (
@@ -305,6 +302,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
                 ))}
               </div>
 
+              </CardSurface>
             </li>
           );
         })}
