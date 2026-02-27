@@ -43,6 +43,7 @@ export type Profile = {
 export type EducationItem = {
   id: string;
   institution: string;
+  institutionLogoPath?: string;
   period: string;
   degree: string;
   location: string;
@@ -52,6 +53,7 @@ export type EducationItem = {
 export type ExperienceItem = {
   id: string;
   organization: string;
+  organizationLogoPath?: string;
   organizationDescription?: string;
   organizationUrl?: string;
   period: string;

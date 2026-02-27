@@ -73,6 +73,7 @@ export const cvContent: CvContent = {
     {
       id: "mit-phd",
       institution: "Massachusetts Institute of Technology",
+      institutionLogoPath: "/assets/institutions/mit-logo.png",
       period: "Jun 2020 -- Jun 2022",
       degree: "Ph.D., Computer Science",
       location: "Cambridge, MA",
@@ -84,6 +85,7 @@ export const cvContent: CvContent = {
     {
       id: "mit-sm",
       institution: "Massachusetts Institute of Technology",
+      institutionLogoPath: "/assets/institutions/mit-logo.png",
       period: "Sep 2017 -- May 2020",
       degree: "S.M., Electrical Engineering and Computer Science",
       location: "Cambridge, MA",
@@ -95,6 +97,7 @@ export const cvContent: CvContent = {
     {
       id: "ntu-bs",
       institution: "National Taiwan University",
+      institutionLogoPath: "/assets/institutions/ntu-logo.png",
       period: "Sep 2011 -- Jun 2016",
       degree: "B.S., Physics; B.S.E., Electrical Engineering",
       location: "Taipei, Taiwan",
@@ -108,6 +111,7 @@ export const cvContent: CvContent = {
     {
       id: "dentscape",
       organization: "Dentscape",
+      organizationLogoPath: "/assets/organizations/dentscape-logo.png",
       organizationDescription: "automated 3D dental crown design",
       organizationUrl: "https://dentscape.ai",
       period: "Apr 2025 -- Present",
@@ -143,6 +147,7 @@ export const cvContent: CvContent = {
     {
       id: "clarq-ai",
       organization: "Clarq AI",
+      organizationLogoPath: "/assets/organizations/clarq-ai-logo.png",
       organizationDescription: "AI-optimized resistance training",
       organizationUrl: "https://clarq-ai.com",
       period: "Dec 2024 -- Present",
@@ -169,6 +174,7 @@ export const cvContent: CvContent = {
     {
       id: "codegreen-labs",
       organization: "CodeGreen Labs PBC",
+      organizationLogoPath: "/assets/organizations/codegreen-labs-logo.png",
       organizationDescription: "trusted transactions for bio and ESG",
       period: "Sep 2023 -- Nov 2024",
       role: "Co-founder & CTO",
@@ -192,6 +198,7 @@ export const cvContent: CvContent = {
     {
       id: "hashgreen-labs",
       organization: "Hashgreen Labs",
+      organizationLogoPath: "/assets/organizations/hashgreen-labs-logo.png",
       organizationDescription: "sustainable blockchain infra",
       period: "Sep 2022 -- Aug 2023",
       role: "Co-founder & CTO",
@@ -215,6 +222,7 @@ export const cvContent: CvContent = {
     {
       id: "iabit",
       organization: "International Academia of Biomedical Innovation Technology",
+      organizationLogoPath: "/assets/organizations/iabit-logo.png",
       period: "2021 -- Present",
       role: "Consultant & Convener",
       location: "Taipei, Taiwan",
@@ -236,6 +244,7 @@ export const cvContent: CvContent = {
     {
       id: "mit-ra",
       organization: "Massachusetts Institute of Technology",
+      organizationLogoPath: "/assets/organizations/mit-logo.png",
       period: "Sep 2018 -- Jun 2022",
       role: "Research Assistant",
       location: "Cambridge, MA",
@@ -257,6 +266,7 @@ export const cvContent: CvContent = {
     {
       id: "worldquant",
       organization: "WorldQuant",
+      organizationLogoPath: "/assets/organizations/worldquant-logo.png",
       period: "Jun 2021 -- Aug 2021",
       role: "Data Science Intern",
       location: "Taipei, Taiwan",
@@ -267,6 +277,7 @@ export const cvContent: CvContent = {
     {
       id: "digital-drift",
       organization: "Digital Drift",
+      organizationLogoPath: "/assets/organizations/digital-drift-logo.png",
       period: "Mar 2016 -- Mar 2020",
       role: "Lead Machine Learning Scientist",
       location: "Taipei, Taiwan",
@@ -281,6 +292,7 @@ export const cvContent: CvContent = {
     {
       id: "google-software-engineer-intern",
       organization: "Google",
+      organizationLogoPath: "/assets/organizations/google-logo.png",
       period: "Jun 2020 -- Sep 2020",
       role: "Software Engineer Intern",
       location: "Remote",
@@ -292,6 +304,7 @@ export const cvContent: CvContent = {
     {
       id: "google-student-researcher",
       organization: "Google",
+      organizationLogoPath: "/assets/organizations/google-logo.png",
       period: "Jun 2019 -- Mar 2020",
       role: "Student Researcher",
       location: "Seattle, WA / Cambridge, MA",
@@ -310,6 +323,7 @@ export const cvContent: CvContent = {
     {
       id: "bwh-bidmc",
       organization: "Brigham and Women's Hospital and Beth Israel Deaconess Medical Center",
+      organizationLogoPath: "/assets/organizations/bwh-bidmc-logo.png",
       period: "2019 -- 2020",
       role: "Research Trainee",
       location: "Boston, MA",
@@ -327,6 +341,7 @@ export const cvContent: CvContent = {
     {
       id: "olympiad-tutor",
       organization: "Olympiad Tutoring Community",
+      organizationLogoPath: "/assets/organizations/ipho-logo.png",
       period: "Sep 2011 -- Jun 2015",
       role: "Private Tutor",
       location: "Taipei, Taiwan",
