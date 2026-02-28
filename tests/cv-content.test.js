@@ -53,7 +53,7 @@ describe("canonical CV content", () => {
 
   test("internal publication asset paths use semantic naming convention", () => {
     const publicationAssetPathPattern =
-      /^\/assets\/publications\/\d{4}--[a-z0-9-]+--(thumb|poster|paper-pdf)\.(png|pdf)$/;
+      /^\/assets\/publications\/\d{4}--[a-z0-9-]+--(thumb|poster|paper-pdf)\.(png|webp|pdf)$/;
 
     for (const publication of cvContent.publications) {
       const candidatePaths = [publication.thumbnailPath, publication.posterUrl, publication.paperUrl].filter(
