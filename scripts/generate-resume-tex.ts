@@ -98,7 +98,7 @@ const renderHeader = (): string => {
     "\\end{center}",
     "",
     "\\begin{resumeItemList}[0in]",
-    "  \\resumeItem[\\textwidth][0.50\\textwidth]",
+    "  \\resumeItem[\\textwidth][0.50\\textwidth][0.47\\textwidth]",
     `  {${escapeLatex(cvContent.profile.headline)}}{\\href{${emailHref}}{${emailValue}}}`,
     `  {${escapeLatex(cvContent.profile.tagline)}}{${escapeLatex(phoneLine)}}`,
     "  {}",

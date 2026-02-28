@@ -128,6 +128,7 @@ bun run resume:generate
 Build PDF (requires local `latexmk`):
 
 ```bash
+bun run resume:deps
 bun run resume:build
 ```
 

@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d dist --cname www.stmharry.io",
     "lint": "eslint .",
     "preview": "vite preview",
+    "resume:deps": "bash scripts/install-resume-deps.sh",
     "resume:generate": "bun run scripts/generate-resume-tex.ts",
     "resume:build": "bun run resume:generate && bash scripts/build-resume.sh",
     "resume:clean": "bash scripts/clean-resume.sh"
