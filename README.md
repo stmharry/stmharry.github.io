@@ -70,8 +70,8 @@ bun run lint
 - Canonical CV data and types: `src/data/cv/content.ts`, `src/data/cv/types.ts`
 - CV selectors: `src/data/cv/selectors.ts`
 - UI components: `src/components/*`
-- Resume LaTeX template: `resume/template.tex`
 - Resume generation script: `scripts/generate-resume-tex.ts`
+- Generated resume source: `resume/resume.tex`
 - Publication media assets: `public/assets/publications/*`
 - Agent memory and workflow: `AGENTS.md`
 

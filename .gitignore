@@ -28,7 +28,6 @@ dist-ssr
 
 # Resume build artifacts
 resume/build/
-resume/generated-content.tex
 resume/resume.tex
 resume/*.aux
 resume/*.fdb_latexmk
