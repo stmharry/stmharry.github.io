@@ -174,7 +174,7 @@ const renderExperience = (item: ExperienceItem): string => {
   const details = renderDetailItems(item.highlights);
   const body = `${summary}${details}`;
   return renderResumeItem({
-    leftPrimary: item.organization,
+    leftPrimary: item.organization.name,
     rightPrimary: item.period,
     leftSecondary: item.role,
     rightSecondary: item.location,

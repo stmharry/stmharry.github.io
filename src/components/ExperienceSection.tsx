@@ -43,8 +43,8 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
           const header = toExperienceCardHeader(item);
           const relatedPublications = publicationLinksByExperienceId[item.id] ?? [];
           const hasSummary = item.summary.trim().length > 0;
-          const hasBodyContent = hasSummary || Boolean(item.organizationUrl) || relatedPublications.length > 0;
-          const organizationLink = item.organizationUrl ? resolveLink(item.organizationUrl) : null;
+          const hasBodyContent = hasSummary || Boolean(item.organization.url) || relatedPublications.length > 0;
+          const organizationLink = item.organization.url ? resolveLink(item.organization.url) : null;
 
           const headerContent = (
             <CardHeader
@@ -55,13 +55,13 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
               }
               secondary={
                 <div className="flex items-center gap-2">
-                  {item.organizationLogoPath ? <LogoBadge path={item.organizationLogoPath} alt={`${header.secondary} logo`} /> : null}
+                  {item.organization.logoPath ? <LogoBadge path={item.organization.logoPath} alt={`${header.secondary} logo`} /> : null}
                   <p className="min-w-0 text-sm text-(--ink-700)">
                     {header.secondary}
-                    {item.organizationDescription ? (
+                    {item.organization.description ? (
                       <>
                         <span className="px-1.5 text-(--ink-700)">·</span>
-                        <span>{item.organizationDescription}</span>
+                        <span>{item.organization.description}</span>
                       </>
                     ) : null}
                   </p>

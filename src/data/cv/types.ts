@@ -52,13 +52,18 @@ export type EducationItem = {
 
 export type ExperienceItem = {
   id: string;
-  organization: string;
-  organizationLogoPath?: string;
-  organizationDescription?: string;
-  organizationUrl?: string;
+  organization: {
+    name: string;
+    logoPath?: string;
+    description?: string;
+    url?: string;
+    address?: string;
+  };
   period: string;
   role: string;
   location: string;
+  hoursPerWeek?: number;
+  jobDescription: string;
   summary: string;
   highlights: DetailItem[];
   highlighted: boolean;

@@ -110,13 +110,17 @@ export const cvContent: CvContent = {
   experience: [
     {
       id: "dentscape",
-      organization: "Dentscape",
-      organizationLogoPath: "/assets/organizations/dentscape-logo.png",
-      organizationDescription: "automated 3D dental crown design",
-      organizationUrl: "https://dentscape.ai",
+      organization: {
+        name: "Dentscape",
+        logoPath: "/assets/organizations/dentscape-logo.png",
+        description: "automated 3D dental crown design",
+        url: "https://dentscape.ai",
+      },
       period: "Apr 2025 -- Present",
       role: "Machine Learning & Software Engineering Consultant",
       location: "Taipei / Remote",
+      jobDescription:
+        "Conduct research and engineering on AI-assisted dental crown design and ML production systems. In order to accelerate model iteration and delivery quality, I reorganized large-scale dental data, rebuilt labeling and pre-labeling workflows, optimized segmentation and crown-generation pipelines, and standardized deployment architecture and CI/CD practices. Tools used include Python, deep learning frameworks, backend API services, GitHub Actions, containers, and cloud infrastructure.",
       summary:
         "Led ML platform and production engineering upgrades that cut data access from ~3 days to minutes, reduced end-to-end labeling turnaround from ~4 weeks to ~1 week, improved core backend throughput by ~110%, and lowered infrastructure cost by ~50%.",
       highlights: [
@@ -146,13 +150,17 @@ export const cvContent: CvContent = {
     },
     {
       id: "clarq-ai",
-      organization: "Clarq AI",
-      organizationLogoPath: "/assets/organizations/clarq-ai-logo.png",
-      organizationDescription: "AI-optimized resistance training",
-      organizationUrl: "https://clarq-ai.com",
+      organization: {
+        name: "Clarq AI",
+        logoPath: "/assets/organizations/clarq-ai-logo.png",
+        description: "AI-optimized resistance training",
+        url: "https://clarq-ai.com",
+      },
       period: "Dec 2024 -- Present",
       role: "Co-founder & CTO",
       location: "Taipei / Remote",
+      jobDescription:
+        "Conduct platform and product research on AI-driven force intelligence for resistance training. In order to validate scalable commercialization and product-market fit, I led data strategy, system architecture, and investor-facing technical positioning across hardware operations, SaaS monetization plans, and long-term model moat development. Tools used include sensor-integrated data systems, analytics pipelines, and product instrumentation platforms.",
       summary:
         "Helped reposition Clarq from hardware product to force-intelligence platform with 100+ deployments, 15M+ force-time samples, and 150K labeled motion sets, while driving investor narrative and US-facing fundraising readiness.",
       highlights: [
@@ -173,13 +181,17 @@ export const cvContent: CvContent = {
     },
     {
       id: "codegreen-labs",
-      organization: "CodeGreen Labs PBC",
-      organizationLogoPath: "/assets/organizations/codegreen-labs-logo.png",
-      organizationDescription: "trusted transactions for bio and ESG",
-      organizationUrl: "https://www.linkedin.com/company/90501967",
+      organization: {
+        name: "CodeGreen Labs PBC",
+        logoPath: "/assets/organizations/codegreen-labs-logo.png",
+        description: "trusted transactions for bio and ESG",
+        url: "https://www.linkedin.com/company/90501967",
+      },
       period: "Sep 2023 -- Nov 2024",
       role: "Co-founder & CTO",
       location: "Boston / Taipei",
+      jobDescription:
+        "Conduct systems research and software development for auditable ESG and bioeconomy transactions. In order to improve trust, compliance, and interoperability for climate-conscious capital flows, I led architecture design, delivery execution, and partnership-aligned product integration with cross-functional teams spanning climate, finance, and engineering. Tools used include decentralized ledger infrastructure, data integrity pipelines, and compliance-aware backend services.",
       summary:
         "Built decentralized software for climate-conscious investors and UN 2030-aligned initiatives, scaling to projected $1MM annual revenue with a 10-person team and major ecosystem partnerships.",
       highlights: [
@@ -198,13 +210,17 @@ export const cvContent: CvContent = {
     },
     {
       id: "hashgreen-labs",
-      organization: "Hashgreen Labs",
-      organizationLogoPath: "/assets/organizations/hashgreen-labs-logo.png",
-      organizationDescription: "sustainable blockchain infra",
-      organizationUrl: "https://www.linkedin.com/company/76261232",
+      organization: {
+        name: "Hashgreen Labs",
+        logoPath: "/assets/organizations/hashgreen-labs-logo.png",
+        description: "sustainable blockchain infra",
+        url: "https://www.linkedin.com/company/76261232",
+      },
       period: "Sep 2022 -- Aug 2023",
       role: "Co-founder & CTO",
       location: "Boston / Taipei",
+      jobDescription:
+        "Conduct product and protocol engineering on sustainable blockchain infrastructure and DeFi systems. In order to establish early market traction and technical leadership, I built the engineering organization, raised capital, and led delivery of client-facing platforms including core DEX and AMM primitives on the Chia ecosystem. Tools used include blockchain protocols, smart-contract-adjacent architecture patterns, backend services, and team operational systems.",
       summary:
         "Scaled Hashgreen from inception to a 20-person team, raised $1MM+ in capital, and delivered flagship green-blockchain and DeFi products for global clients.",
       highlights: [
@@ -223,12 +239,16 @@ export const cvContent: CvContent = {
     },
     {
       id: "iabit",
-      organization: "International Academia of Biomedical Innovation Technology",
-      organizationLogoPath: "/assets/organizations/iabit-logo.png",
-      organizationUrl: "https://bit-biomed.com",
+      organization: {
+        name: "International Academia of Biomedical Innovation Technology",
+        logoPath: "/assets/organizations/iabit-logo.png",
+        url: "https://bit-biomed.com",
+      },
       period: "2021 -- Present",
       role: "Consultant & Convener",
       location: "Taipei, Taiwan",
+      jobDescription:
+        "Conduct collaborative research and ecosystem development in biomedical innovation. In order to accelerate translation from academic output to practical health technology impact, I mentor project teams, coordinate dental AI collaborations with hospital partners, and organize high-visibility community events for technology dissemination. Tools used include medical imaging AI workflows, project mentoring frameworks, and cross-institution collaboration platforms.",
       summary:
         "Supported a 50+ member biomedical innovation community through project mentorship, dental AI research collaboration, and large-scale technology outreach events.",
       highlights: [
@@ -246,12 +266,16 @@ export const cvContent: CvContent = {
     },
     {
       id: "mit-ra",
-      organization: "Massachusetts Institute of Technology",
-      organizationLogoPath: "/assets/organizations/mit-logo.png",
-      organizationUrl: "https://mit-medg.github.io",
+      organization: {
+        name: "Massachusetts Institute of Technology",
+        logoPath: "/assets/organizations/mit-logo.png",
+        url: "https://mit-medg.github.io",
+      },
       period: "Sep 2018 -- Jun 2022",
       role: "Research Assistant",
       location: "Cambridge, MA",
+      jobDescription:
+        "Conduct research in medical AI and computer vision focusing on clinically deployable modeling under constrained data settings. In order to improve diagnosis and longitudinal assessment workflows, I designed and validated machine learning methods, collaborated with healthcare and industry partners, and produced peer-reviewed publications, patents, and translational outputs. Tools used include deep learning frameworks, medical imaging data pipelines, and large-scale compute resources.",
       summary:
         "Produced 14 conference papers, 5 journal papers, and 1 U.S. patent across medical AI and computer vision, while collaborating with top research and healthcare partners to move models toward real-world clinical use.",
       highlights: [
@@ -269,22 +293,30 @@ export const cvContent: CvContent = {
     },
     {
       id: "worldquant",
-      organization: "WorldQuant",
-      organizationLogoPath: "/assets/organizations/worldquant-logo.png",
+      organization: {
+        name: "WorldQuant",
+        logoPath: "/assets/organizations/worldquant-logo.png",
+      },
       period: "Jun 2021 -- Aug 2021",
       role: "Data Science Intern",
       location: "Taipei, Taiwan",
+      jobDescription:
+        "Conduct quantitative research on financial strategy performance optimization. In order to improve predictive alignment with market behavior, I evaluated strategy limitations, iterated on modeling assumptions, and implemented targeted improvements to increase market correlation and robustness. Tools used include statistical modeling techniques and quantitative backtesting workflows.",
       summary: "Improved an existing quantitative strategy by +1.5% market correlation through targeted modeling and optimization work.",
       highlights: [],
       highlighted: false,
     },
     {
       id: "digital-drift",
-      organization: "Digital Drift",
-      organizationLogoPath: "/assets/organizations/digital-drift-logo.png",
+      organization: {
+        name: "Digital Drift",
+        logoPath: "/assets/organizations/digital-drift-logo.png",
+      },
       period: "Mar 2016 -- Mar 2020",
       role: "Lead Machine Learning Scientist",
       location: "Taipei, Taiwan",
+      jobDescription:
+        "Conduct applied computer vision research and production ML engineering for consumer mobile experiences. In order to transition models from experimentation to reliable deployment, I developed neural network systems for visual recognition, designed serving APIs, and maintained end-to-end inference integration in backend environments. Tools used include TensorFlow, multi-GPU training systems, and API infrastructure.",
       summary:
         "Built and deployed deep learning systems and backend APIs that moved computer vision features from experimentation into production mobile experiences.",
       highlights: [
@@ -295,12 +327,16 @@ export const cvContent: CvContent = {
     },
     {
       id: "google-software-engineer-intern",
-      organization: "Google",
-      organizationLogoPath: "/assets/organizations/google-logo.png",
-      organizationDescription: "Google Health",
+      organization: {
+        name: "Google",
+        logoPath: "/assets/organizations/google-logo.png",
+        description: "Google Health",
+      },
       period: "Jun 2020 -- Sep 2020",
       role: "Software Engineer Intern",
       location: "Remote",
+      jobDescription:
+        "Conduct software engineering for applied machine learning workflows in health-focused product settings. In order to improve experimentation reliability and development velocity, I built production-grade components and tooling that strengthened reproducibility and reduced iteration friction for model development teams. Tools used include internal ML experimentation infrastructure, backend services, and software testing frameworks.",
       summary:
         "Contributed production software and experimentation tooling that improved reliability and iteration speed for applied machine learning workflows.",
       highlights: [],
@@ -308,12 +344,16 @@ export const cvContent: CvContent = {
     },
     {
       id: "google-student-researcher",
-      organization: "Google",
-      organizationLogoPath: "/assets/organizations/google-logo.png",
-      organizationDescription: "Mobile Vision",
+      organization: {
+        name: "Google",
+        logoPath: "/assets/organizations/google-logo.png",
+        description: "Mobile Vision",
+      },
       period: "Jun 2019 -- Mar 2020",
       role: "Student Researcher",
       location: "Seattle, WA / Cambridge, MA",
+      jobDescription:
+        "Conduct research in federated learning and large-scale mobile vision model training. In order to improve learning performance under real-world non-IID data conditions, I developed scalable experimentation infrastructure, designed and ran large compute studies, and published methods with open-source assets for community adoption. Tools used include distributed training infrastructure, GPU clusters, and research code/data release pipelines.",
       summary:
         "Built large-scale ML experimentation infrastructure spanning 1,000+ GPUs and 1M+ machine hours, and published 2 peer-reviewed papers in deep federated learning with open-source outputs for broader adoption.",
       highlights: [
@@ -328,22 +368,30 @@ export const cvContent: CvContent = {
     },
     {
       id: "bwh-research-trainee",
-      organization: "Brigham and Women's Hospital",
-      organizationLogoPath: "/assets/organizations/bwh-logo.png",
+      organization: {
+        name: "Brigham and Women's Hospital",
+        logoPath: "/assets/organizations/bwh-logo.png",
+      },
       period: "Mar 2019 -- Feb 2020",
       role: "Research Trainee",
       location: "Boston, MA",
+      jobDescription:
+        "Conduct clinical AI research focused on medical imaging and risk prediction applications. In order to support translational deployment in hospital settings, I contributed to model development, validation analysis, and workflow integration efforts tied to real patient cohorts and radiology operations. Tools used include medical imaging datasets, deep learning models, and clinical informatics systems.",
       summary: "",
       highlights: [],
       highlighted: false,
     },
     {
       id: "bidmc-research-trainee",
-      organization: "Beth Israel Deaconess Medical Center",
-      organizationLogoPath: "/assets/organizations/bidmc-logo.png",
+      organization: {
+        name: "Beth Israel Deaconess Medical Center",
+        logoPath: "/assets/organizations/bidmc-logo.png",
+      },
       period: "Nov 2019 -- Oct 2020",
       role: "Research Trainee",
       location: "Boston, MA",
+      jobDescription:
+        "Conduct research in clinical AI with emphasis on imaging-driven disease assessment and hospital deployment readiness. In order to improve diagnosis and triage quality at scale, I developed and integrated a PACS-aligned screening pipeline, published on high-impact clinical questions, and managed shared compute resources for a multidisciplinary research team. Tools used include PACS workflow integration, deep learning pipelines, and shared GPU compute systems.",
       summary:
         "Published impactful clinical AI research and deployed a PACS-integrated screening workflow across 1,000+ patients while managing shared deep-learning compute for a 10+ member research unit.",
       highlights: [
@@ -361,11 +409,15 @@ export const cvContent: CvContent = {
     },
     {
       id: "academia-sinica-student-researcher",
-      organization: "Academia Sinica",
-      organizationLogoPath: "/assets/organizations/academia-sinica-logo.png",
+      organization: {
+        name: "Academia Sinica",
+        logoPath: "/assets/organizations/academia-sinica-logo.png",
+      },
       period: "Feb 2014 -- May 2016",
       role: "Student Researcher",
       location: "Taipei City, Taiwan",
+      jobDescription:
+        "Conduct research in domain adaptation for visual classification focusing on heterogeneous and low-label regimes. In order to improve transfer performance across mismatched data domains, I investigated unsupervised and semi-supervised methods, validated them experimentally, and disseminated findings through peer-reviewed conference and journal publications. Tools used include machine learning algorithms, computer vision benchmarks, and experimental research code.",
       summary:
         "Researched heterogeneous, unsupervised, and semi-supervised domain adaptation for visual classification and published three peer-reviewed papers presented at top conferences and workshops.",
       highlights: [
@@ -380,11 +432,15 @@ export const cvContent: CvContent = {
     },
     {
       id: "olympiad-tutor",
-      organization: "Olympiad Tutoring Community",
-      organizationLogoPath: "/assets/organizations/ipho-logo.png",
+      organization: {
+        name: "Olympiad Tutoring Community",
+        logoPath: "/assets/organizations/ipho-logo.png",
+      },
       period: "Sep 2011 -- Jun 2015",
       role: "Private Tutor",
       location: "Taipei, Taiwan",
+      jobDescription:
+        "Conduct advanced physics instruction and curriculum design for competition-track students. In order to elevate student performance to national and international Olympiad standards, I developed structured learning plans, delivered high-intensity mentoring, and guided problem-solving progression from fundamentals to elite competition readiness. Tools used include Olympiad problem sets, custom teaching materials, and performance-tracking practices.",
       summary:
         "Mentored advanced physics students from fundamentals through competition-level performance, including pathways to Taiwan's national Olympiad representation.",
       highlights: [

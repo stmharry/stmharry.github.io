@@ -17,7 +17,7 @@ export const formatPeriodLabel = (period: string): string => {
 export const toExperienceCardHeader = (item: ExperienceItem): CardHeaderSemantics => {
   return {
     primary: item.role,
-    secondary: item.organization,
+    secondary: item.organization.name,
     date: formatPeriodLabel(item.period),
     location: item.location,
   };
