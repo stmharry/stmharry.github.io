@@ -119,7 +119,7 @@ export const cvContent: CvContent = {
       },
       period: "Apr 2025 -- Present",
       role: "Machine Learning & Software Engineering Consultant",
-      location: "Taipei / Remote",
+      location: "San Francisco / Taipei",
       jobDescription:
         "Conduct research and engineering on AI-assisted dental crown design and ML production systems. In order to accelerate model iteration and delivery quality, I reorganized large-scale dental data, rebuilt labeling and pre-labeling workflows, optimized segmentation and crown-generation pipelines, and standardized deployment architecture and CI/CD practices. Tools used include Python, deep learning frameworks, backend API services, GitHub Actions, containers, and cloud infrastructure.",
       summary:
