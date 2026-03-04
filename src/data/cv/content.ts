@@ -119,7 +119,7 @@ export const cvContent: CvContent = {
       },
       period: "Apr 2025 -- Present",
       role: "Machine Learning & Software Engineering Consultant",
-      location: "San Francisco / Taipei",
+      location: "San Francisco, CA / Taipei, Taiwan",
       jobDescription:
         "Conduct research and engineering on AI-assisted dental crown design and ML production systems. In order to accelerate model iteration and delivery quality, I reorganized large-scale dental data, rebuilt labeling and pre-labeling workflows, optimized segmentation and crown-generation pipelines, and standardized deployment architecture and CI/CD practices. Tools used include Python, deep learning frameworks, backend API services, GitHub Actions, containers, and cloud infrastructure.",
       summary:
@@ -160,7 +160,7 @@ export const cvContent: CvContent = {
       },
       period: "Dec 2024 -- Present",
       role: "Co-founder & CTO",
-      location: "Taipei / Remote",
+      location: "Palo Alto, CA / Taipei, Taiwan",
       jobDescription:
         "Conduct platform and product research on AI-driven force intelligence for resistance training. In order to validate scalable commercialization and product-market fit, I led data strategy, system architecture, and investor-facing technical positioning across hardware operations, SaaS monetization plans, and long-term model moat development. Tools used include sensor-integrated data systems, analytics pipelines, and product instrumentation platforms.",
       summary:
@@ -192,7 +192,7 @@ export const cvContent: CvContent = {
       },
       period: "Sep 2023 -- Nov 2024",
       role: "Co-founder & CTO",
-      location: "Boston / Taipei",
+      location: "Boston, MA / Taipei, Taiwan",
       jobDescription:
         "Conduct systems research and software development for auditable ESG and bioeconomy transactions. In order to improve trust, compliance, and interoperability for climate-conscious capital flows, I led architecture design, delivery execution, and partnership-aligned product integration with cross-functional teams spanning climate, finance, and engineering. Tools used include decentralized ledger infrastructure, data integrity pipelines, and compliance-aware backend services.",
       summary:
@@ -222,7 +222,7 @@ export const cvContent: CvContent = {
       },
       period: "Sep 2022 -- Aug 2023",
       role: "Co-founder & CTO",
-      location: "Boston / Taipei",
+      location: "Boston, MA / Taipei, Taiwan",
       jobDescription:
         "Conduct product and protocol engineering on sustainable blockchain infrastructure and DeFi systems. In order to establish early market traction and technical leadership, I built the engineering organization, raised capital, and led delivery of client-facing platforms including core DEX and AMM primitives on the Chia ecosystem. Tools used include blockchain protocols, smart-contract-adjacent architecture patterns, backend services, and team operational systems.",
       summary:
