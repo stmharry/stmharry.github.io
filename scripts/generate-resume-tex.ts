@@ -111,6 +111,9 @@ const HEADER_WIDTHS = {
 } as const;
 
 type ResumeItemFields = {
+  totalWidth?: string;
+  leftWidth?: string;
+  rightWidth?: string;
   leftPrimary: string;
   rightPrimary: string;
   leftSecondary: string;
@@ -118,11 +121,29 @@ type ResumeItemFields = {
   body: string;
 };
 
+const EXPERIENCE_WIDTHS = {
+  total: "0.95\\textwidth",
+  left: "0.64\\textwidth",
+  right: "0.31\\textwidth",
+} as const;
+
 const joinBlocks = (blocks: string[]): string => blocks.filter((block) => block.length > 0).join("\n\n");
 
-const renderResumeItem = ({ leftPrimary, rightPrimary, leftSecondary, rightSecondary, body }: ResumeItemFields): string => {
+const renderResumeItem = ({
+  totalWidth,
+  leftWidth,
+  rightWidth,
+  leftPrimary,
+  rightPrimary,
+  leftSecondary,
+  rightSecondary,
+  body,
+}: ResumeItemFields): string => {
+  const widthArgs =
+    totalWidth && leftWidth && rightWidth ? `[${totalWidth}][${leftWidth}][${rightWidth}]` : "";
+
   return [
-    "  \\resumeItem",
+    `  \\resumeItem${widthArgs}`,
     `    {${escapeLatex(leftPrimary)}}{${escapeLatex(rightPrimary)}}`,
     `    {${escapeLatex(leftSecondary)}}{${escapeLatex(rightSecondary)}}`,
     `    {${body}}`,
@@ -174,6 +195,9 @@ const renderExperience = (item: ExperienceItem): string => {
   const details = renderDetailItems(item.highlights);
   const body = `${summary}${details}`;
   return renderResumeItem({
+    totalWidth: EXPERIENCE_WIDTHS.total,
+    leftWidth: EXPERIENCE_WIDTHS.left,
+    rightWidth: EXPERIENCE_WIDTHS.right,
     leftPrimary: item.organization.name,
     rightPrimary: item.period,
     leftSecondary: item.role,
