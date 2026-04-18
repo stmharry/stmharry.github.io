@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { SectionHeading } from "./SectionHeading";
-import { filterPublicationsByTopic, getUsedTopics, getWebPublications } from "../data/cv/selectors";
+import { filterPublicationsByTopic, getUsedTopics } from "../data/cv/selectors";
 import type { PublicationItem, Topic } from "../data/cv/types";
 import { PublicationCard } from "./publications/PublicationCard";
 import { PublicationsFilterBar } from "./publications/PublicationsFilterBar";
@@ -16,16 +16,17 @@ type PublicationsSectionProps = {
 export const PublicationsSection = ({ publications, topics }: PublicationsSectionProps) => {
   const [topicFilter, setTopicFilter] = useState<TopicFilter>("all");
 
-  const allPublications = useMemo(() => getWebPublications(publications), [publications]);
-  const availableTopics = useMemo(() => getUsedTopics(topics, allPublications), [topics, allPublications]);
-  const visiblePublications = useMemo(() => filterPublicationsByTopic(allPublications, topicFilter), [allPublications, topicFilter]);
+  const availableTopics = useMemo(() => getUsedTopics(topics, publications), [topics, publications]);
+  const visiblePublications = useMemo(() => filterPublicationsByTopic(publications, topicFilter), [publications, topicFilter]);
 
   usePublicationHashNavigation({ topicFilter, setTopicFilter, visiblePublications });
 
   return (
     <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
-      <SectionHeading id="publications-heading" title="Publications">
-        <PublicationsFilterBar selectedFilter={topicFilter} availableTopics={availableTopics} onSelect={setTopicFilter} />
+      <SectionHeading id="publications-heading" title="Selected Publications">
+        {availableTopics.length > 1 ? (
+          <PublicationsFilterBar selectedFilter={topicFilter} availableTopics={availableTopics} onSelect={setTopicFilter} />
+        ) : null}
       </SectionHeading>
 
       <ul className="mt-6 space-y-4">

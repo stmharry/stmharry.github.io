@@ -3,6 +3,8 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { cvContent } from "../src/data/cv/content";
+import { resumeTargetOverlays } from "../src/data/cv/targets";
+import { getExperienceForResume, getProfileForResume, getResumePublicationsForTarget } from "../src/data/cv/selectors";
 import { escapeLatex, highlightSelfInAuthors } from "../src/resume/latex";
 import type {
   AwardItem,
@@ -11,10 +13,17 @@ import type {
   ExperienceItem,
   LeadershipItem,
   PublicationItem,
+  Profile,
+  ResumeTargetId,
+  ResumeVariantId,
 } from "../src/data/cv/types";
 
 const projectRoot = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
-const generatedResumePath = resolve(projectRoot, "resume/resume.tex");
+const baseGeneratedResumePaths: Record<ResumeVariantId, string> = {
+  applied: resolve(projectRoot, "resume/resume-applied.tex"),
+  research: resolve(projectRoot, "resume/resume-research.tex"),
+};
+const targetedResumeDir = resolve(projectRoot, "resume/targets");
 
 const DOCUMENT_PREAMBLE = String.raw`\documentclass[11pt]{article}
 \usepackage[a4paper, margin=0.75in]{geometry}
@@ -127,6 +136,78 @@ const EXPERIENCE_WIDTHS = {
   right: "0.31\\textwidth",
 } as const;
 
+const RESUME_VARIANTS: ResumeVariantId[] = ["applied", "research"];
+
+type GeneratedResumeSpec = {
+  variant: ResumeVariantId;
+  targetId?: ResumeTargetId;
+  label: string;
+  outputPath: string;
+};
+
+const parseArgs = (argv: string[]) => {
+  const args = { variant: undefined as ResumeVariantId | undefined, target: undefined as ResumeTargetId | undefined };
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const current = argv[index];
+    const next = argv[index + 1];
+
+    if (current === "--variant" && next) {
+      args.variant = next as ResumeVariantId;
+      index += 1;
+    } else if (current === "--target" && next) {
+      args.target = next as ResumeTargetId;
+      index += 1;
+    }
+  }
+
+  return args;
+};
+
+const buildGeneratedResumeSpecs = (variant?: ResumeVariantId, targetId?: ResumeTargetId): GeneratedResumeSpec[] => {
+  if (targetId) {
+    const targetOverlay = resumeTargetOverlays.find((overlay) => overlay.id === targetId);
+
+    if (!targetOverlay) {
+      throw new Error(`Unknown resume target: ${targetId}`);
+    }
+
+    const selectedVariant = variant ?? targetOverlay.baseVariant;
+    return [
+      {
+        variant: selectedVariant,
+        targetId,
+        label: `${selectedVariant}:${targetId}`,
+        outputPath: resolve(targetedResumeDir, `resume-${targetId}.tex`),
+      },
+    ];
+  }
+
+  if (variant) {
+    return [
+      {
+        variant,
+        label: variant,
+        outputPath: baseGeneratedResumePaths[variant],
+      },
+    ];
+  }
+
+  return [
+    ...RESUME_VARIANTS.map((currentVariant) => ({
+      variant: currentVariant,
+      label: currentVariant,
+      outputPath: baseGeneratedResumePaths[currentVariant],
+    })),
+    ...resumeTargetOverlays.map((overlay) => ({
+      variant: overlay.baseVariant,
+      targetId: overlay.id,
+      label: `${overlay.baseVariant}:${overlay.id}`,
+      outputPath: resolve(targetedResumeDir, `resume-${overlay.id}.tex`),
+    })),
+  ];
+};
+
 const joinBlocks = (blocks: string[]): string => blocks.filter((block) => block.length > 0).join("\n\n");
 
 const renderResumeItem = ({
@@ -158,8 +239,8 @@ const renderSectionEntries = <T>(title: string, entries: T[], renderEntry: (entr
   return renderSection(title, entries.map(renderEntry).join("\n\n"));
 };
 
-const getContactByLabel = (label: string) => {
-  return cvContent.profile.contacts.find((contact) => contact.label === label);
+const getContactByLabel = (profile: Profile, label: string) => {
+  return profile.contacts.find((contact) => contact.label === label);
 };
 
 const renderDetailItems = (details: DetailItem[]): string => {
@@ -239,30 +320,30 @@ const renderPublication = (item: PublicationItem): string => {
   });
 };
 
-const renderHeader = (): string => {
-  const emailContact = getContactByLabel(CONTACT_LABELS.email);
-  const usPhone = getContactByLabel(CONTACT_LABELS.usPhone);
-  const twPhone = getContactByLabel(CONTACT_LABELS.twPhone);
+const renderHeader = (profile: Profile): string => {
+  const emailContact = getContactByLabel(profile, CONTACT_LABELS.email);
+  const usPhone = getContactByLabel(profile, CONTACT_LABELS.usPhone);
+  const twPhone = getContactByLabel(profile, CONTACT_LABELS.twPhone);
 
   const emailHref = emailContact?.href ?? `mailto:${emailContact?.value ?? ""}`;
   const emailValue = escapeLatex(emailContact?.value ?? "");
   const phoneLine = [usPhone?.value, twPhone?.value].filter(Boolean).join(" / ");
 
-  const bulletLines = cvContent.profile.summaryBullets
+  const bulletLines = profile.summaryBullets
     .map((item) => `  \\resumeDetailItem{${escapeLatex(item)}}`)
     .join("\n");
 
   return [
     "\\begin{center}",
-    `  {\\LARGE ${escapeLatex(cvContent.profile.name)}} \\\\`,
+    `  {\\LARGE ${escapeLatex(profile.name)}} \\\\`,
     "  \\vspace{4pt}",
-    `  \\begin{CJK*}{UTF8}{bkai} ${cvContent.profile.nativeName} \\end{CJK*}`,
+    `  \\begin{CJK*}{UTF8}{bkai} ${profile.nativeName} \\end{CJK*}`,
     "\\end{center}",
     "",
     "\\begin{resumeItemList}[0in]",
     `  \\resumeItem[${HEADER_WIDTHS.total}][${HEADER_WIDTHS.left}][${HEADER_WIDTHS.right}]`,
-    `  {${escapeLatex(cvContent.profile.headline)}}{\\href{${emailHref}}{${emailValue}}}`,
-    `  {${escapeLatex(cvContent.profile.tagline)}}{${escapeLatex(phoneLine)}}`,
+    `  {${escapeLatex(profile.headline)}}{\\href{${emailHref}}{${emailValue}}}`,
+    `  {${escapeLatex(profile.tagline)}}{${escapeLatex(phoneLine)}}`,
     "  {}",
     "\\end{resumeItemList}",
     "",
@@ -272,27 +353,43 @@ const renderHeader = (): string => {
   ].join("\n");
 };
 
-const renderDocumentContent = (): string => {
+const renderDocumentContent = (
+  profile: Profile,
+  experience: ExperienceItem[],
+  publications: PublicationItem[],
+): string => {
   return joinBlocks([
-    renderHeader(),
+    renderHeader(profile),
     renderSectionEntries("Education", cvContent.education, renderEducation),
-    renderSectionEntries("Professional Experience", cvContent.experience, renderExperience),
+    renderSectionEntries("Professional Experience", experience, renderExperience),
     renderSectionEntries("Leadership Experiences", cvContent.leadership, renderLeadership),
     renderSectionEntries("Awards \\& Honors", cvContent.awards, renderAward),
     "\\newpage",
-    renderSectionEntries("Academic Publications", cvContent.publications, renderPublication),
+    renderSectionEntries("Selected Publications", publications, renderPublication),
   ]);
 };
 
 const run = async (): Promise<void> => {
-  const generatedContent = renderDocumentContent();
-  const resumeTex = `${DOCUMENT_PREAMBLE}\n\n${generatedContent}\n\n${DOCUMENT_END}\n`;
+  const { variant, target } = parseArgs(process.argv.slice(2));
+  const generatedResumeSpecs = buildGeneratedResumeSpecs(variant, target);
 
   await mkdir(resolve(projectRoot, "resume"), { recursive: true });
-  await writeFile(generatedResumePath, resumeTex, "utf8");
+  await mkdir(targetedResumeDir, { recursive: true });
 
-  console.log("Generated resume LaTeX:");
-  console.log(`- ${generatedResumePath}`);
+  for (const spec of generatedResumeSpecs) {
+    const targetOverlay = spec.targetId
+      ? resumeTargetOverlays.find((overlay) => overlay.id === spec.targetId)
+      : undefined;
+    const profile = getProfileForResume(cvContent.profile, spec.variant, targetOverlay);
+    const experience = getExperienceForResume(cvContent.experience, spec.variant, targetOverlay);
+    const publications = getResumePublicationsForTarget(cvContent.publications, spec.variant, targetOverlay);
+    const generatedContent = renderDocumentContent(profile, experience, publications);
+    const resumeTex = `${DOCUMENT_PREAMBLE}\n\n${generatedContent}\n\n${DOCUMENT_END}\n`;
+
+    await writeFile(spec.outputPath, resumeTex, "utf8");
+    console.log(`Generated ${spec.label} resume LaTeX:`);
+    console.log(`- ${spec.outputPath}`);
+  }
 };
 
 run().catch((error: unknown) => {

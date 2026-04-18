@@ -4,15 +4,27 @@ export const cvContent: CvContent = {
   profile: {
     name: "Tzu-Ming Harry Hsu",
     nativeName: "徐子旻",
-    tagline: "Entrepreneur, Scholar, Writer, Speaker, and Diver",
-    headline: "Ph.D. in AI and Healthcare, MIT",
+    tagline: "Embodied AI, ML systems, and AI product delivery",
+    headline: "Research-to-product ML builder for embodied AI",
     location: "Taiwan and Boston",
     summaryBullets: [
-      "Entrepreneurial builder with experience leading cross-functional teams, scaling products from idea to launch, and turning research into practical impact.",
-      "Researcher with peer-reviewed work spanning AI, medical imaging, and machine learning, with 3,684 Google Scholar citations.",
-      "Taiwan-born, US-educated innovator seeking to elevate Taiwan's role as a global engineering powerhouse and promoting a culture of rapid iterative innovation.",
-      "Ocean lover with an AIDA Instructor Certification and an SDI Open Water Scuba Diving Certification.",
+      "MIT-trained ML researcher-engineer with 10+ years across computer vision, federated learning, sensing, and production AI systems.",
+      "Built and scaled ML/data platforms from research prototypes to deployed systems, including 10 TB data operations, labeling pipelines, and large-scale training infrastructure.",
+      "Recent work spans AI-assisted dental design and sensor-driven human performance products; now targeting general-purpose robotics and embodied AI.",
+      "Founder-operator experience raising $1MM+, hiring and leading teams up to 20 people, and translating technical roadmaps into product and commercialization plans.",
     ],
+    variantOverrides: {
+      research: {
+        tagline: "Computer vision, federated learning, sensing, and ML systems",
+        headline: "Research scientist in embodied AI, computer vision, and learning systems",
+        summaryBullets: [
+          "MIT-trained researcher with 20+ publications, patents, and theses spanning computer vision, federated learning, sensing, and deployable medical AI.",
+          "Built large-scale experimentation infrastructure at Google spanning 1,000+ GPUs and 1M+ machine hours, with open-source code and dataset releases.",
+          "Research includes 3D scene understanding, wireless sensing, and learning under real-world data constraints, with outputs cited across academia and industry.",
+          "Targeting embodied-AI roles that connect world models, robot perception, data systems, and real-world deployment.",
+        ],
+      },
+    },
     contacts: [
       {
         label: "Email",
@@ -56,7 +68,7 @@ export const cvContent: CvContent = {
       {
         icon: "resume",
         label: "Resume",
-        href: "/assets/resume/tzu-ming-harry-hsu-resume.pdf",
+        href: "/assets/resume/tzu-ming-harry-hsu-resume-applied.pdf",
         description: "Full PDF",
       },
     ],
@@ -123,7 +135,7 @@ export const cvContent: CvContent = {
       jobDescription:
         "Conduct research and engineering on AI-assisted dental crown design and ML production systems. In order to accelerate model iteration and delivery quality, I reorganized large-scale dental data, rebuilt labeling and pre-labeling workflows, optimized segmentation and crown-generation pipelines, and standardized deployment architecture and CI/CD practices. Tools used include Python, deep learning frameworks, backend API services, GitHub Actions, containers, and cloud infrastructure.",
       summary:
-        "Led ML platform and production engineering upgrades that cut data access from ~3 days to minutes, reduced end-to-end labeling turnaround from ~4 weeks to ~1 week, improved core backend throughput by ~110%, and lowered infrastructure cost by ~50%.",
+        "Led ML platform, data, and deployment upgrades for AI-assisted dental design, cutting data access from ~3 days to minutes, reducing labeling turnaround from ~4 weeks to ~1 week, improving backend throughput by ~110%, and lowering infrastructure cost by ~50%.",
       highlights: [
         {
           text: "Reorganized a fragmented ~10 TB dental dataset into a standardized ~4 TB ML-ready registry, reducing raw-data access from ~3 days to minutes.",
@@ -148,6 +160,30 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: true,
+      variantOrder: {
+        applied: 1,
+        research: 3,
+      },
+      variantSummary: {
+        research:
+          "Built data, training, and evaluation systems for AI-assisted dental design, combining geometric ML, pre-labeling workflows, and preference modeling to accelerate iteration and production deployment.",
+      },
+      variantHighlights: {
+        research: [
+          {
+            text: "Reorganized a fragmented ~10 TB dental dataset into a standardized ~4 TB ML-ready registry, reducing raw-data access from ~3 days to minutes.",
+          },
+          {
+            text: "Rebuilt pre-labeling and labeling loops for 100-200 case batches, reducing turnaround from ~4 weeks to ~1 week and improving experiment velocity.",
+          },
+          {
+            text: "Implemented bilevel/meta-learning for personalized crown generation and improved preference fit by ~20% while keeping the system production-facing.",
+          },
+          {
+            text: "Optimized segmentation and crown-generation services for ~110% aggregate throughput improvement while reducing infrastructure cost by ~50%.",
+          },
+        ],
+      },
     },
     {
       id: "clarq-ai",
@@ -164,10 +200,10 @@ export const cvContent: CvContent = {
       jobDescription:
         "Conduct platform and product research on AI-driven force intelligence for resistance training. In order to validate scalable commercialization and product-market fit, I led data strategy, system architecture, and investor-facing technical positioning across hardware operations, SaaS monetization plans, and long-term model moat development. Tools used include sensor-integrated data systems, analytics pipelines, and product instrumentation platforms.",
       summary:
-        "Helped reposition Clarq from hardware product to force-intelligence platform with 100+ deployments, 15M+ force-time samples, and 150K labeled motion sets, while driving investor narrative and US-facing fundraising readiness.",
+        "Helped reposition Clarq from a hardware product into a force-intelligence platform with 100+ deployments, 15M+ force-time samples, and 150K labeled motion sets, linking sensor data strategy to product and fundraising.",
       highlights: [
         {
-          text: "Co-led fundraising and positioning narrative around a three-layer strategy: hardware wedge, SaaS profit engine, and long-term data/model moat.",
+          text: "Co-led technical positioning around a three-layer strategy: hardware wedge, SaaS profit engine, and long-term data/model moat.",
         },
         {
           text: "Drove US-facing investor outreach and progressed pre-seed conversations toward near-commit stage with angels.",
@@ -180,6 +216,14 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: true,
+      variantOrder: {
+        applied: 2,
+        research: 4,
+      },
+      variantSummary: {
+        research:
+          "Scoped the data and modeling strategy for a sensor-rich human-performance platform, framing a long-term moat around force-time data, evaluation loops, and model-driven product decisions.",
+      },
     },
     {
       id: "codegreen-labs",
@@ -196,20 +240,24 @@ export const cvContent: CvContent = {
       jobDescription:
         "Conduct systems research and software development for auditable ESG and bioeconomy transactions. In order to improve trust, compliance, and interoperability for climate-conscious capital flows, I led architecture design, delivery execution, and partnership-aligned product integration with cross-functional teams spanning climate, finance, and engineering. Tools used include decentralized ledger infrastructure, data integrity pipelines, and compliance-aware backend services.",
       summary:
-        "Built decentralized software for climate-conscious investors and UN 2030-aligned initiatives, scaling to projected $1MM annual revenue with a 10-person team and major ecosystem partnerships.",
+        "Led a 10-person engineering organization delivering auditable data systems for enterprise partners, reaching projected $1MM annual revenue while hardening integration, compliance, and delivery operations.",
       highlights: [
         { text: "Reached projected annual revenue of $1MM USD by Q2 2024 with a 10-person team." },
         {
           text: "Established partnerships with Microsoft, Global Blockchain Business Council, Gold Standard, SDG Data Alliance, and PVBLIC.",
         },
         {
-          text: "Built a cross-functional team across climate, finance, and software to address complex data, auditability, and compliance challenges.",
+          text: "Built a cross-functional team across product, partnerships, and engineering to address complex data, auditability, and compliance challenges.",
         },
         {
-          text: "Designed and shipped decentralized systems with end-to-end auditability, regulatory compliance, and interoperability with existing ecosystems.",
+          text: "Designed and shipped data-intensive systems with end-to-end auditability, regulatory compliance, and interoperability with existing partner ecosystems.",
         },
       ],
-      highlighted: true,
+      highlighted: false,
+      variantOrder: {
+        applied: 5,
+        research: 7,
+      },
     },
     {
       id: "hashgreen-labs",
@@ -226,7 +274,7 @@ export const cvContent: CvContent = {
       jobDescription:
         "Conduct product and protocol engineering on sustainable blockchain infrastructure and DeFi systems. In order to establish early market traction and technical leadership, I built the engineering organization, raised capital, and led delivery of client-facing platforms including core DEX and AMM primitives on the Chia ecosystem. Tools used include blockchain protocols, smart-contract-adjacent architecture patterns, backend services, and team operational systems.",
       summary:
-        "Scaled Hashgreen from inception to a 20-person team, raised $1MM+ in capital, and delivered flagship green-blockchain and DeFi products for global clients.",
+        "Built and led a 20-person engineering organization, raised $1MM+ in capital, and shipped client-facing data and transaction systems while establishing hiring, delivery, and product operating cadence from zero.",
       highlights: [
         { text: "Raised over $1MM USD in capital and grew the team from 0 to 20 employees." },
         {
@@ -240,6 +288,10 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: false,
+      variantOrder: {
+        applied: 6,
+        research: 8,
+      },
     },
     {
       id: "iabit",
@@ -282,7 +334,7 @@ export const cvContent: CvContent = {
       jobDescription:
         "Conduct research in medical AI and computer vision focusing on clinically deployable modeling under constrained data settings. In order to improve diagnosis and longitudinal assessment workflows, I designed and validated machine learning methods, collaborated with healthcare and industry partners, and produced peer-reviewed publications, patents, and translational outputs. Tools used include deep learning frameworks, medical imaging data pipelines, and large-scale compute resources.",
       summary:
-        "Produced 14 conference papers, 5 journal papers, and 1 U.S. patent across medical AI and computer vision, while collaborating with top research and healthcare partners to move models toward real-world clinical use.",
+        "Led research on deployable medical AI and computer vision, producing 20+ publications, patents, and theses while collaborating with Google, Takeda, and hospital partners to move models toward real workflows.",
       highlights: [
         {
           text: "Published 14 conference articles, 5 journal articles, one U.S. patent, and two degree theses.",
@@ -294,7 +346,15 @@ export const cvContent: CvContent = {
         },
         { text: "Awarded scholarships totaling 4 years in duration." },
       ],
-      highlighted: false,
+      highlighted: true,
+      variantOrder: {
+        applied: 3,
+        research: 1,
+      },
+      variantSummary: {
+        research:
+          "Led research on deployable medical AI, computer vision, and learning under data constraints, producing 20+ publications, patents, and theses with translational partners across industry and healthcare.",
+      },
     },
     {
       id: "worldquant",
@@ -370,6 +430,10 @@ export const cvContent: CvContent = {
         { text: "Open-sourced research code and datasets for broader community use." },
       ],
       highlighted: true,
+      variantOrder: {
+        applied: 4,
+        research: 2,
+      },
     },
     {
       id: "bwh-research-trainee",
@@ -382,9 +446,13 @@ export const cvContent: CvContent = {
       location: "Boston, MA",
       jobDescription:
         "Conduct clinical AI research focused on medical imaging and risk prediction applications. In order to support translational deployment in hospital settings, I contributed to model development, validation analysis, and workflow integration efforts tied to real patient cohorts and radiology operations. Tools used include medical imaging datasets, deep learning models, and clinical informatics systems.",
-      summary: "",
-      highlights: [],
+      summary:
+        "Contributed hospital-facing medical-imaging ML work on risk prediction and deployment-oriented evaluation using real patient cohorts and radiology workflows.",
+      highlights: [{ text: "Supported model development and validation analysis for clinical imaging applications tied to operational hospital use cases." }],
       highlighted: false,
+      variantOrder: {
+        research: 5,
+      },
     },
     {
       id: "bidmc-research-trainee",
@@ -411,6 +479,9 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: false,
+      variantOrder: {
+        research: 6,
+      },
     },
     {
       id: "academia-sinica-student-researcher",
@@ -561,6 +632,11 @@ export const cvContent: CvContent = {
       codeUrl: "https://github.com/stmharry/dental-pano-ai",
       topics: ["medical-ai"],
       order: 1,
+      variantOrder: {
+        applied: 1,
+        research: 1,
+      },
+      webFeaturedOrder: 1,
     },
     {
       id: "performance-frontier-freediving-2026",
@@ -588,6 +664,11 @@ export const cvContent: CvContent = {
       kind: "journal",
       topics: ["medical-ai", "computer-vision"],
       order: 2,
+      variantOrder: {
+        applied: 2,
+        research: 2,
+      },
+      webFeaturedOrder: 2,
     },
     {
       id: "molar-jod-2023",
@@ -713,6 +794,11 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["iabit"],
       topics: ["medical-ai", "computer-vision"],
       order: 10,
+      variantOrder: {
+        applied: 3,
+        research: 3,
+      },
+      webFeaturedOrder: 3,
     },
     {
       id: "rf-patent-2020",
@@ -811,6 +897,11 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["google-student-researcher"],
       topics: ["federated-learning", "computer-vision"],
       order: 16,
+      variantOrder: {
+        applied: 4,
+        research: 4,
+      },
+      webFeaturedOrder: 4,
     },
     {
       id: "fedavgm-2019",
@@ -828,6 +919,9 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["google-student-researcher"],
       topics: ["federated-learning", "ml-systems"],
       order: 17,
+      variantOrder: {
+        research: 5,
+      },
     },
     {
       id: "transfer-neural-trees-tip-2019",
@@ -841,6 +935,9 @@ export const cvContent: CvContent = {
       kind: "journal",
       topics: ["computer-vision", "ml-systems"],
       order: 18,
+      variantOrder: {
+        research: 8,
+      },
     },
     {
       id: "ccr-2019",
@@ -892,6 +989,11 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 2.563,
       topics: ["wireless-sensing", "ml-systems"],
       order: 21,
+      variantOrder: {
+        applied: 5,
+        research: 7,
+      },
+      webFeaturedOrder: 5,
     },
     {
       id: "3d-aware-2018",
@@ -911,6 +1013,11 @@ export const cvContent: CvContent = {
       projectUrl: "http://3dsdn.csail.mit.edu/",
       topics: ["computer-vision", "ml-systems"],
       order: 22,
+      variantOrder: {
+        applied: 6,
+        research: 6,
+      },
+      webFeaturedOrder: 6,
     },
     {
       id: "transfer-neural-trees-eccv-2016",

@@ -5,7 +5,7 @@ import { ExperienceSection } from "./components/ExperienceSection";
 import { Hero } from "./components/Hero";
 import { PublicationsSection } from "./components/PublicationsSection";
 import { cvContent } from "./data/cv/content";
-import { getExperiencePublicationLinks } from "./data/cv/selectors";
+import { getExperienceForVariant, getExperiencePublicationLinks, getProfileForVariant, getWebPublications } from "./data/cv/selectors";
 
 type ThemePreference = "system" | "light" | "dark";
 
@@ -21,7 +21,11 @@ const getOppositeTheme = (value: Exclude<ThemePreference, "system">): Exclude<Th
 };
 
 function App() {
-  const experiencePublicationLinks = getExperiencePublicationLinks(cvContent.publications);
+  const siteVariant = "applied" as const;
+  const profile = getProfileForVariant(cvContent.profile, siteVariant);
+  const webPublications = getWebPublications(cvContent.publications);
+  const webExperience = getExperienceForVariant(cvContent.experience, siteVariant).filter((item) => item.highlighted);
+  const experiencePublicationLinks = getExperiencePublicationLinks(webPublications);
   const [stickyNameOpacity, setStickyNameOpacity] = useState(0);
   const [systemTheme, setSystemTheme] = useState<Exclude<ThemePreference, "system">>(() => {
     if (typeof window === "undefined") {
@@ -98,21 +102,21 @@ function App() {
           style={{ opacity: stickyNameOpacity }}
         >
           <p className="text-[13px] font-medium text-(--ink-900)" style={{ fontFamily: "var(--font-serif)" }}>
-            {cvContent.profile.name} · MIT Ph.D.
+            {profile.name} · Embodied AI
           </p>
         </div>
       </div>
       <Hero
-        profile={cvContent.profile}
-        links={cvContent.profile.links}
+        profile={profile}
+        links={profile.links}
         themePreference={effectiveTheme}
         onCycleTheme={() => {
           setThemePreference((current) => getOppositeTheme(current ?? effectiveTheme));
         }}
       />
-      <ExperienceSection items={cvContent.experience} publicationLinksByExperienceId={experiencePublicationLinks} />
+      <ExperienceSection items={webExperience} publicationLinksByExperienceId={experiencePublicationLinks} />
       <EducationSection items={cvContent.education} />
-      <PublicationsSection publications={cvContent.publications} topics={cvContent.topics} />
+      <PublicationsSection publications={webPublications} topics={cvContent.topics} />
     </main>
   );
 }

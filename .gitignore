@@ -28,7 +28,9 @@ dist-ssr
 
 # Resume build artifacts
 resume/build/
-resume/resume.tex
+resume/output/
+resume/targets/
+resume/*.tex
 resume/*.aux
 resume/*.fdb_latexmk
 resume/*.fls

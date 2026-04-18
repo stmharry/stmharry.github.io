@@ -7,7 +7,9 @@ Minimal personal website scaffold built with React, TypeScript, Vite, Tailwind C
 - One-page, modular baseline implemented on `main`
 - Canonical CV data source established at `src/data/cv/content.ts`
 - Theme follows system preference (no manual toggle)
-- Publications section with single-select topic filter over full list
+- Public site shows selected experience plus a curated publication subset
+- Two resume variants are generated from the same canonical dataset: `applied` and `research`
+- Company/role-specific resume overlays are generated as non-public application artifacts
 - SEO baseline in place (meta tags + Open Graph + Twitter + JSON-LD)
 - LaTeX resume pipeline generated from canonical TS data
 - Legacy content and assets should be sourced only from `origin/master` as needed
@@ -68,10 +70,11 @@ bun run lint
 - Page composition: `src/App.tsx`
 - Base styles and tokens: `src/index.css`
 - Canonical CV data and types: `src/data/cv/content.ts`, `src/data/cv/types.ts`
+- Resume target overlays: `src/data/cv/targets.ts`
 - CV selectors: `src/data/cv/selectors.ts`
 - UI components: `src/components/*`
 - Resume generation script: `scripts/generate-resume-tex.ts`
-- Generated resume source: `resume/resume.tex`
+- Generated resume sources: `resume/resume-applied.tex`, `resume/resume-research.tex`
 - Publication media assets: `public/assets/publications/*`
 - Agent memory and workflow: `AGENTS.md`
 
@@ -84,6 +87,12 @@ The app keeps data and rendering separate with one source of truth:
 - Website and resume are both derived from the same canonical data
 - UI components read typed data and avoid embedded hardcoded content
 - Publication records include optional media/action links (slides, poster, video, code, project, dataset)
+- Canonical profile, experience, and publication records can carry typed per-variant overrides
+- Company-targeted resumes are produced by applying a typed target overlay on top of a selected base variant
+- Bridge-sponsor resumes use category overlays before any company-specific rewrite
+- Resume publication curation is driven by per-variant ordering fields
+- Targeted publication curation is driven by overlay-specific publication order fields
+- Website publication curation is driven by `webFeaturedOrder`
 - Publication thumbnails use ratio-aware media frames with `object-contain`
 - Publication citations are stored as numeric `citationCount` values
 - Internal asset links are resolved with `import.meta.env.BASE_URL` for subpath-safe deploys
@@ -107,11 +116,19 @@ This supports stable filtering logic while keeping readable UI labels.
   - experience
   - education
   - publications
-- Single-select topic filter for publications (`All` + one topic)
-- All publications are rendered by default; filter buttons narrow the list
-- Experience section uses summary-only cards, shows highlighted entries first, and uses a See more/See less control that reveals full history at once
+- Single-select topic filter for curated web publications (`All` + one topic)
+- Experience section renders selected/highlighted entries only on the public site
 - Education is rendered as a standalone section between experience and publications
 - Light/dark theme follows system preference automatically
+- Resume pipeline emits two PDFs:
+  - `applied`
+  - `research`
+- Resume pipeline also emits non-public targeted PDFs under `resume/output/targets/*`
+- Bridge-target overlay categories currently include:
+  - `bigtech-ml-infra`
+  - `bigtech-research-engineer`
+  - `healthcare-ai-multimodal`
+  - `robotics-platform-simulation`
 - SEO baseline:
   - title and description
   - Open Graph and Twitter metadata
@@ -123,6 +140,15 @@ Generate LaTeX from canonical CV data:
 
 ```bash
 bun run resume:generate
+```
+
+Generate a specific targeted resume LaTeX source:
+
+```bash
+bun run resume:generate -- --target figure-data-infra
+bun run resume:generate -- --variant research -- --target deepmind-research
+bun run resume:generate -- --target bigtech-ml-infra
+bun run resume:generate -- --target healthcare-ai-multimodal
 ```
 
 Build PDF (requires local `latexmk`):
@@ -140,7 +166,9 @@ bun run resume:clean
 
 Output PDF path:
 
-- `public/assets/resume/tzu-ming-harry-hsu-resume.pdf`
+- `public/assets/resume/tzu-ming-harry-hsu-resume-applied.pdf`
+- `public/assets/resume/tzu-ming-harry-hsu-resume-research.pdf`
+- `resume/output/targets/resume-<target-id>.pdf`
 
 ## Commit message format
 

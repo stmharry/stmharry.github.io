@@ -11,18 +11,42 @@
 - `CNAME` is intentionally not included during scaffold stage
 - Canonical source of truth: latest long-form resume content in `src/data/cv/content.ts`
 - Content architecture: typed data in `src/data/cv/*`, rendering in `src/components/*`
+- Current search target: physical AI / embodied AI roles, US-first, senior IC, with research and research-to-product variants
 - Topics use internal slug + display label (`TopicSlug` + `Topic`)
 - Theme behavior: system default via `prefers-color-scheme` (no manual toggle)
 - Resume pipeline: preserve LaTeX rendering for PDF fidelity, generated from canonical TS data
-- Publication UI behavior: render all publications with topic filter buttons (no subset list)
+- Resume outputs: generate exactly two variants from canonical data, `applied` and `research`
+- Resume targeting: keep the public site stable, and generate company/role-specific resumes only as non-public application artifacts
+- Resume link behavior: website should point to the applied PDF by default; research PDF lives alongside it for targeted applications
+- Variant architecture: keep one canonical dataset and use typed per-variant overrides for profile copy, experience ordering, experience summaries, experience highlights, and resume publication ordering
+- Target overlay architecture: base content -> variant override -> target overlay
+- Target overlay source of truth: `src/data/cv/targets.ts`
+- Target overlay capabilities: profile headline/summary overrides, experience ordering, top-bullet substitutions, publication subset selection, keyword bank, fit thesis
+- Seeded target overlays include Physical Intelligence, Figure, Apptronik, Google DeepMind, NVIDIA, and Intrinsic role families
+- Bridge overlay categories also exist for faster sponsor-path applications:
+  - `bigtech-ml-infra`
+  - `bigtech-research-engineer`
+  - `healthcare-ai-multimodal`
+  - `robotics-platform-simulation`
+- Bridge overlay emphasis:
+  - Google-scale infra
+  - MIT research depth
+  - production ML systems
+  - medical / dental / multimodal deployment
+  - founder work as execution signal, not primary identity
+- Targeted resume output path: keep generated target PDFs out of `public/`; use the resume workspace only
+- Publication UI behavior: render only curated web-featured publications with topic filters over that curated subset
 - Publication media reuse: use `origin/master` assets selectively in `public/assets/publications/*`
 - Publication thumbnail behavior: ratio-aware media frames with `object-contain`
 - Publication citation data: store numeric `citationCount` values (format labels at render time)
 - Publication asset naming: use `<year>--<publication-id>--<type>.<ext>` for internal media
 - Publication URL fields: prefer explicit `paperUrl` and `scholarCitationUrl` over generic `href`
 - Internal asset links in UI: resolve via `import.meta.env.BASE_URL`
-- Experience web behavior: summary-only cards, highlighted entries first, with a See more/See less toggle that reveals full history at once
+- Experience web behavior: render only selected/highlighted experience entries for the applied variant; do not reintroduce a full-history toggle on the public site
 - Education web behavior: render standalone section between experience and publications
+- Hiring-facing tone: recruiter-forward, evidence-led, minimal personal/philosophical language
+- Metrics rule: only keep quantified claims that the user can defend tightly
+- Job-search operating docs live in `/Users/stmharry/Library/CloudStorage/GoogleDrive-harry19930924@gmail.com/My Drive/10-Admin/202603-job-hunt`
 
 ## Working agreement
 
@@ -31,7 +55,7 @@
 - Before each commit, run checks:
   - `bun test`
   - `bun run build`
-  - `bun run resume:generate`
+  - `bun run resume:build`
 - Push after each successful commit
 - When `main` receives new commits (direct commit or post-integration), push `main` to `origin/main` immediately
 - Follow `.gitmessage.txt` gitmoji commit style
@@ -43,7 +67,7 @@
 - Before commit and before integrating, run:
   - `bun test`
   - `bun run build`
-  - `bun run resume:generate`
+  - `bun run resume:build`
 - Integrate feature work into `main` using this fallback order:
   - Fast-forward merge on main worktree (`git merge --ff-only <feature-branch>`)
   - Rebase feature branch onto `origin/main` when fast-forward is not possible

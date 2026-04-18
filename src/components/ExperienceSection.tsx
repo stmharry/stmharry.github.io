@@ -1,5 +1,3 @@
-import { useMemo, useState } from "react";
-
 import { CardSurface } from "./CardSurface";
 import { CardHeader } from "./CardHeader";
 import { LogoBadge } from "./LogoBadge";
@@ -29,17 +27,11 @@ const ExternalLinkIcon = () => (
 );
 
 export const ExperienceSection = ({ items, publicationLinksByExperienceId }: ExperienceSectionProps) => {
-  const [showAll, setShowAll] = useState(false);
-
-  const highlightedItems = useMemo(() => items.filter((item) => item.highlighted), [items]);
-  const hasExpandableItems = highlightedItems.length > 0 && highlightedItems.length < items.length;
-  const visibleItems = showAll || highlightedItems.length === 0 ? items : highlightedItems;
-
   return (
     <section aria-labelledby="experience-heading" className="mt-14 sm:mt-18">
-      <SectionHeading id="experience-heading" title="Experience" />
+      <SectionHeading id="experience-heading" title="Selected Experience" />
       <ul className="mt-5 space-y-3 sm:space-y-4">
-        {visibleItems.map((item) => {
+        {items.map((item) => {
           const header = toExperienceCardHeader(item);
           const relatedPublications = publicationLinksByExperienceId[item.id] ?? [];
           const hasSummary = item.summary.trim().length > 0;
@@ -120,18 +112,6 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
           );
         })}
       </ul>
-
-      {hasExpandableItems ? (
-        <div className="mt-5 flex justify-center">
-          <button
-            type="button"
-            onClick={() => setShowAll((current) => !current)}
-            className="rounded-full border border-(--line) px-4 py-1.5 text-[11px] tracking-[0.12em] text-(--ink-700) uppercase transition hover:border-(--ink-700) hover:text-(--ink-900)"
-          >
-            {showAll ? "See less" : "See more"}
-          </button>
-        </div>
-      ) : null}
     </section>
   );
 };

@@ -3,8 +3,12 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 RESUME_DIR="$ROOT_DIR/resume"
-BUILD_DIR="$RESUME_DIR/build"
+BUILD_ROOT="$RESUME_DIR/build"
 OUTPUT_DIR="$ROOT_DIR/public/assets/resume"
+TARGET_TEX_DIR="$RESUME_DIR/targets"
+TARGET_OUTPUT_DIR="$RESUME_DIR/output/targets"
+
+VARIANTS=("applied" "research")
 
 REQUIRED_STY=(
   "xcolor.sty:xcolor"
@@ -40,10 +44,38 @@ if [ "${#missing_packages[@]}" -gt 0 ]; then
   exit 1
 fi
 
-mkdir -p "$BUILD_DIR"
 mkdir -p "$OUTPUT_DIR"
+mkdir -p "$BUILD_ROOT"
+mkdir -p "$TARGET_OUTPUT_DIR"
 
-latexmk -pdf -interaction=nonstopmode -output-directory="$BUILD_DIR" "$RESUME_DIR/resume.tex"
-cp "$BUILD_DIR/resume.pdf" "$OUTPUT_DIR/tzu-ming-harry-hsu-resume.pdf"
+for variant in "${VARIANTS[@]}"; do
+  build_dir="$BUILD_ROOT/$variant"
+  source_tex="$RESUME_DIR/resume-$variant.tex"
+  output_pdf="$OUTPUT_DIR/tzu-ming-harry-hsu-resume-$variant.pdf"
 
-printf "Generated PDF: %s\n" "$OUTPUT_DIR/tzu-ming-harry-hsu-resume.pdf"
+  mkdir -p "$build_dir"
+  latexmk -pdf -interaction=nonstopmode -output-directory="$build_dir" "$source_tex"
+  cp "$build_dir/resume-$variant.pdf" "$output_pdf"
+
+  printf "Generated PDF: %s\n" "$output_pdf"
+
+  if [ "$variant" = "applied" ]; then
+    cp "$output_pdf" "$OUTPUT_DIR/tzu-ming-harry-hsu-resume.pdf"
+  fi
+done
+
+if [ -d "$TARGET_TEX_DIR" ]; then
+  shopt -s nullglob
+  for source_tex in "$TARGET_TEX_DIR"/*.tex; do
+    target_name="$(basename "$source_tex" .tex)"
+    build_dir="$BUILD_ROOT/$target_name"
+    output_pdf="$TARGET_OUTPUT_DIR/$target_name.pdf"
+
+    mkdir -p "$build_dir"
+    latexmk -pdf -interaction=nonstopmode -output-directory="$build_dir" "$source_tex"
+    cp "$build_dir/$target_name.pdf" "$output_pdf"
+
+    printf "Generated targeted PDF: %s\n" "$output_pdf"
+  done
+  shopt -u nullglob
+fi

@@ -1,9 +1,16 @@
 import { describe, expect, test } from "bun:test";
 
 import { cvContent } from "../src/data/cv/content";
+import { resumeTargetOverlayById } from "../src/data/cv/targets";
 import {
   filterPublicationsByTopic,
+  getExperienceForResume,
+  getExperienceForVariant,
   getExperiencePublicationLinks,
+  getProfileForResume,
+  getProfileForVariant,
+  getResumePublicationsForTarget,
+  getResumePublications,
   getTopicLabelBySlug,
   getWebPublications,
   getUsedTopics,
@@ -11,13 +18,12 @@ import {
 } from "../src/data/cv/selectors";
 
 describe("publication selectors", () => {
-  test("returns publications sorted by descending year", () => {
+  test("returns only curated web publications in featured order", () => {
     const sorted = getWebPublications(cvContent.publications);
 
-    expect(sorted.length).toBe(cvContent.publications.length);
-
+    expect(sorted.length).toBeGreaterThan(0);
     for (let index = 0; index < sorted.length - 1; index += 1) {
-      expect(sorted[index].year).toBeGreaterThanOrEqual(sorted[index + 1].year);
+      expect(sorted[index].webFeaturedOrder).toBeLessThan(sorted[index + 1].webFeaturedOrder);
     }
   });
 
@@ -56,13 +62,95 @@ describe("publication selectors", () => {
   });
 
   test("groups publication links by related experience", () => {
-    const grouped = getExperiencePublicationLinks(cvContent.publications);
+    const grouped = getExperiencePublicationLinks(getWebPublications(cvContent.publications));
 
-    expect(grouped["mit-ra"]?.length ?? 0).toBeGreaterThan(0);
-    const mitLinks = grouped["mit-ra"] ?? [];
+    expect(grouped["google-student-researcher"]?.length ?? 0).toBeGreaterThan(0);
+    const mitLinks = grouped["google-student-researcher"] ?? [];
 
     for (let index = 0; index < mitLinks.length - 1; index += 1) {
       expect(mitLinks[index].year).toBeGreaterThanOrEqual(mitLinks[index + 1].year);
     }
+  });
+});
+
+describe("variant selectors", () => {
+  test("returns variant-specific profile copy", () => {
+    const applied = getProfileForVariant(cvContent.profile, "applied");
+    const research = getProfileForVariant(cvContent.profile, "research");
+
+    expect(applied.headline).not.toBe(research.headline);
+    expect(applied.summaryBullets).not.toEqual(research.summaryBullets);
+  });
+
+  test("returns variant-ordered experience entries", () => {
+    const researchExperience = getExperienceForVariant(cvContent.experience, "research");
+
+    expect(researchExperience[0]?.id).toBe("mit-ra");
+    expect(researchExperience[1]?.id).toBe("google-student-researcher");
+  });
+
+  test("returns curated variant-specific resume publications", () => {
+    const applied = getResumePublications(cvContent.publications, "applied");
+    const research = getResumePublications(cvContent.publications, "research");
+
+    expect(applied.length).toBeGreaterThan(0);
+    expect(research.length).toBeGreaterThan(applied.length - 1);
+    expect(applied.every((publication) => publication.variantOrder?.applied !== undefined)).toBeTrue();
+    expect(research.every((publication) => publication.variantOrder?.research !== undefined)).toBeTrue();
+  });
+
+  test("applies target-specific profile overrides on top of the base variant", () => {
+    const overlay = resumeTargetOverlayById["figure-data-infra"];
+    const profile = getProfileForResume(cvContent.profile, overlay.baseVariant, overlay);
+
+    expect(profile.headline).toContain("data infrastructure");
+    expect(profile.summaryBullets[2]).toContain("10 TB");
+  });
+
+  test("applies target-specific experience ordering and bullet overrides", () => {
+    const overlay = resumeTargetOverlayById["pi-research"];
+    const experience = getExperienceForResume(cvContent.experience, overlay.baseVariant, overlay);
+
+    expect(experience[0]?.id).toBe("google-student-researcher");
+    expect(experience[1]?.id).toBe("mit-ra");
+    expect(experience[0]?.highlights[0]?.text).toContain("1,000+ GPUs");
+  });
+
+  test("returns target-specific publication subsets in overlay order", () => {
+    const overlay = resumeTargetOverlayById["apptronik-perception"];
+    const publications = getResumePublicationsForTarget(cvContent.publications, overlay.baseVariant, overlay);
+
+    expect(publications.map((publication) => publication.id)).toEqual([
+      "3d-aware-2018",
+      "deepopg-2021",
+      "dental-multinational-2025",
+      "intraoral-bmc-2023",
+      "fedvc-2020",
+    ]);
+  });
+
+  test("bridge bigtech infra overlay leads with Google-scale systems and production ML", () => {
+    const overlay = resumeTargetOverlayById["bigtech-ml-infra"];
+    const profile = getProfileForResume(cvContent.profile, overlay.baseVariant, overlay);
+    const experience = getExperienceForResume(cvContent.experience, overlay.baseVariant, overlay);
+
+    expect(profile.summaryBullets[1]).toContain("Google");
+    expect(profile.summaryBullets[2]).toContain("10 TB");
+    expect(experience[0]?.id).toBe("google-student-researcher");
+    expect(experience[1]?.id).toBe("dentscape");
+  });
+
+  test("bridge healthcare overlay selects medical and multimodal publications first", () => {
+    const overlay = resumeTargetOverlayById["healthcare-ai-multimodal"];
+    const publications = getResumePublicationsForTarget(cvContent.publications, overlay.baseVariant, overlay);
+
+    expect(publications.map((publication) => publication.id)).toEqual([
+      "dental-multinational-2025",
+      "intraoral-bmc-2023",
+      "deepopg-2021",
+      "body-composition-2021",
+      "liver-mri-2020",
+      "cxr-baselines-2020",
+    ]);
   });
 });
