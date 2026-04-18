@@ -129,11 +129,11 @@ export const cvContent: CvContent = {
         url: "https://dentscape.ai",
         address: "166 Geary St, STE 1500, #1709, San Francisco, CA 94114",
       },
-      period: "Apr 2025 -- Present",
+      period: "Apr 2025 -- Apr 2026",
       role: "Machine Learning & Software Engineering Consultant",
       location: "San Francisco, CA / Taipei, Taiwan",
       jobDescription:
-        "Conduct research and engineering on AI-assisted dental crown design and ML production systems. In order to accelerate model iteration and delivery quality, I reorganized large-scale dental data, rebuilt labeling and pre-labeling workflows, optimized segmentation and crown-generation pipelines, and standardized deployment architecture and CI/CD practices. Tools used include Python, deep learning frameworks, backend API services, GitHub Actions, containers, and cloud infrastructure.",
+        "Conducted research and engineering on AI-assisted dental crown design and ML production systems. In order to accelerate model iteration and delivery quality, I reorganized large-scale dental data, rebuilt labeling and pre-labeling workflows, optimized segmentation and crown-generation pipelines, and standardized deployment architecture and CI/CD practices. Tools used included Python, deep learning frameworks, backend API services, GitHub Actions, containers, and cloud infrastructure.",
       summary:
         "Led ML platform, data, and deployment upgrades for AI-assisted dental design, cutting data access from ~3 days to minutes, reducing labeling turnaround from ~4 weeks to ~1 week, improving backend throughput by ~110%, and lowering infrastructure cost by ~50%.",
       highlights: [
