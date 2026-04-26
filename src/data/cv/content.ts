@@ -161,8 +161,8 @@ export const cvContent: CvContent = {
       ],
       highlighted: true,
       variantOrder: {
-        applied: 1,
-        research: 3,
+        applied: 2,
+        research: 4,
       },
       variantSummary: {
         research:
@@ -217,8 +217,8 @@ export const cvContent: CvContent = {
       ],
       highlighted: true,
       variantOrder: {
-        applied: 2,
-        research: 4,
+        applied: 1,
+        research: 3,
       },
       variantSummary: {
         research:
