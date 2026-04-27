@@ -141,6 +141,20 @@ describe("variant selectors", () => {
     ]);
   });
 
+  test("sorts target-specific resume experience by recent period after overrides", () => {
+    const overlay = resumeTargetOverlayById["figure-data-infra"];
+    const targetExperience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience, overlay.baseVariant, overlay));
+
+    expect(targetExperience.slice(0, 5).map((item) => item.id)).toEqual([
+      "clarq-ai",
+      "iabit",
+      "dentscape",
+      "codegreen-labs",
+      "hashgreen-labs",
+    ]);
+    expect(targetExperience[0]?.summary).toContain("100+ deployments");
+  });
+
   test("returns target-specific publication subsets in overlay order", () => {
     const overlay = resumeTargetOverlayById["apptronik-perception"];
     const publications = getResumePublicationsForTarget(cvContent.publications, overlay.baseVariant, overlay);

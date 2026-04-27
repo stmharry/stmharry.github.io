@@ -387,7 +387,7 @@ const run = async (): Promise<void> => {
       : undefined;
     const profile = getProfileForResume(cvContent.profile, spec.variant, targetOverlay);
     const variantExperience = getExperienceForResume(cvContent.experience, spec.variant, targetOverlay);
-    const experience = spec.targetId ? variantExperience : sortExperienceByRecentPeriod(variantExperience);
+    const experience = sortExperienceByRecentPeriod(variantExperience);
     const publications = getResumePublicationsForTarget(cvContent.publications, spec.variant, targetOverlay);
     const generatedContent = renderDocumentContent(profile, experience, publications);
     const resumeTex = `${DOCUMENT_PREAMBLE}\n\n${generatedContent}\n\n${DOCUMENT_END}\n`;
