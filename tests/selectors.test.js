@@ -14,6 +14,7 @@ import {
   getTopicLabelBySlug,
   getWebPublications,
   getUsedTopics,
+  sortExperienceByRecentPeriod,
   sortPublicationsByYear,
 } from "../src/data/cv/selectors";
 
@@ -114,6 +115,30 @@ describe("variant selectors", () => {
     expect(experience[0]?.id).toBe("google-student-researcher");
     expect(experience[1]?.id).toBe("mit-ra");
     expect(experience[0]?.highlights[0]?.text).toContain("1,000+ GPUs");
+  });
+
+  test("sorts experience chronologically by end date and start date", () => {
+    const sorted = sortExperienceByRecentPeriod([
+      { ...cvContent.experience[0], id: "same-a", period: "Jan 2020 -- Dec 2020" },
+      { ...cvContent.experience[0], id: "year-only", period: "2021 -- Present" },
+      { ...cvContent.experience[0], id: "month-year", period: "Apr 2025 -- Apr 2026" },
+      { ...cvContent.experience[0], id: "present-recent", period: "Dec 2024 -- Present" },
+      { ...cvContent.experience[0], id: "same-b", period: "Jan 2020 -- Dec 2020" },
+    ]);
+
+    expect(sorted.map((item) => item.id)).toEqual(["present-recent", "year-only", "month-year", "same-a", "same-b"]);
+  });
+
+  test("sorts default resume experience by recent period", () => {
+    const appliedExperience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience, "applied"));
+
+    expect(appliedExperience.slice(0, 5).map((item) => item.id)).toEqual([
+      "clarq-ai",
+      "iabit",
+      "dentscape",
+      "codegreen-labs",
+      "hashgreen-labs",
+    ]);
   });
 
   test("returns target-specific publication subsets in overlay order", () => {

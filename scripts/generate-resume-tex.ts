@@ -4,7 +4,12 @@ import { fileURLToPath } from "node:url";
 
 import { cvContent } from "../src/data/cv/content";
 import { resumeTargetOverlays } from "../src/data/cv/targets";
-import { getExperienceForResume, getProfileForResume, getResumePublicationsForTarget } from "../src/data/cv/selectors";
+import {
+  getExperienceForResume,
+  getProfileForResume,
+  getResumePublicationsForTarget,
+  sortExperienceByRecentPeriod,
+} from "../src/data/cv/selectors";
 import { escapeLatex, highlightSelfInAuthors } from "../src/resume/latex";
 import type {
   AwardItem,
@@ -381,7 +386,8 @@ const run = async (): Promise<void> => {
       ? resumeTargetOverlays.find((overlay) => overlay.id === spec.targetId)
       : undefined;
     const profile = getProfileForResume(cvContent.profile, spec.variant, targetOverlay);
-    const experience = getExperienceForResume(cvContent.experience, spec.variant, targetOverlay);
+    const variantExperience = getExperienceForResume(cvContent.experience, spec.variant, targetOverlay);
+    const experience = spec.targetId ? variantExperience : sortExperienceByRecentPeriod(variantExperience);
     const publications = getResumePublicationsForTarget(cvContent.publications, spec.variant, targetOverlay);
     const generatedContent = renderDocumentContent(profile, experience, publications);
     const resumeTex = `${DOCUMENT_PREAMBLE}\n\n${generatedContent}\n\n${DOCUMENT_END}\n`;

@@ -18,6 +18,58 @@ const getVariantOverride = <T>(baseValue: T, overrides: Partial<Record<ResumeVar
   return overrides?.[variant] ?? baseValue;
 };
 
+const MONTH_SCORE: Record<string, number> = {
+  jan: 1,
+  feb: 2,
+  mar: 3,
+  apr: 4,
+  may: 5,
+  jun: 6,
+  jul: 7,
+  aug: 8,
+  sep: 9,
+  oct: 10,
+  nov: 11,
+  dec: 12,
+};
+
+const parsePeriodDate = (dateLabel: string, boundary: "start" | "end"): number => {
+  const normalized = dateLabel.trim().toLowerCase();
+
+  if (normalized === "present") {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const monthYearMatch = normalized.match(/^([a-z]{3})\s+(\d{4})$/);
+
+  if (monthYearMatch) {
+    const [, monthLabel, yearLabel] = monthYearMatch;
+    const month = MONTH_SCORE[monthLabel];
+
+    if (month !== undefined) {
+      return Number(yearLabel) * 12 + month;
+    }
+  }
+
+  const yearMatch = normalized.match(/^(\d{4})$/);
+
+  if (yearMatch) {
+    const month = boundary === "start" ? 1 : 12;
+    return Number(yearMatch[1]) * 12 + month;
+  }
+
+  return Number.NEGATIVE_INFINITY;
+};
+
+const parseExperiencePeriod = (period: string): { start: number; end: number } => {
+  const [start = "", end = start] = period.split(/\s+(?:--|–)\s+/);
+
+  return {
+    start: parsePeriodDate(start, "start"),
+    end: parsePeriodDate(end, "end"),
+  };
+};
+
 export const getProfileForVariant = (profile: Profile, variant: ResumeVariantId): Profile => {
   const variantOverrides = profile.variantOverrides?.[variant];
 
@@ -80,6 +132,27 @@ export const getExperienceForResume = (
     })
     .sort((left, right) => left.resolvedOrder - right.resolvedOrder)
     .map(({ resolvedOrder: _resolvedOrder, ...item }) => item);
+};
+
+export const sortExperienceByRecentPeriod = (items: ExperienceItem[]): ExperienceItem[] => {
+  return items
+    .map((item, index) => ({
+      item,
+      index,
+      period: parseExperiencePeriod(item.period),
+    }))
+    .sort((left, right) => {
+      if (left.period.end !== right.period.end) {
+        return right.period.end - left.period.end;
+      }
+
+      if (left.period.start !== right.period.start) {
+        return right.period.start - left.period.start;
+      }
+
+      return left.index - right.index;
+    })
+    .map(({ item }) => item);
 };
 
 export const sortPublicationsByYear = (publications: PublicationItem[]): PublicationItem[] => {
