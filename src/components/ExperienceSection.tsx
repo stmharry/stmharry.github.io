@@ -6,7 +6,7 @@ import { LogoBadge } from "./LogoBadge";
 import { MobileCardDisclosure } from "./MobileCardDisclosure";
 import { SectionHeading } from "./SectionHeading";
 import { toExperienceCardHeader } from "./cardSemantics";
-import type { ExperiencePublicationLink } from "../data/cv/selectors";
+import { sortExperienceByRecentPeriod, type ExperiencePublicationLink } from "../data/cv/selectors";
 import type { ExperienceItem } from "../data/cv/types";
 import { resolveLink } from "../lib/url";
 
@@ -32,8 +32,9 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
   const [showAll, setShowAll] = useState(false);
 
   const highlightedItems = useMemo(() => items.filter((item) => item.highlighted), [items]);
+  const chronologicalItems = useMemo(() => sortExperienceByRecentPeriod(items), [items]);
   const hasExpandableItems = highlightedItems.length > 0 && highlightedItems.length < items.length;
-  const visibleItems = showAll || highlightedItems.length === 0 ? items : highlightedItems;
+  const visibleItems = showAll || highlightedItems.length === 0 ? chronologicalItems : highlightedItems;
 
   return (
     <section aria-labelledby="experience-heading" className="mt-14 sm:mt-18">

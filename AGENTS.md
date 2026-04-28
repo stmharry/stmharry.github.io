@@ -42,7 +42,7 @@
 - Publication asset naming: use `<year>--<publication-id>--<type>.<ext>` for internal media
 - Publication URL fields: prefer explicit `paperUrl` and `scholarCitationUrl` over generic `href`
 - Internal asset links in UI: resolve via `import.meta.env.BASE_URL`
-- Experience web behavior: show highlighted entries first for the applied variant, with a See more/See less control that reveals the full applied-variant history
+- Experience web behavior: show highlighted entries first for the applied variant, with a See more/See less control that reveals the full applied-variant history in reverse chronological order
 - Education web behavior: render standalone section between experience and publications
 - Hiring-facing tone: recruiter-forward, evidence-led, minimal personal/philosophical language
 - Metrics rule: only keep quantified claims that the user can defend tightly
