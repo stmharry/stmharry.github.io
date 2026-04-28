@@ -7,7 +7,7 @@ Minimal personal website scaffold built with React, TypeScript, Vite, Tailwind C
 - One-page, modular baseline implemented on `main`
 - Canonical CV data source established at `src/data/cv/content.ts`
 - Theme follows system preference (no manual toggle)
-- Public site shows selected experience plus a curated publication subset
+- Public site shows highlighted experience with an expandable full-history view plus a curated publication subset
 - Two resume variants are generated from the same canonical dataset: `applied` and `research`
 - Company/role-specific resume overlays are generated as non-public application artifacts
 - SEO baseline in place (meta tags + Open Graph + Twitter + JSON-LD)
@@ -117,7 +117,7 @@ This supports stable filtering logic while keeping readable UI labels.
   - education
   - publications
 - Single-select topic filter for curated web publications (`All` + one topic)
-- Experience section renders selected/highlighted entries only on the public site
+- Experience section shows highlighted entries first and uses a See more/See less control to reveal the full applied-variant history
 - Education is rendered as a standalone section between experience and publications
 - Light/dark theme follows system preference automatically
 - Resume pipeline emits two PDFs:

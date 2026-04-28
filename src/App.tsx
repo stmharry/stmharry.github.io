@@ -24,7 +24,7 @@ function App() {
   const siteVariant = "applied" as const;
   const profile = getProfileForVariant(cvContent.profile, siteVariant);
   const webPublications = getWebPublications(cvContent.publications);
-  const webExperience = getExperienceForVariant(cvContent.experience, siteVariant).filter((item) => item.highlighted);
+  const webExperience = getExperienceForVariant(cvContent.experience, siteVariant);
   const experiencePublicationLinks = getExperiencePublicationLinks(webPublications);
   const [stickyNameOpacity, setStickyNameOpacity] = useState(0);
   const [systemTheme, setSystemTheme] = useState<Exclude<ThemePreference, "system">>(() => {

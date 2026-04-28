@@ -1,3 +1,5 @@
+import { useMemo, useState } from "react";
+
 import { CardSurface } from "./CardSurface";
 import { CardHeader } from "./CardHeader";
 import { LogoBadge } from "./LogoBadge";
@@ -27,11 +29,17 @@ const ExternalLinkIcon = () => (
 );
 
 export const ExperienceSection = ({ items, publicationLinksByExperienceId }: ExperienceSectionProps) => {
+  const [showAll, setShowAll] = useState(false);
+
+  const highlightedItems = useMemo(() => items.filter((item) => item.highlighted), [items]);
+  const hasExpandableItems = highlightedItems.length > 0 && highlightedItems.length < items.length;
+  const visibleItems = showAll || highlightedItems.length === 0 ? items : highlightedItems;
+
   return (
     <section aria-labelledby="experience-heading" className="mt-14 sm:mt-18">
-      <SectionHeading id="experience-heading" title="Selected Experience" />
+      <SectionHeading id="experience-heading" title="Experience" />
       <ul className="mt-5 space-y-3 sm:space-y-4">
-        {items.map((item) => {
+        {visibleItems.map((item) => {
           const header = toExperienceCardHeader(item);
           const relatedPublications = publicationLinksByExperienceId[item.id] ?? [];
           const hasSummary = item.summary.trim().length > 0;
@@ -67,51 +75,63 @@ export const ExperienceSection = ({ items, publicationLinksByExperienceId }: Exp
           return (
             <li key={item.id}>
               <CardSurface>
-              {hasBodyContent ? (
-                <MobileCardDisclosure id={`experience-${item.id}`} trigger={headerContent}>
-                  <div className="border-l border-(--rail) pl-3.5">
-                    {hasSummary ? <p className="text-sm leading-relaxed text-(--ink-700)">{item.summary}</p> : null}
+                {hasBodyContent ? (
+                  <MobileCardDisclosure id={`experience-${item.id}`} trigger={headerContent}>
+                    <div className="border-l border-(--rail) pl-3.5">
+                      {hasSummary ? <p className="text-sm leading-relaxed text-(--ink-700)">{item.summary}</p> : null}
 
-                    {organizationLink ? (
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        <a
-                          href={organizationLink.href}
-                          target={organizationLink.target}
-                          rel={organizationLink.rel}
-                          className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
-                        >
-                          <ExternalLinkIcon />
-                          Website
-                        </a>
-                      </div>
-                    ) : null}
-
-                    {relatedPublications.length > 0 ? (
-                      <div className="mt-3 space-y-1.5">
-                        <p className="text-[11px] font-semibold tracking-[0.1em] text-(--ink-700) uppercase">Related Publications</p>
-                        <div className="flex flex-wrap gap-2">
-                          {relatedPublications.map((publication) => (
-                            <a
-                              key={publication.id}
-                              href={`#publication-${publication.id}`}
-                              className="inline-flex items-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_6%)] px-2.5 py-1 text-[11px] text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
-                            >
-                              {publication.title} ({publication.year})
-                            </a>
-                          ))}
+                      {organizationLink ? (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <a
+                            href={organizationLink.href}
+                            target={organizationLink.target}
+                            rel={organizationLink.rel}
+                            className="inline-flex items-center gap-1.5 rounded-md border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_8%)] px-2.5 py-1.5 text-[11px] font-medium text-(--ink-900) hover:border-(--ink-700)"
+                          >
+                            <ExternalLinkIcon />
+                            Website
+                          </a>
                         </div>
-                      </div>
-                    ) : null}
-                  </div>
-                </MobileCardDisclosure>
-              ) : (
-                headerContent
-              )}
+                      ) : null}
+
+                      {relatedPublications.length > 0 ? (
+                        <div className="mt-3 space-y-1.5">
+                          <p className="text-[11px] font-semibold tracking-[0.1em] text-(--ink-700) uppercase">Related Publications</p>
+                          <div className="flex flex-wrap gap-2">
+                            {relatedPublications.map((publication) => (
+                              <a
+                                key={publication.id}
+                                href={`#publication-${publication.id}`}
+                                className="inline-flex items-center rounded-full border border-(--line) bg-[color:color-mix(in_oklab,var(--paper),var(--ink-900)_6%)] px-2.5 py-1 text-[11px] text-(--ink-700) hover:border-(--ink-700) hover:text-(--ink-900)"
+                              >
+                                {publication.title} ({publication.year})
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
+                    </div>
+                  </MobileCardDisclosure>
+                ) : (
+                  headerContent
+                )}
               </CardSurface>
             </li>
           );
         })}
       </ul>
+
+      {hasExpandableItems ? (
+        <div className="mt-5 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setShowAll((current) => !current)}
+            className="rounded-full border border-(--line) px-4 py-1.5 text-[11px] tracking-[0.12em] text-(--ink-700) uppercase transition hover:border-(--ink-700) hover:text-(--ink-900)"
+          >
+            {showAll ? "See less" : "See more"}
+          </button>
+        </div>
+      ) : null}
     </section>
   );
 };
