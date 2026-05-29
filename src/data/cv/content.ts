@@ -415,7 +415,8 @@ export const cvContent: CvContent = {
         description: "Mobile Vision",
       },
       period: "Jun 2019 -- Mar 2020",
-      role: "Student Researcher",
+      // Transitional O-1A public alignment; restore to "Student Researcher" after filing if no longer needed.
+      role: "Researcher",
       location: "Seattle, WA / Cambridge, MA",
       jobDescription:
         "Conduct research in federated learning and large-scale mobile vision model training. In order to improve learning performance under real-world non-IID data conditions, I developed scalable experimentation infrastructure, designed and ran large compute studies, and published methods with open-source assets for community adoption. Tools used include distributed training infrastructure, GPU clusters, and research code/data release pipelines.",
