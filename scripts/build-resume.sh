@@ -6,8 +6,6 @@ RESUME_DIR="$ROOT_DIR/resume"
 BUILD_ROOT="$RESUME_DIR/build"
 OUTPUT_DIR="$ROOT_DIR/public/assets/resume"
 PRIVATE_OUTPUT_DIR="$RESUME_DIR/output/variants"
-TARGET_TEX_DIR="$RESUME_DIR/targets"
-TARGET_OUTPUT_DIR="$RESUME_DIR/output/targets"
 
 VARIANTS=()
 PUBLIC_VARIANTS=()
@@ -70,7 +68,6 @@ fi
 mkdir -p "$OUTPUT_DIR"
 mkdir -p "$BUILD_ROOT"
 mkdir -p "$PRIVATE_OUTPUT_DIR"
-mkdir -p "$TARGET_OUTPUT_DIR"
 
 for variant in "${VARIANTS[@]}"; do
   build_dir="$BUILD_ROOT/$variant"
@@ -91,21 +88,5 @@ for variant in "${VARIANTS[@]}"; do
     private_output_pdf="$PRIVATE_OUTPUT_DIR/tzu-ming-harry-hsu-resume-$variant.pdf"
     cp "$build_dir/resume-$variant.pdf" "$private_output_pdf"
     printf "Generated private PDF: %s\n" "$private_output_pdf"
-  fi
-done
-
-if [ -d "$TARGET_TEX_DIR" ]; then
-  shopt -s nullglob
-  for source_tex in "$TARGET_TEX_DIR"/*.tex; do
-    target_name="$(basename "$source_tex" .tex)"
-    build_dir="$BUILD_ROOT/$target_name"
-    output_pdf="$TARGET_OUTPUT_DIR/$target_name.pdf"
-
-    mkdir -p "$build_dir"
-    latexmk -pdf -interaction=nonstopmode -output-directory="$build_dir" "$source_tex"
-    cp "$build_dir/$target_name.pdf" "$output_pdf"
-
-    printf "Generated targeted PDF: %s\n" "$output_pdf"
-  done
-  shopt -u nullglob
 fi
+done

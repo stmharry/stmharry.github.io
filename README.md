@@ -4,8 +4,7 @@ Minimal personal website and resume pipeline for Tzu-Ming Harry Hsu.
 
 The site is a one-page React app focused on essentials: hero, links, experience,
 education, and curated publications. The resume pipeline generates public
-applied/research PDFs plus non-public targeted application artifacts from the
-same typed CV data.
+applied/research PDFs from the same typed CV data.
 
 ## Stack
 
@@ -51,14 +50,12 @@ bun run lint
 
 - Canonical CV content lives in `src/data/cv/content.ts`.
 - Typed CV contracts live in `src/data/cv/types.ts`.
-- Variant and target selection logic lives in `src/data/cv/selectors.ts`.
-- Company and role overlays live in `src/data/cv/targets.ts`.
+- Resume variants live in `src/data/cv/variants.ts`.
+- Variant selection logic lives in `src/data/cv/selectors.ts`.
 - UI rendering lives in `src/components/*`.
 
 The public site uses the `applied` variant. It links to the applied PDF by
-default, while the research PDF remains available for targeted applications.
-Company-specific resumes are generated into the resume workspace and are not
-published under `public/`.
+default, while the research PDF remains available alongside it.
 
 ## Resume Pipeline
 
@@ -74,20 +71,10 @@ Build PDFs:
 bun run resume:build
 ```
 
-Build one targeted LaTeX source:
-
-```bash
-bun run resume:generate -- --target figure-data-infra
-```
-
 Public PDFs:
 
 - `public/assets/resume/tzu-ming-harry-hsu-resume-applied.pdf`
 - `public/assets/resume/tzu-ming-harry-hsu-resume-research.pdf`
-
-Targeted PDFs:
-
-- `resume/output/targets/resume-<target-id>.pdf`
 
 ## Deployment
 

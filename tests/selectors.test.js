@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
 import { cvContent } from "../src/data/cv/content";
-import { resumeTargetOverlayById, resumeTargetOverlays } from "../src/data/cv/targets";
 import { resumeVariantIds } from "../src/data/cv/variants";
 import {
   filterPublicationsByTopic,
@@ -10,7 +9,6 @@ import {
   getExperiencePublicationLinks,
   getProfileForResume,
   getProfileForVariant,
-  getResumePublicationsForTarget,
   getResumePublications,
   getTopicLabelBySlug,
   getWebPublications,
@@ -106,27 +104,11 @@ describe("variant selectors", () => {
     expect(research.every((publication) => publication.variantOrder?.research !== undefined)).toBeTrue();
   });
 
-  test("target overlays reference canonical base variants", () => {
-    const validVariantIds = new Set(resumeVariantIds);
+  test("returns resume profile copy for a variant", () => {
+    const profile = getProfileForResume(cvContent.profile, "research");
 
-    expect(resumeTargetOverlays.every((overlay) => validVariantIds.has(overlay.baseVariant))).toBeTrue();
-  });
-
-  test("applies target-specific profile overrides on top of the base variant", () => {
-    const overlay = resumeTargetOverlayById["figure-data-infra"];
-    const profile = getProfileForResume(cvContent.profile, overlay.baseVariant, overlay);
-
-    expect(profile.headline).toContain("data infrastructure");
-    expect(profile.summaryBullets[2]).toContain("10 TB");
-  });
-
-  test("applies target-specific experience ordering and bullet overrides", () => {
-    const overlay = resumeTargetOverlayById["pi-research"];
-    const experience = getExperienceForResume(cvContent.experience, overlay.baseVariant, overlay);
-
-    expect(experience[0]?.id).toBe("google-student-researcher");
-    expect(experience[1]?.id).toBe("mit-ra");
-    expect(experience[0]?.highlights[0]?.text).toContain("1,000+ GPUs");
+    expect(profile.headline).toContain("Research scientist");
+    expect(profile.summaryBullets[0]).toContain("20+ publications");
   });
 
   test("sorts experience chronologically by end date and start date", () => {
@@ -150,58 +132,6 @@ describe("variant selectors", () => {
       "dentscape",
       "codegreen-labs",
       "hashgreen-labs",
-    ]);
-  });
-
-  test("sorts target-specific resume experience by recent period after overrides", () => {
-    const overlay = resumeTargetOverlayById["figure-data-infra"];
-    const targetExperience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience, overlay.baseVariant, overlay));
-
-    expect(targetExperience.slice(0, 5).map((item) => item.id)).toEqual([
-      "clarq-ai",
-      "iabit",
-      "dentscape",
-      "codegreen-labs",
-      "hashgreen-labs",
-    ]);
-    expect(targetExperience[0]?.summary).toContain("100+ deployments");
-  });
-
-  test("returns target-specific publication subsets in overlay order", () => {
-    const overlay = resumeTargetOverlayById["apptronik-perception"];
-    const publications = getResumePublicationsForTarget(cvContent.publications, overlay.baseVariant, overlay);
-
-    expect(publications.map((publication) => publication.id)).toEqual([
-      "3d-aware-2018",
-      "deepopg-2021",
-      "dental-multinational-2025",
-      "intraoral-bmc-2023",
-      "fedvc-2020",
-    ]);
-  });
-
-  test("bridge bigtech infra overlay leads with Google-scale systems and production ML", () => {
-    const overlay = resumeTargetOverlayById["bigtech-ml-infra"];
-    const profile = getProfileForResume(cvContent.profile, overlay.baseVariant, overlay);
-    const experience = getExperienceForResume(cvContent.experience, overlay.baseVariant, overlay);
-
-    expect(profile.summaryBullets[1]).toContain("Google");
-    expect(profile.summaryBullets[2]).toContain("10 TB");
-    expect(experience[0]?.id).toBe("google-student-researcher");
-    expect(experience[1]?.id).toBe("dentscape");
-  });
-
-  test("bridge healthcare overlay selects medical and multimodal publications first", () => {
-    const overlay = resumeTargetOverlayById["healthcare-ai-multimodal"];
-    const publications = getResumePublicationsForTarget(cvContent.publications, overlay.baseVariant, overlay);
-
-    expect(publications.map((publication) => publication.id)).toEqual([
-      "dental-multinational-2025",
-      "intraoral-bmc-2023",
-      "deepopg-2021",
-      "body-composition-2021",
-      "liver-mri-2020",
-      "cxr-baselines-2020",
     ]);
   });
 });

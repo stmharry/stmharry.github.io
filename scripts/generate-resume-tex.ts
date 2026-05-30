@@ -3,12 +3,11 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { cvContent } from "../src/data/cv/content";
-import { resumeTargetOverlays } from "../src/data/cv/targets";
 import { isResumeVariantId, resumeVariantIds, resumeVariants } from "../src/data/cv/variants";
 import {
   getExperienceForResume,
   getProfileForResume,
-  getResumePublicationsForTarget,
+  getResumePublications,
   sortExperienceByRecentPeriod,
 } from "../src/data/cv/selectors";
 import { escapeLatex, highlightSelfInAuthors } from "../src/resume/latex";
@@ -20,12 +19,10 @@ import type {
   LeadershipItem,
   PublicationItem,
   Profile,
-  ResumeTargetId,
   ResumeVariantId,
 } from "../src/data/cv/types";
 
 const projectRoot = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
-const targetedResumeDir = resolve(projectRoot, "resume/targets");
 
 const DOCUMENT_PREAMBLE = String.raw`\documentclass[11pt]{article}
 \usepackage[a4paper, margin=0.75in]{geometry}
@@ -140,28 +137,30 @@ const EXPERIENCE_WIDTHS = {
 
 type GeneratedResumeSpec = {
   variant: ResumeVariantId;
-  targetId?: ResumeTargetId;
   label: string;
   outputPath: string;
 };
 
 const parseArgs = (argv: string[]) => {
-  const args = { variant: undefined as ResumeVariantId | undefined, target: undefined as ResumeTargetId | undefined };
+  const args = { variant: undefined as ResumeVariantId | undefined };
 
   for (let index = 0; index < argv.length; index += 1) {
     const current = argv[index];
     const next = argv[index + 1];
 
-    if (current === "--variant" && next) {
+    if (current === "--variant") {
+      if (!next) {
+        throw new Error(`Missing value for ${current}. Expected one of: ${resumeVariantIds.join(", ")}`);
+      }
+
       if (!isResumeVariantId(next)) {
         throw new Error(`Unknown resume variant: ${next}. Expected one of: ${resumeVariantIds.join(", ")}`);
       }
 
       args.variant = next;
       index += 1;
-    } else if (current === "--target" && next) {
-      args.target = next as ResumeTargetId;
-      index += 1;
+    } else if (current.startsWith("--")) {
+      throw new Error(`Unknown resume generator option: ${current}`);
     }
   }
 
@@ -172,25 +171,7 @@ const getBaseGeneratedResumePath = (variant: ResumeVariantId): string => {
   return resolve(projectRoot, `resume/resume-${variant}.tex`);
 };
 
-const buildGeneratedResumeSpecs = (variant?: ResumeVariantId, targetId?: ResumeTargetId): GeneratedResumeSpec[] => {
-  if (targetId) {
-    const targetOverlay = resumeTargetOverlays.find((overlay) => overlay.id === targetId);
-
-    if (!targetOverlay) {
-      throw new Error(`Unknown resume target: ${targetId}`);
-    }
-
-    const selectedVariant = variant ?? targetOverlay.baseVariant;
-    return [
-      {
-        variant: selectedVariant,
-        targetId,
-        label: `${selectedVariant}:${targetId}`,
-        outputPath: resolve(targetedResumeDir, `resume-${targetId}.tex`),
-      },
-    ];
-  }
-
+const buildGeneratedResumeSpecs = (variant?: ResumeVariantId): GeneratedResumeSpec[] => {
   if (variant) {
     return [
       {
@@ -206,12 +187,6 @@ const buildGeneratedResumeSpecs = (variant?: ResumeVariantId, targetId?: ResumeT
       variant: currentVariant.id,
       label: currentVariant.id,
       outputPath: getBaseGeneratedResumePath(currentVariant.id),
-    })),
-    ...resumeTargetOverlays.map((overlay) => ({
-      variant: overlay.baseVariant,
-      targetId: overlay.id,
-      label: `${overlay.baseVariant}:${overlay.id}`,
-      outputPath: resolve(targetedResumeDir, `resume-${overlay.id}.tex`),
     })),
   ];
 };
@@ -378,20 +353,16 @@ const renderDocumentContent = (
 };
 
 const run = async (): Promise<void> => {
-  const { variant, target } = parseArgs(process.argv.slice(2));
-  const generatedResumeSpecs = buildGeneratedResumeSpecs(variant, target);
+  const { variant } = parseArgs(process.argv.slice(2));
+  const generatedResumeSpecs = buildGeneratedResumeSpecs(variant);
 
   await mkdir(resolve(projectRoot, "resume"), { recursive: true });
-  await mkdir(targetedResumeDir, { recursive: true });
 
   for (const spec of generatedResumeSpecs) {
-    const targetOverlay = spec.targetId
-      ? resumeTargetOverlays.find((overlay) => overlay.id === spec.targetId)
-      : undefined;
-    const profile = getProfileForResume(cvContent.profile, spec.variant, targetOverlay);
-    const variantExperience = getExperienceForResume(cvContent.experience, spec.variant, targetOverlay);
+    const profile = getProfileForResume(cvContent.profile, spec.variant);
+    const variantExperience = getExperienceForResume(cvContent.experience, spec.variant);
     const experience = sortExperienceByRecentPeriod(variantExperience);
-    const publications = getResumePublicationsForTarget(cvContent.publications, spec.variant, targetOverlay);
+    const publications = getResumePublications(cvContent.publications, spec.variant);
     const generatedContent = renderDocumentContent(profile, experience, publications);
     const resumeTex = `${DOCUMENT_PREAMBLE}\n\n${generatedContent}\n\n${DOCUMENT_END}\n`;
 

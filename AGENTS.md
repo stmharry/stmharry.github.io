@@ -14,13 +14,12 @@
 
 - Canonical CV content: `src/data/cv/content.ts`
 - CV types and topic slugs: `src/data/cv/types.ts`
-- Variant and target selectors: `src/data/cv/selectors.ts`
-- Target overlays: `src/data/cv/targets.ts`
+- Resume variants: `src/data/cv/variants.ts`
+- Variant selectors: `src/data/cv/selectors.ts`
 - UI rendering: `src/components/*`
 
-Keep one canonical dataset. Public website content, applied/research resumes,
-and company-specific targeted resumes should all derive from typed data and
-overrides rather than duplicated prose.
+Keep one canonical dataset. Public website content and applied/research resumes
+should derive from typed data and variant overrides rather than duplicated prose.
 
 ## Documentation Contract
 
@@ -37,9 +36,8 @@ overrides rather than duplicated prose.
 - Current search target: physical AI / embodied AI roles, US-first, senior IC.
 - Keep public site copy recruiter-forward, evidence-led, and low on personal or philosophical framing.
 - The website uses the `applied` variant and links to the applied PDF by default.
-- The research PDF lives alongside the applied PDF for targeted applications.
-- Targeted company/role resumes are non-public application artifacts under the resume workspace.
-- Resume overlays apply in this order: base content, variant override, target overlay.
+- The research PDF lives alongside the applied PDF.
+- Resume copy applies in this order: base content, variant override.
 - Publication UI renders only curated web-featured publications and filters that curated subset.
 - Internal asset links in UI must resolve through `import.meta.env.BASE_URL`.
 - Theme follows system preference by default and includes the current manual light/dark override.
@@ -79,7 +77,6 @@ bun run resume:build
 
 - Preserve LaTeX rendering for PDF fidelity.
 - Generate exactly two public resume variants from canonical data: `applied` and `research`.
-- Keep generated target PDFs out of `public/`; use `resume/output/targets/`.
 - Website resume links should point to `public/assets/resume/tzu-ming-harry-hsu-resume-applied.pdf`.
 - Publication media can reuse selected `origin/master` assets under `public/assets/publications/*`.
 - Publication asset filenames should follow `<year>--<publication-id>--<type>.<ext>`.

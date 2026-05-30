@@ -2,7 +2,6 @@ import type {
   ExperienceItem,
   Profile,
   PublicationItem,
-  ResumeTargetOverlay,
   ResumeVariantId,
   Topic,
   TopicSlug,
@@ -83,21 +82,8 @@ export const getProfileForVariant = (profile: Profile, variant: ResumeVariantId)
   };
 };
 
-export const getProfileForResume = (
-  profile: Profile,
-  variant: ResumeVariantId,
-  targetOverlay?: ResumeTargetOverlay,
-): Profile => {
-  const variantProfile = getProfileForVariant(profile, variant);
-
-  if (!targetOverlay?.profile) {
-    return variantProfile;
-  }
-
-  return {
-    ...variantProfile,
-    ...targetOverlay.profile,
-  };
+export const getProfileForResume = (profile: Profile, variant: ResumeVariantId): Profile => {
+  return getProfileForVariant(profile, variant);
 };
 
 export const getExperienceForVariant = (items: ExperienceItem[], variant: ResumeVariantId): ExperienceItem[] => {
@@ -114,28 +100,8 @@ export const getExperienceForVariant = (items: ExperienceItem[], variant: Resume
     .map(({ item }) => item);
 };
 
-export const getExperienceForResume = (
-  items: ExperienceItem[],
-  variant: ResumeVariantId,
-  targetOverlay?: ResumeTargetOverlay,
-): ExperienceItem[] => {
-  const variantExperience = getExperienceForVariant(items, variant);
-
-  return variantExperience
-    .map((item, index) => {
-      const targetOverride = targetOverlay?.experience?.[item.id];
-
-      return {
-        item: {
-          ...item,
-          summary: targetOverride?.summary ?? item.summary,
-          highlights: targetOverride?.highlights ?? item.highlights,
-        },
-        resolvedOrder: targetOverride?.order ?? 10_000 + index,
-      };
-    })
-    .sort((left, right) => left.resolvedOrder - right.resolvedOrder)
-    .map(({ item }) => item);
+export const getExperienceForResume = (items: ExperienceItem[], variant: ResumeVariantId): ExperienceItem[] => {
+  return getExperienceForVariant(items, variant);
 };
 
 export const sortExperienceByRecentPeriod = (items: ExperienceItem[]): ExperienceItem[] => {
@@ -188,24 +154,6 @@ export const getResumePublications = (
     .sort((left, right) => {
       const leftOrder = left.variantOrder?.[variant] ?? Number.MAX_SAFE_INTEGER;
       const rightOrder = right.variantOrder?.[variant] ?? Number.MAX_SAFE_INTEGER;
-      return leftOrder - rightOrder;
-    });
-};
-
-export const getResumePublicationsForTarget = (
-  publications: PublicationItem[],
-  variant: ResumeVariantId,
-  targetOverlay?: ResumeTargetOverlay,
-): PublicationItem[] => {
-  if (!targetOverlay?.publications) {
-    return getResumePublications(publications, variant);
-  }
-
-  return publications
-    .filter((publication) => targetOverlay.publications?.[publication.id] !== undefined)
-    .sort((left, right) => {
-      const leftOrder = targetOverlay.publications?.[left.id]?.order ?? Number.MAX_SAFE_INTEGER;
-      const rightOrder = targetOverlay.publications?.[right.id]?.order ?? Number.MAX_SAFE_INTEGER;
       return leftOrder - rightOrder;
     });
 };

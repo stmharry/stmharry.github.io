@@ -10,24 +10,6 @@ export type TopicSlug =
   | "wireless-sensing"
   | "blockchain";
 
-export type ResumeTargetId =
-  | "bigtech-ml-infra"
-  | "bigtech-research-engineer"
-  | "healthcare-ai-multimodal"
-  | "robotics-platform-simulation"
-  | "pi-research"
-  | "pi-infra"
-  | "pi-robotics-software"
-  | "figure-robot-learning"
-  | "figure-data-infra"
-  | "figure-training-infra"
-  | "apptronik-rl"
-  | "apptronik-perception"
-  | "apptronik-systems"
-  | "deepmind-research"
-  | "nvidia-simulation"
-  | "intrinsic-platform";
-
 export type VariantOverrides<T> = Partial<Record<ResumeVariantId, T>>;
 
 export type Topic = {
@@ -71,12 +53,6 @@ export type Profile = {
   variantOverrides?: VariantOverrides<ProfileVariantOverride>;
 };
 
-export type ProfileTargetOverride = {
-  tagline?: string;
-  headline?: string;
-  summaryBullets?: string[];
-};
-
 export type EducationItem = {
   id: string;
   institution: string;
@@ -107,12 +83,6 @@ export type ExperienceItem = {
   variantOrder?: VariantOverrides<number>;
   variantSummary?: VariantOverrides<string>;
   variantHighlights?: VariantOverrides<DetailItem[]>;
-};
-
-export type ExperienceTargetOverride = {
-  order?: number;
-  summary?: string;
-  highlights?: DetailItem[];
 };
 
 export type LeadershipItem = {
@@ -158,22 +128,6 @@ export type PublicationItem = {
   order: number;
   variantOrder?: VariantOverrides<number>;
   webFeaturedOrder?: number;
-};
-
-export type PublicationTargetOverride = {
-  order: number;
-};
-
-export type ResumeTargetOverlay = {
-  id: ResumeTargetId;
-  company: string;
-  roleFamily: string;
-  baseVariant: ResumeVariantId;
-  fitThesis: string;
-  keywordBank: string[];
-  profile?: ProfileTargetOverride;
-  experience?: Partial<Record<ExperienceItem["id"], ExperienceTargetOverride>>;
-  publications?: Partial<Record<PublicationItem["id"], PublicationTargetOverride>>;
 };
 
 export type CvContent = {
