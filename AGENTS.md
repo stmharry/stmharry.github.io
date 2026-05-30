@@ -1,101 +1,96 @@
 # AGENTS
 
-## Project memory
+## Project
 
 - Repository: `stmharry.github.io`
-- Active branch: `main`
-- Site direction: very minimal, editorial clean, serif + sans mix
-- Stack: Vite + React + TypeScript + Tailwind CSS + Bun
-- Scope for v1: one-page essentials (hero, short bio, links, selected publications)
-- Legacy usage rule: use `origin/master` only as a source of content/assets
-- `CNAME` is intentionally not included during scaffold stage
-- Canonical source of truth: latest long-form resume content in `src/data/cv/content.ts`
-- Content architecture: typed data in `src/data/cv/*`, rendering in `src/components/*`
-- Current search target: physical AI / embodied AI roles, US-first, senior IC, with research and research-to-product variants
-- Topics use internal slug + display label (`TopicSlug` + `Topic`)
-- Theme behavior: system default via `prefers-color-scheme` (no manual toggle)
-- Resume pipeline: preserve LaTeX rendering for PDF fidelity, generated from canonical TS data
-- Resume outputs: generate exactly two variants from canonical data, `applied` and `research`
-- Resume targeting: keep the public site stable, and generate company/role-specific resumes only as non-public application artifacts
-- Resume link behavior: website should point to the applied PDF by default; research PDF lives alongside it for targeted applications
-- Variant architecture: keep one canonical dataset and use typed per-variant overrides for profile copy, experience ordering, experience summaries, experience highlights, and resume publication ordering
-- Target overlay architecture: base content -> variant override -> target overlay
-- Target overlay source of truth: `src/data/cv/targets.ts`
-- Target overlay capabilities: profile headline/summary overrides, experience ordering, top-bullet substitutions, publication subset selection, keyword bank, fit thesis
-- Seeded target overlays include Physical Intelligence, Figure, Apptronik, Google DeepMind, NVIDIA, and Intrinsic role families
-- Bridge overlay categories also exist for faster sponsor-path applications:
-  - `bigtech-ml-infra`
-  - `bigtech-research-engineer`
-  - `healthcare-ai-multimodal`
-  - `robotics-platform-simulation`
-- Bridge overlay emphasis:
-  - Google-scale infra
-  - MIT research depth
-  - production ML systems
-  - medical / dental / multimodal deployment
-  - founder work as execution signal, not primary identity
-- Targeted resume output path: keep generated target PDFs out of `public/`; use the resume workspace only
-- Publication UI behavior: render only curated web-featured publications with topic filters over that curated subset
-- Publication media reuse: use `origin/master` assets selectively in `public/assets/publications/*`
-- Publication thumbnail behavior: ratio-aware media frames with `object-contain`
-- Publication citation data: store numeric `citationCount` values (format labels at render time)
-- Publication asset naming: use `<year>--<publication-id>--<type>.<ext>` for internal media
-- Publication URL fields: prefer explicit `paperUrl` and `scholarCitationUrl` over generic `href`
-- Internal asset links in UI: resolve via `import.meta.env.BASE_URL`
-- Experience web behavior: show highlighted entries first for the applied variant, with a See more/See less control that reveals the full applied-variant history in reverse chronological order
-- Education web behavior: render standalone section between experience and publications
-- Hiring-facing tone: recruiter-forward, evidence-led, minimal personal/philosophical language
-- Metrics rule: only keep quantified claims that the user can defend tightly
-- Job-search operating docs live in `/Users/stmharry/Library/CloudStorage/GoogleDrive-harry19930924@gmail.com/My Drive/10-Admin/202603-job-hunt`
+- Primary branch: `main`
+- Stack: Bun, Vite, React, TypeScript, Tailwind CSS, LaTeX
+- Direction: minimal editorial personal site with a serif/sans mix
+- Public scope: one-page essentials plus applied resume link
+- Legacy source rule: use `origin/master` only for selected old content/assets
+- `CNAME` is intentionally absent during scaffold-stage work
 
-## Working agreement
+## Source Of Truth
 
-- Use Bun as package manager and task runner
-- Keep changes small and commit in understandable units
-- Before each commit, run checks:
-  - `bun test`
-  - `bun run build`
-  - `bun run resume:build`
-- Push after each successful commit
-- When `main` receives new commits (direct commit or post-integration), push `main` to `origin/main` immediately
-- Follow `.gitmessage.txt` gitmoji commit style
+- Canonical CV content: `src/data/cv/content.ts`
+- CV types and topic slugs: `src/data/cv/types.ts`
+- Variant and target selectors: `src/data/cv/selectors.ts`
+- Target overlays: `src/data/cv/targets.ts`
+- UI rendering: `src/components/*`
 
-## Worktree merge strategy
+Keep one canonical dataset. Public website content, applied/research resumes,
+and company-specific targeted resumes should all derive from typed data and
+overrides rather than duplicated prose.
 
-- Implement changes on a feature worktree branch (for example, `opencode/*`)
-- Keep `main` checked out in `/workspace/stmharry.github.io`
-- Before commit and before integrating, run:
-  - `bun test`
-  - `bun run build`
-  - `bun run resume:build`
-- Integrate feature work into `main` using this fallback order:
-  - Fast-forward merge on main worktree (`git merge --ff-only <feature-branch>`)
-  - Rebase feature branch onto `origin/main` when fast-forward is not possible
-  - Manual merge only when both fast-forward and rebase cannot complete cleanly
-- After integration, confirm `main` and feature branch point to the same commit
+## Documentation Contract
 
-## Style guidance
+- `README.md` owns human-facing project purpose, setup, checks, deployment, and
+  the short source-of-truth map.
+- `AGENTS.md` owns agent workflow, repository policy, validation, commit, and
+  push rules.
+- `.agents/skills/*/SKILL.md` owns task-specific operational workflows.
+- Update the owning doc once instead of duplicating commands, current status,
+  or interpretation across files.
 
-- Keep layout minimal but intentional
-- Prefer whitespace, restrained color, and clear hierarchy
-- Preserve mobile and desktop readability
-- Avoid carrying old Bootstrap-era styles into the new implementation
+## Product Rules
 
-## Core features for current baseline
+- Current search target: physical AI / embodied AI roles, US-first, senior IC.
+- Keep public site copy recruiter-forward, evidence-led, and low on personal or philosophical framing.
+- The website uses the `applied` variant and links to the applied PDF by default.
+- The research PDF lives alongside the applied PDF for targeted applications.
+- Targeted company/role resumes are non-public application artifacts under the resume workspace.
+- Resume overlays apply in this order: base content, variant override, target overlay.
+- Publication UI renders only curated web-featured publications and filters that curated subset.
+- Internal asset links in UI must resolve through `import.meta.env.BASE_URL`.
+- Theme follows system preference by default and includes the current manual light/dark override.
+- Use only quantified claims the user can defend tightly.
 
-- Structured sections with predefined fields for profile, experience, and publications
-- Structured sections with predefined fields for profile, experience, education, and publications
-- Single-select topic filter for full publications list
-- SEO baseline (meta tags + Open Graph + Twitter + JSON-LD Person)
-- Theme system with automatic system light/dark behavior
-- Dual output targets: minimal website + full resume PDF
+## Workflow
 
-## Local skills
+- Use Bun for package management and task execution.
+- Preserve existing user or generated changes; do not reset or overwrite them.
+- Before implementation work, fetch `origin/main`, compare it with local `main`,
+  and fast-forward or reconcile before branching or editing.
+- If there are uncommitted changes, reconcile or preserve them before any sync,
+  merge, or rebase operation.
+- Work in cohesive logical bundles. Do not split tiny doc or config fragments
+  solely for commit count.
+- Commit each validated bundle. Examples: root config consolidation as one
+  commit; README and AGENTS cleanup as one commit; an inseparable feature plus
+  its focused tests as one commit.
+- Before committing a bundle, run:
 
-- Project-local skills live in `./.agents/skills/`
-- `google-scholar-cv-sync` (`./.agents/skills/google-scholar-cv-sync/SKILL.md`)
-- Purpose (`google-scholar-cv-sync`): extract Google Scholar publications/citation counts and reconcile them with `src/data/cv/content.ts`
-- Trigger (`google-scholar-cv-sync`): requests to sync/update Scholar citations, detect new Scholar publications, or merge Scholar publication metadata into CV source-of-truth
-- `experience-narrative-distiller` (`./.agents/skills/experience-narrative-distiller/SKILL.md`)
-- Purpose (`experience-narrative-distiller`): convert freeform role narratives into recruiter-facing summaries, optional bullets, and structured `experience[]` entries for `src/data/cv/content.ts`
-- Trigger (`experience-narrative-distiller`): requests to talk through what the user did in a role and distill it into concise CV-ready content with metadata
+```bash
+bun test
+bun run build
+bun run resume:build
+```
+
+- Run `bun run lint` when touching TypeScript, React, config, or docs that describe checks.
+- Do not stop at a local commit or local merge when network access and remote
+  credentials are available.
+- After work is committed on `main`, push `main` to `origin/main`, fetch, and
+  verify local `main` equals `origin/main`.
+- Final handoff must state whether `main` was pushed. If push was blocked,
+  state the exact blocker and current git state.
+- Follow `.gitmessage.txt` gitmoji commit style: `<gitmoji> (scope): <subject>`.
+
+## Resume And Artifacts
+
+- Preserve LaTeX rendering for PDF fidelity.
+- Generate exactly two public resume variants from canonical data: `applied` and `research`.
+- Keep generated target PDFs out of `public/`; use `resume/output/targets/`.
+- Website resume links should point to `public/assets/resume/tzu-ming-harry-hsu-resume-applied.pdf`.
+- Publication media can reuse selected `origin/master` assets under `public/assets/publications/*`.
+- Publication asset filenames should follow `<year>--<publication-id>--<type>.<ext>`.
+- Store citation counts as numeric `citationCount` values.
+- Prefer explicit `paperUrl` and `scholarCitationUrl` fields.
+
+## Local Skills
+
+- `./.agents/skills/google-scholar-cv-sync/SKILL.md`: use for Scholar citation/publication sync into `src/data/cv/content.ts`.
+- `./.agents/skills/experience-narrative-distiller/SKILL.md`: use for converting role narratives into concise CV-ready experience entries.
+
+Job-search operating docs live outside this repo at:
+
+`/Users/stmharry/Library/CloudStorage/GoogleDrive-harry19930924@gmail.com/My Drive/10-Admin/202603-job-hunt`
