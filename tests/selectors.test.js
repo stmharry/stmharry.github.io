@@ -67,18 +67,36 @@ describe("publication selectors", () => {
       expect(mitLinks[index].year).toBeGreaterThanOrEqual(mitLinks[index + 1].year);
     }
   });
-  test("returns curated resume publications in selected order", () => {
+  test("returns full resume publications in reverse chronological order", () => {
     const publications = getResumePublications(cvContent.publications);
 
     expect(publications.map((publication) => publication.id)).toEqual([
+      "performance-frontier-freediving-2026",
       "dental-multinational-2025",
       "intraoral-bmc-2023",
+      "molar-jod-2023",
+      "jaw-cysts-2022",
+      "rf-patent-2022",
+      "phd-thesis-2022",
+      "body-composition-2021",
+      "visceral-adiposity-2021",
+      "adversarial-protein-2021",
       "deepopg-2021",
+      "rf-patent-2020",
+      "liver-mri-2020",
+      "chexpertpp-2020",
+      "sm-thesis-2020",
+      "cxr-baselines-2020",
       "fedvc-2020",
       "fedavgm-2019",
-      "3d-aware-2018",
-      "wireless-stickers-2018",
       "transfer-neural-trees-tip-2019",
+      "ccr-2019",
+      "multimodal-2018",
+      "wireless-stickers-2018",
+      "3d-aware-2018",
+      "transfer-neural-trees-eccv-2016",
+      "connecting-dots-2015",
+      "imbalanced-domain-2015",
     ]);
   });
 

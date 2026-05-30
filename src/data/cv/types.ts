@@ -110,7 +110,6 @@ export type PublicationItem = {
   relatedExperienceIds?: ExperienceItem["id"][];
   topics: TopicSlug[];
   order: number;
-  resumeOrder?: number;
   webFeaturedOrder?: number;
 };
 

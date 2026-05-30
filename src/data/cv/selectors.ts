@@ -109,13 +109,7 @@ export const getWebPublications = (publications: PublicationItem[]): Publication
 };
 
 export const getResumePublications = (publications: PublicationItem[]): PublicationItem[] => {
-  return publications
-    .filter((publication) => publication.resumeOrder !== undefined)
-    .sort((left, right) => {
-      const leftOrder = left.resumeOrder ?? Number.MAX_SAFE_INTEGER;
-      const rightOrder = right.resumeOrder ?? Number.MAX_SAFE_INTEGER;
-      return leftOrder - rightOrder;
-    });
+  return sortPublicationsByYear(publications);
 };
 
 export const getExperiencePublicationLinks = (

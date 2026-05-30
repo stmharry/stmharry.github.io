@@ -554,7 +554,6 @@ export const cvContent: CvContent = {
       codeUrl: "https://github.com/stmharry/dental-pano-ai",
       topics: ["medical-ai"],
       order: 1,
-      resumeOrder: 1,
       webFeaturedOrder: 1,
     },
     {
@@ -583,7 +582,6 @@ export const cvContent: CvContent = {
       kind: "journal",
       topics: ["medical-ai", "computer-vision"],
       order: 2,
-      resumeOrder: 2,
       webFeaturedOrder: 2,
     },
     {
@@ -710,7 +708,6 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["iabit"],
       topics: ["medical-ai", "computer-vision"],
       order: 10,
-      resumeOrder: 3,
       webFeaturedOrder: 3,
     },
     {
@@ -810,7 +807,6 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["google-student-researcher"],
       topics: ["federated-learning", "computer-vision"],
       order: 16,
-      resumeOrder: 4,
       webFeaturedOrder: 4,
     },
     {
@@ -829,7 +825,6 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["google-student-researcher"],
       topics: ["federated-learning", "ml-systems"],
       order: 17,
-      resumeOrder: 5,
     },
     {
       id: "transfer-neural-trees-tip-2019",
@@ -843,7 +838,6 @@ export const cvContent: CvContent = {
       kind: "journal",
       topics: ["computer-vision", "ml-systems"],
       order: 18,
-      resumeOrder: 8,
     },
     {
       id: "ccr-2019",
@@ -895,7 +889,6 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 2.563,
       topics: ["wireless-sensing", "ml-systems"],
       order: 21,
-      resumeOrder: 7,
       webFeaturedOrder: 5,
     },
     {
@@ -916,7 +909,6 @@ export const cvContent: CvContent = {
       projectUrl: "http://3dsdn.csail.mit.edu/",
       topics: ["computer-vision", "ml-systems"],
       order: 22,
-      resumeOrder: 6,
       webFeaturedOrder: 6,
     },
     {
