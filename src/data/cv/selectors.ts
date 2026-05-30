@@ -103,13 +103,15 @@ export const getProfileForResume = (
 export const getExperienceForVariant = (items: ExperienceItem[], variant: ResumeVariantId): ExperienceItem[] => {
   return items
     .map((item, index) => ({
-      ...item,
-      summary: getVariantOverride(item.summary, item.variantSummary, variant),
-      highlights: getVariantOverride(item.highlights, item.variantHighlights, variant),
+      item: {
+        ...item,
+        summary: getVariantOverride(item.summary, item.variantSummary, variant),
+        highlights: getVariantOverride(item.highlights, item.variantHighlights, variant),
+      },
       resolvedOrder: item.variantOrder?.[variant] ?? 10_000 + index,
     }))
     .sort((left, right) => left.resolvedOrder - right.resolvedOrder)
-    .map(({ resolvedOrder: _resolvedOrder, ...item }) => item);
+    .map(({ item }) => item);
 };
 
 export const getExperienceForResume = (
@@ -124,14 +126,16 @@ export const getExperienceForResume = (
       const targetOverride = targetOverlay?.experience?.[item.id];
 
       return {
-        ...item,
-        summary: targetOverride?.summary ?? item.summary,
-        highlights: targetOverride?.highlights ?? item.highlights,
+        item: {
+          ...item,
+          summary: targetOverride?.summary ?? item.summary,
+          highlights: targetOverride?.highlights ?? item.highlights,
+        },
         resolvedOrder: targetOverride?.order ?? 10_000 + index,
       };
     })
     .sort((left, right) => left.resolvedOrder - right.resolvedOrder)
-    .map(({ resolvedOrder: _resolvedOrder, ...item }) => item);
+    .map(({ item }) => item);
 };
 
 export const sortExperienceByRecentPeriod = (items: ExperienceItem[]): ExperienceItem[] => {

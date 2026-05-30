@@ -45,7 +45,6 @@ export const MobileCardDisclosure = ({
       setIsDesktop(event.matches);
     };
 
-    setIsDesktop(mediaQuery.matches);
     mediaQuery.addEventListener("change", handleChange);
 
     return () => {
