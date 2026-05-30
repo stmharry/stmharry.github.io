@@ -3,10 +3,8 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { cvContent } from "../src/data/cv/content";
-import { isResumeVariantId, resumeVariantIds, resumeVariants } from "../src/data/cv/variants";
 import {
   getExperienceForResume,
-  getProfileForResume,
   getResumePublications,
   sortExperienceByRecentPeriod,
 } from "../src/data/cv/selectors";
@@ -19,7 +17,6 @@ import type {
   LeadershipItem,
   PublicationItem,
   Profile,
-  ResumeVariantId,
 } from "../src/data/cv/types";
 
 const projectRoot = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
@@ -135,61 +132,7 @@ const EXPERIENCE_WIDTHS = {
   right: "0.31\\textwidth",
 } as const;
 
-type GeneratedResumeSpec = {
-  variant: ResumeVariantId;
-  label: string;
-  outputPath: string;
-};
-
-const parseArgs = (argv: string[]) => {
-  const args = { variant: undefined as ResumeVariantId | undefined };
-
-  for (let index = 0; index < argv.length; index += 1) {
-    const current = argv[index];
-    const next = argv[index + 1];
-
-    if (current === "--variant") {
-      if (!next) {
-        throw new Error(`Missing value for ${current}. Expected one of: ${resumeVariantIds.join(", ")}`);
-      }
-
-      if (!isResumeVariantId(next)) {
-        throw new Error(`Unknown resume variant: ${next}. Expected one of: ${resumeVariantIds.join(", ")}`);
-      }
-
-      args.variant = next;
-      index += 1;
-    } else if (current.startsWith("--")) {
-      throw new Error(`Unknown resume generator option: ${current}`);
-    }
-  }
-
-  return args;
-};
-
-const getBaseGeneratedResumePath = (variant: ResumeVariantId): string => {
-  return resolve(projectRoot, `resume/resume-${variant}.tex`);
-};
-
-const buildGeneratedResumeSpecs = (variant?: ResumeVariantId): GeneratedResumeSpec[] => {
-  if (variant) {
-    return [
-      {
-        variant,
-        label: variant,
-        outputPath: getBaseGeneratedResumePath(variant),
-      },
-    ];
-  }
-
-  return [
-    ...resumeVariants.map((currentVariant) => ({
-      variant: currentVariant.id,
-      label: currentVariant.id,
-      outputPath: getBaseGeneratedResumePath(currentVariant.id),
-    })),
-  ];
-};
+const generatedResumePath = resolve(projectRoot, "resume/resume.tex");
 
 const joinBlocks = (blocks: string[]): string => blocks.filter((block) => block.length > 0).join("\n\n");
 
@@ -353,23 +296,22 @@ const renderDocumentContent = (
 };
 
 const run = async (): Promise<void> => {
-  const { variant } = parseArgs(process.argv.slice(2));
-  const generatedResumeSpecs = buildGeneratedResumeSpecs(variant);
+  const args = process.argv.slice(2);
+
+  if (args.length > 0) {
+    throw new Error(`Unknown resume generator option: ${args[0]}`);
+  }
 
   await mkdir(resolve(projectRoot, "resume"), { recursive: true });
 
-  for (const spec of generatedResumeSpecs) {
-    const profile = getProfileForResume(cvContent.profile, spec.variant);
-    const variantExperience = getExperienceForResume(cvContent.experience, spec.variant);
-    const experience = sortExperienceByRecentPeriod(variantExperience);
-    const publications = getResumePublications(cvContent.publications, spec.variant);
-    const generatedContent = renderDocumentContent(profile, experience, publications);
-    const resumeTex = `${DOCUMENT_PREAMBLE}\n\n${generatedContent}\n\n${DOCUMENT_END}\n`;
+  const experience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience));
+  const publications = getResumePublications(cvContent.publications);
+  const generatedContent = renderDocumentContent(cvContent.profile, experience, publications);
+  const resumeTex = `${DOCUMENT_PREAMBLE}\n\n${generatedContent}\n\n${DOCUMENT_END}\n`;
 
-    await writeFile(spec.outputPath, resumeTex, "utf8");
-    console.log(`Generated ${spec.label} resume LaTeX:`);
-    console.log(`- ${spec.outputPath}`);
-  }
+  await writeFile(generatedResumePath, resumeTex, "utf8");
+  console.log("Generated resume LaTeX:");
+  console.log(`- ${generatedResumePath}`);
 };
 
 run().catch((error: unknown) => {

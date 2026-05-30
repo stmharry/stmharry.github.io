@@ -5,26 +5,14 @@ export const cvContent: CvContent = {
     name: "Tzu-Ming Harry Hsu",
     nativeName: "徐子旻",
     tagline: "Embodied AI, ML systems, and AI product delivery",
-    headline: "Research-to-product ML builder for embodied AI",
+    headline: "AI researcher-engineer for embodied AI, ML systems, and product delivery",
     location: "Taiwan and Boston",
     summaryBullets: [
-      "MIT-trained ML researcher-engineer with 10+ years across computer vision, federated learning, sensing, and production AI systems.",
-      "Built and scaled ML/data platforms from research prototypes to deployed systems, including 10 TB data operations, labeling pipelines, and large-scale training infrastructure.",
-      "Recent work spans AI-assisted dental design and sensor-driven human performance products; now targeting general-purpose robotics and embodied AI.",
-      "Founder-operator experience raising $1MM+, hiring and leading teams up to 20 people, and translating technical roadmaps into product and commercialization plans.",
+      "MIT-trained researcher-engineer with 20+ publications, patents, and theses across computer vision, federated learning, sensing, medical AI, and production ML systems.",
+      "Built large-scale experimentation infrastructure at Google spanning 1,000+ GPUs and 1M+ machine hours, with open-source code and dataset releases.",
+      "Recent production work includes 10 TB data operations, labeling loops, deployment automation, throughput gains, and cost-aware ML platform improvements.",
+      "Founder-operator experience raising $1MM+, hiring and leading teams up to 20 people, and translating technical roadmaps into product delivery.",
     ],
-    variantOverrides: {
-      research: {
-        tagline: "Computer vision, federated learning, sensing, and ML systems",
-        headline: "Research scientist in embodied AI, computer vision, and learning systems",
-        summaryBullets: [
-          "MIT-trained researcher with 20+ publications, patents, and theses spanning computer vision, federated learning, sensing, and deployable medical AI.",
-          "Built large-scale experimentation infrastructure at Google spanning 1,000+ GPUs and 1M+ machine hours, with open-source code and dataset releases.",
-          "Research includes 3D scene understanding, wireless sensing, and learning under real-world data constraints, with outputs cited across academia and industry.",
-          "Targeting embodied-AI roles that connect world models, robot perception, data systems, and real-world deployment.",
-        ],
-      },
-    },
     contacts: [
       {
         label: "Email",
@@ -68,7 +56,7 @@ export const cvContent: CvContent = {
       {
         icon: "resume",
         label: "Resume",
-        href: "/assets/resume/tzu-ming-harry-hsu-resume-applied.pdf",
+        href: "/assets/resume/tzu-ming-harry-hsu-resume.pdf",
         description: "Full PDF",
       },
     ],
@@ -135,55 +123,22 @@ export const cvContent: CvContent = {
       jobDescription:
         "Conducted research and engineering on AI-assisted dental crown design and ML production systems. In order to accelerate model iteration and delivery quality, I reorganized large-scale dental data, rebuilt labeling and pre-labeling workflows, optimized segmentation and crown-generation pipelines, and standardized deployment architecture and CI/CD practices. Tools used included Python, deep learning frameworks, backend API services, GitHub Actions, containers, and cloud infrastructure.",
       summary:
-        "Led ML platform, data, and deployment upgrades for AI-assisted dental design, cutting data access from ~3 days to minutes, reducing labeling turnaround from ~4 weeks to ~1 week, improving backend throughput by ~110%, and lowering infrastructure cost by ~50%.",
+        "Built data, training, and evaluation systems for AI-assisted dental design, combining geometric ML, pre-labeling workflows, preference modeling, and production deployment improvements.",
       highlights: [
         {
           text: "Reorganized a fragmented ~10 TB dental dataset into a standardized ~4 TB ML-ready registry, reducing raw-data access from ~3 days to minutes.",
         },
         {
-          text: "Rebuilt labeling and pre-labeling workflows end-to-end, cutting 100-200 case batch turnaround from ~4 weeks to ~1 week with clear audit trails.",
+          text: "Rebuilt pre-labeling and labeling loops for 100-200 case batches, reducing turnaround from ~4 weeks to ~1 week and improving experiment velocity.",
         },
         {
-          text: "Standardized devops/deployment with modern packaging, private registry support, and GitHub Actions; deploys moved from manual half-day ops to single-push workflows.",
+          text: "Implemented bilevel/meta-learning for personalized crown generation and improved preference fit by ~20% while keeping the system production-facing.",
         },
         {
-          text: "Led infra migration from GPU-heavy services to CPU-compatible stack for CPU-bound workloads, reducing overall server costs by ~50%.",
-        },
-        {
-          text: "Implemented bilevel/meta-learning framework for personal AI crown generation and improved preference fit by ~20%, contributing to higher user engagement.",
-        },
-        {
-          text: "Optimized backend pipelines for SLO segmentation and crown generation, achieving ~110% aggregate throughput improvement.",
-        },
-        {
-          text: "Introduced structured hiring and engineering standards; closed a senior leadership hire and supported award-related media visibility.",
+          text: "Optimized segmentation and crown-generation services for ~110% aggregate throughput improvement while reducing infrastructure cost by ~50%.",
         },
       ],
       highlighted: true,
-      variantOrder: {
-        applied: 2,
-        research: 4,
-      },
-      variantSummary: {
-        research:
-          "Built data, training, and evaluation systems for AI-assisted dental design, combining geometric ML, pre-labeling workflows, and preference modeling to accelerate iteration and production deployment.",
-      },
-      variantHighlights: {
-        research: [
-          {
-            text: "Reorganized a fragmented ~10 TB dental dataset into a standardized ~4 TB ML-ready registry, reducing raw-data access from ~3 days to minutes.",
-          },
-          {
-            text: "Rebuilt pre-labeling and labeling loops for 100-200 case batches, reducing turnaround from ~4 weeks to ~1 week and improving experiment velocity.",
-          },
-          {
-            text: "Implemented bilevel/meta-learning for personalized crown generation and improved preference fit by ~20% while keeping the system production-facing.",
-          },
-          {
-            text: "Optimized segmentation and crown-generation services for ~110% aggregate throughput improvement while reducing infrastructure cost by ~50%.",
-          },
-        ],
-      },
     },
     {
       id: "clarq-ai",
@@ -200,7 +155,7 @@ export const cvContent: CvContent = {
       jobDescription:
         "Conduct platform and product research on AI-driven force intelligence for resistance training. In order to validate scalable commercialization and product-market fit, I led data strategy, system architecture, and investor-facing technical positioning across hardware operations, SaaS monetization plans, and long-term model moat development. Tools used include sensor-integrated data systems, analytics pipelines, and product instrumentation platforms.",
       summary:
-        "Helped reposition Clarq from a hardware product into a force-intelligence platform with 100+ deployments, 15M+ force-time samples, and 150K labeled motion sets, linking sensor data strategy to product and fundraising.",
+        "Helped reposition Clarq from a hardware product into a force-intelligence platform, framing a long-term moat around force-time data, evaluation loops, model-driven product decisions, and fundraising.",
       highlights: [
         {
           text: "Co-led technical positioning around a three-layer strategy: hardware wedge, SaaS profit engine, and long-term data/model moat.",
@@ -216,14 +171,6 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: true,
-      variantOrder: {
-        applied: 1,
-        research: 3,
-      },
-      variantSummary: {
-        research:
-          "Scoped the data and modeling strategy for a sensor-rich human-performance platform, framing a long-term moat around force-time data, evaluation loops, and model-driven product decisions.",
-      },
     },
     {
       id: "codegreen-labs",
@@ -254,10 +201,6 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: false,
-      variantOrder: {
-        applied: 5,
-        research: 7,
-      },
     },
     {
       id: "hashgreen-labs",
@@ -288,10 +231,6 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: false,
-      variantOrder: {
-        applied: 6,
-        research: 8,
-      },
     },
     {
       id: "iabit",
@@ -334,7 +273,7 @@ export const cvContent: CvContent = {
       jobDescription:
         "Conduct research in medical AI and computer vision focusing on clinically deployable modeling under constrained data settings. In order to improve diagnosis and longitudinal assessment workflows, I designed and validated machine learning methods, collaborated with healthcare and industry partners, and produced peer-reviewed publications, patents, and translational outputs. Tools used include deep learning frameworks, medical imaging data pipelines, and large-scale compute resources.",
       summary:
-        "Led research on deployable medical AI and computer vision, producing 20+ publications, patents, and theses while collaborating with Google, Takeda, and hospital partners to move models toward real workflows.",
+        "Led research on deployable medical AI, computer vision, and learning under data constraints, producing 20+ publications, patents, and theses with translational partners across industry and healthcare.",
       highlights: [
         {
           text: "Published 14 conference articles, 5 journal articles, one U.S. patent, and two degree theses.",
@@ -347,14 +286,6 @@ export const cvContent: CvContent = {
         { text: "Awarded scholarships totaling 4 years in duration." },
       ],
       highlighted: true,
-      variantOrder: {
-        applied: 3,
-        research: 1,
-      },
-      variantSummary: {
-        research:
-          "Led research on deployable medical AI, computer vision, and learning under data constraints, producing 20+ publications, patents, and theses with translational partners across industry and healthcare.",
-      },
     },
     {
       id: "worldquant",
@@ -431,10 +362,6 @@ export const cvContent: CvContent = {
         { text: "Open-sourced research code and datasets for broader community use." },
       ],
       highlighted: true,
-      variantOrder: {
-        applied: 4,
-        research: 2,
-      },
     },
     {
       id: "bwh-research-trainee",
@@ -451,9 +378,6 @@ export const cvContent: CvContent = {
         "Contributed hospital-facing medical-imaging ML work on risk prediction and deployment-oriented evaluation using real patient cohorts and radiology workflows.",
       highlights: [{ text: "Supported model development and validation analysis for clinical imaging applications tied to operational hospital use cases." }],
       highlighted: false,
-      variantOrder: {
-        research: 5,
-      },
     },
     {
       id: "bidmc-research-trainee",
@@ -480,9 +404,6 @@ export const cvContent: CvContent = {
         },
       ],
       highlighted: false,
-      variantOrder: {
-        research: 6,
-      },
     },
     {
       id: "academia-sinica-student-researcher",
@@ -633,10 +554,7 @@ export const cvContent: CvContent = {
       codeUrl: "https://github.com/stmharry/dental-pano-ai",
       topics: ["medical-ai"],
       order: 1,
-      variantOrder: {
-        applied: 1,
-        research: 1,
-      },
+      resumeOrder: 1,
       webFeaturedOrder: 1,
     },
     {
@@ -665,10 +583,7 @@ export const cvContent: CvContent = {
       kind: "journal",
       topics: ["medical-ai", "computer-vision"],
       order: 2,
-      variantOrder: {
-        applied: 2,
-        research: 2,
-      },
+      resumeOrder: 2,
       webFeaturedOrder: 2,
     },
     {
@@ -795,10 +710,7 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["iabit"],
       topics: ["medical-ai", "computer-vision"],
       order: 10,
-      variantOrder: {
-        applied: 3,
-        research: 3,
-      },
+      resumeOrder: 3,
       webFeaturedOrder: 3,
     },
     {
@@ -898,10 +810,7 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["google-student-researcher"],
       topics: ["federated-learning", "computer-vision"],
       order: 16,
-      variantOrder: {
-        applied: 4,
-        research: 4,
-      },
+      resumeOrder: 4,
       webFeaturedOrder: 4,
     },
     {
@@ -920,9 +829,7 @@ export const cvContent: CvContent = {
       relatedExperienceIds: ["google-student-researcher"],
       topics: ["federated-learning", "ml-systems"],
       order: 17,
-      variantOrder: {
-        research: 5,
-      },
+      resumeOrder: 5,
     },
     {
       id: "transfer-neural-trees-tip-2019",
@@ -936,9 +843,7 @@ export const cvContent: CvContent = {
       kind: "journal",
       topics: ["computer-vision", "ml-systems"],
       order: 18,
-      variantOrder: {
-        research: 8,
-      },
+      resumeOrder: 8,
     },
     {
       id: "ccr-2019",
@@ -990,10 +895,7 @@ export const cvContent: CvContent = {
       thumbnailAspectRatio: 2.563,
       topics: ["wireless-sensing", "ml-systems"],
       order: 21,
-      variantOrder: {
-        applied: 5,
-        research: 7,
-      },
+      resumeOrder: 7,
       webFeaturedOrder: 5,
     },
     {
@@ -1014,10 +916,7 @@ export const cvContent: CvContent = {
       projectUrl: "http://3dsdn.csail.mit.edu/",
       topics: ["computer-vision", "ml-systems"],
       order: 22,
-      variantOrder: {
-        applied: 6,
-        research: 6,
-      },
+      resumeOrder: 6,
       webFeaturedOrder: 6,
     },
     {

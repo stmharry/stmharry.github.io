@@ -6,7 +6,7 @@
 - Primary branch: `main`
 - Stack: Bun, Vite, React, TypeScript, Tailwind CSS, LaTeX
 - Direction: minimal editorial personal site with a serif/sans mix
-- Public scope: one-page essentials plus applied resume link
+- Public scope: one-page essentials plus canonical resume link
 - Legacy source rule: use `origin/master` only for selected old content/assets
 - `CNAME` is intentionally absent during scaffold-stage work
 
@@ -14,12 +14,11 @@
 
 - Canonical CV content: `src/data/cv/content.ts`
 - CV types and topic slugs: `src/data/cv/types.ts`
-- Resume variants: `src/data/cv/variants.ts`
-- Variant selectors: `src/data/cv/selectors.ts`
+- Resume and publication selectors: `src/data/cv/selectors.ts`
 - UI rendering: `src/components/*`
 
-Keep one canonical dataset. Public website content and applied/research resumes
-should derive from typed data and variant overrides rather than duplicated prose.
+Keep one canonical dataset. Public website content and the generated resume
+should derive from typed data rather than duplicated prose.
 
 ## Documentation Contract
 
@@ -35,9 +34,7 @@ should derive from typed data and variant overrides rather than duplicated prose
 
 - Current search target: physical AI / embodied AI roles, US-first, senior IC.
 - Keep public site copy recruiter-forward, evidence-led, and low on personal or philosophical framing.
-- The website uses the `applied` variant and links to the applied PDF by default.
-- The research PDF lives alongside the applied PDF.
-- Resume copy applies in this order: base content, variant override.
+- The website links to the single canonical resume PDF.
 - Publication UI renders only curated web-featured publications and filters that curated subset.
 - Internal asset links in UI must resolve through `import.meta.env.BASE_URL`.
 - Theme follows system preference by default and includes the current manual light/dark override.
@@ -76,8 +73,8 @@ bun run resume:build
 ## Resume And Artifacts
 
 - Preserve LaTeX rendering for PDF fidelity.
-- Generate exactly two public resume variants from canonical data: `applied` and `research`.
-- Website resume links should point to `public/assets/resume/tzu-ming-harry-hsu-resume-applied.pdf`.
+- Generate one public resume PDF from canonical data.
+- Website resume links should point to `public/assets/resume/tzu-ming-harry-hsu-resume.pdf`.
 - Publication media can reuse selected `origin/master` assets under `public/assets/publications/*`.
 - Publication asset filenames should follow `<year>--<publication-id>--<type>.<ext>`.
 - Store citation counts as numeric `citationCount` values.

@@ -1,14 +1,10 @@
 import { describe, expect, test } from "bun:test";
 
 import { cvContent } from "../src/data/cv/content";
-import { resumeVariantIds } from "../src/data/cv/variants";
 import {
   filterPublicationsByTopic,
   getExperienceForResume,
-  getExperienceForVariant,
   getExperiencePublicationLinks,
-  getProfileForResume,
-  getProfileForVariant,
   getResumePublications,
   getTopicLabelBySlug,
   getWebPublications,
@@ -71,46 +67,35 @@ describe("publication selectors", () => {
       expect(mitLinks[index].year).toBeGreaterThanOrEqual(mitLinks[index + 1].year);
     }
   });
+  test("returns curated resume publications in selected order", () => {
+    const publications = getResumePublications(cvContent.publications);
+
+    expect(publications.map((publication) => publication.id)).toEqual([
+      "dental-multinational-2025",
+      "intraoral-bmc-2023",
+      "deepopg-2021",
+      "fedvc-2020",
+      "fedavgm-2019",
+      "3d-aware-2018",
+      "wireless-stickers-2018",
+      "transfer-neural-trees-tip-2019",
+    ]);
+  });
+
+  test("uses the curated hybrid resume profile", () => {
+    expect(cvContent.profile.headline).toContain("AI researcher-engineer");
+    expect(cvContent.profile.summaryBullets[0]).toContain("20+ publications");
+    expect(cvContent.profile.summaryBullets[1]).toContain("1,000+ GPUs");
+    expect(cvContent.profile.summaryBullets[2]).toContain("10 TB");
+    expect(cvContent.profile.summaryBullets[3]).toContain("Founder-operator");
+  });
+
+  test("returns resume experience entries without selection input", () => {
+    expect(getExperienceForResume(cvContent.experience)).toBe(cvContent.experience);
+  });
 });
 
-describe("variant selectors", () => {
-  test("uses the canonical resume variant list", () => {
-    expect(resumeVariantIds).toEqual(["applied", "research"]);
-    expect(new Set(resumeVariantIds).size).toBe(resumeVariantIds.length);
-  });
-
-  test("returns variant-specific profile copy", () => {
-    const applied = getProfileForVariant(cvContent.profile, "applied");
-    const research = getProfileForVariant(cvContent.profile, "research");
-
-    expect(applied.headline).not.toBe(research.headline);
-    expect(applied.summaryBullets).not.toEqual(research.summaryBullets);
-  });
-
-  test("returns variant-ordered experience entries", () => {
-    const researchExperience = getExperienceForVariant(cvContent.experience, "research");
-
-    expect(researchExperience[0]?.id).toBe("mit-ra");
-    expect(researchExperience[1]?.id).toBe("google-student-researcher");
-  });
-
-  test("returns curated variant-specific resume publications", () => {
-    const applied = getResumePublications(cvContent.publications, "applied");
-    const research = getResumePublications(cvContent.publications, "research");
-
-    expect(applied.length).toBeGreaterThan(0);
-    expect(research.length).toBeGreaterThan(applied.length - 1);
-    expect(applied.every((publication) => publication.variantOrder?.applied !== undefined)).toBeTrue();
-    expect(research.every((publication) => publication.variantOrder?.research !== undefined)).toBeTrue();
-  });
-
-  test("returns resume profile copy for a variant", () => {
-    const profile = getProfileForResume(cvContent.profile, "research");
-
-    expect(profile.headline).toContain("Research scientist");
-    expect(profile.summaryBullets[0]).toContain("20+ publications");
-  });
-
+describe("resume selectors", () => {
   test("sorts experience chronologically by end date and start date", () => {
     const sorted = sortExperienceByRecentPeriod([
       { ...cvContent.experience[0], id: "same-a", period: "Jan 2020 -- Dec 2020" },
@@ -124,9 +109,9 @@ describe("variant selectors", () => {
   });
 
   test("sorts default resume experience by recent period", () => {
-    const appliedExperience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience, "applied"));
+    const resumeExperience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience));
 
-    expect(appliedExperience.slice(0, 5).map((item) => item.id)).toEqual([
+    expect(resumeExperience.slice(0, 5).map((item) => item.id)).toEqual([
       "clarq-ai",
       "iabit",
       "dentscape",

@@ -5,31 +5,6 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 RESUME_DIR="$ROOT_DIR/resume"
 BUILD_ROOT="$RESUME_DIR/build"
 OUTPUT_DIR="$ROOT_DIR/public/assets/resume"
-PRIVATE_OUTPUT_DIR="$RESUME_DIR/output/variants"
-
-VARIANTS=()
-PUBLIC_VARIANTS=()
-while IFS= read -r variant; do
-  [ -n "$variant" ] && VARIANTS+=("$variant")
-done < <(cd "$ROOT_DIR" && bun run scripts/list-resume-variants.ts)
-
-while IFS= read -r variant; do
-  [ -n "$variant" ] && PUBLIC_VARIANTS+=("$variant")
-done < <(cd "$ROOT_DIR" && bun run scripts/list-resume-variants.ts --public)
-
-DEFAULT_PUBLIC_VARIANT="$(cd "$ROOT_DIR" && bun run scripts/list-resume-variants.ts --default-public)"
-
-is_public_variant() {
-  local selected="$1"
-
-  for variant in "${PUBLIC_VARIANTS[@]}"; do
-    if [ "$variant" = "$selected" ]; then
-      return 0
-    fi
-  done
-
-  return 1
-}
 
 REQUIRED_STY=(
   "xcolor.sty:xcolor"
@@ -67,26 +42,13 @@ fi
 
 mkdir -p "$OUTPUT_DIR"
 mkdir -p "$BUILD_ROOT"
-mkdir -p "$PRIVATE_OUTPUT_DIR"
 
-for variant in "${VARIANTS[@]}"; do
-  build_dir="$BUILD_ROOT/$variant"
-  source_tex="$RESUME_DIR/resume-$variant.tex"
-  output_pdf="$OUTPUT_DIR/tzu-ming-harry-hsu-resume-$variant.pdf"
+build_dir="$BUILD_ROOT/resume"
+source_tex="$RESUME_DIR/resume.tex"
+output_pdf="$OUTPUT_DIR/tzu-ming-harry-hsu-resume.pdf"
 
-  mkdir -p "$build_dir"
-  latexmk -pdf -interaction=nonstopmode -output-directory="$build_dir" "$source_tex"
+mkdir -p "$build_dir"
+latexmk -pdf -interaction=nonstopmode -output-directory="$build_dir" "$source_tex"
+cp "$build_dir/resume.pdf" "$output_pdf"
 
-  if is_public_variant "$variant"; then
-    cp "$build_dir/resume-$variant.pdf" "$output_pdf"
-    printf "Generated PDF: %s\n" "$output_pdf"
-
-    if [ "$variant" = "$DEFAULT_PUBLIC_VARIANT" ]; then
-      cp "$output_pdf" "$OUTPUT_DIR/tzu-ming-harry-hsu-resume.pdf"
-    fi
-  else
-    private_output_pdf="$PRIVATE_OUTPUT_DIR/tzu-ming-harry-hsu-resume-$variant.pdf"
-    cp "$build_dir/resume-$variant.pdf" "$private_output_pdf"
-    printf "Generated private PDF: %s\n" "$private_output_pdf"
-fi
-done
+printf "Generated PDF: %s\n" "$output_pdf"

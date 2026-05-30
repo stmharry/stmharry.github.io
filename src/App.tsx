@@ -5,7 +5,7 @@ import { ExperienceSection } from "./components/ExperienceSection";
 import { Hero } from "./components/Hero";
 import { PublicationsSection } from "./components/PublicationsSection";
 import { cvContent } from "./data/cv/content";
-import { getExperienceForVariant, getExperiencePublicationLinks, getProfileForVariant, getWebPublications } from "./data/cv/selectors";
+import { getExperienceForResume, getExperiencePublicationLinks, getWebPublications } from "./data/cv/selectors";
 
 type ThemePreference = "system" | "light" | "dark";
 
@@ -21,10 +21,9 @@ const getOppositeTheme = (value: Exclude<ThemePreference, "system">): Exclude<Th
 };
 
 function App() {
-  const siteVariant = "applied" as const;
-  const profile = getProfileForVariant(cvContent.profile, siteVariant);
+  const profile = cvContent.profile;
   const webPublications = getWebPublications(cvContent.publications);
-  const webExperience = getExperienceForVariant(cvContent.experience, siteVariant);
+  const webExperience = getExperienceForResume(cvContent.experience);
   const experiencePublicationLinks = getExperiencePublicationLinks(webPublications);
   const [stickyNameOpacity, setStickyNameOpacity] = useState(0);
   const [systemTheme, setSystemTheme] = useState<Exclude<ThemePreference, "system">>(() => {

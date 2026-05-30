@@ -1,8 +1,6 @@
 import type {
   ExperienceItem,
-  Profile,
   PublicationItem,
-  ResumeVariantId,
   Topic,
   TopicSlug,
 } from "./types";
@@ -11,10 +9,6 @@ export type ExperiencePublicationLink = {
   id: string;
   title: string;
   year: number;
-};
-
-const getVariantOverride = <T>(baseValue: T, overrides: Partial<Record<ResumeVariantId, T>> | undefined, variant: ResumeVariantId): T => {
-  return overrides?.[variant] ?? baseValue;
 };
 
 const MONTH_SCORE: Record<string, number> = {
@@ -69,39 +63,8 @@ const parseExperiencePeriod = (period: string): { start: number; end: number } =
   };
 };
 
-export const getProfileForVariant = (profile: Profile, variant: ResumeVariantId): Profile => {
-  const variantOverrides = profile.variantOverrides?.[variant];
-
-  if (!variantOverrides) {
-    return profile;
-  }
-
-  return {
-    ...profile,
-    ...variantOverrides,
-  };
-};
-
-export const getProfileForResume = (profile: Profile, variant: ResumeVariantId): Profile => {
-  return getProfileForVariant(profile, variant);
-};
-
-export const getExperienceForVariant = (items: ExperienceItem[], variant: ResumeVariantId): ExperienceItem[] => {
-  return items
-    .map((item, index) => ({
-      item: {
-        ...item,
-        summary: getVariantOverride(item.summary, item.variantSummary, variant),
-        highlights: getVariantOverride(item.highlights, item.variantHighlights, variant),
-      },
-      resolvedOrder: item.variantOrder?.[variant] ?? 10_000 + index,
-    }))
-    .sort((left, right) => left.resolvedOrder - right.resolvedOrder)
-    .map(({ item }) => item);
-};
-
-export const getExperienceForResume = (items: ExperienceItem[], variant: ResumeVariantId): ExperienceItem[] => {
-  return getExperienceForVariant(items, variant);
+export const getExperienceForResume = (items: ExperienceItem[]): ExperienceItem[] => {
+  return items;
 };
 
 export const sortExperienceByRecentPeriod = (items: ExperienceItem[]): ExperienceItem[] => {
@@ -145,15 +108,12 @@ export const getWebPublications = (publications: PublicationItem[]): Publication
     });
 };
 
-export const getResumePublications = (
-  publications: PublicationItem[],
-  variant: ResumeVariantId,
-): PublicationItem[] => {
+export const getResumePublications = (publications: PublicationItem[]): PublicationItem[] => {
   return publications
-    .filter((publication) => publication.variantOrder?.[variant] !== undefined)
+    .filter((publication) => publication.resumeOrder !== undefined)
     .sort((left, right) => {
-      const leftOrder = left.variantOrder?.[variant] ?? Number.MAX_SAFE_INTEGER;
-      const rightOrder = right.variantOrder?.[variant] ?? Number.MAX_SAFE_INTEGER;
+      const leftOrder = left.resumeOrder ?? Number.MAX_SAFE_INTEGER;
+      const rightOrder = right.resumeOrder ?? Number.MAX_SAFE_INTEGER;
       return leftOrder - rightOrder;
     });
 };

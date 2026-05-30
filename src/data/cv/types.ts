@@ -1,7 +1,3 @@
-import type { ResumeVariantId } from "./variants";
-
-export type { ResumeVariantId } from "./variants";
-
 export type TopicSlug =
   | "federated-learning"
   | "medical-ai"
@@ -9,8 +5,6 @@ export type TopicSlug =
   | "ml-systems"
   | "wireless-sensing"
   | "blockchain";
-
-export type VariantOverrides<T> = Partial<Record<ResumeVariantId, T>>;
 
 export type Topic = {
   slug: TopicSlug;
@@ -35,12 +29,6 @@ export type DetailItem = {
   text: string;
 };
 
-export type ProfileVariantOverride = {
-  tagline?: string;
-  headline?: string;
-  summaryBullets?: string[];
-};
-
 export type Profile = {
   name: string;
   nativeName: string;
@@ -50,7 +38,6 @@ export type Profile = {
   summaryBullets: string[];
   contacts: ContactItem[];
   links: LinkItem[];
-  variantOverrides?: VariantOverrides<ProfileVariantOverride>;
 };
 
 export type EducationItem = {
@@ -80,9 +67,6 @@ export type ExperienceItem = {
   summary: string;
   highlights: DetailItem[];
   highlighted: boolean;
-  variantOrder?: VariantOverrides<number>;
-  variantSummary?: VariantOverrides<string>;
-  variantHighlights?: VariantOverrides<DetailItem[]>;
 };
 
 export type LeadershipItem = {
@@ -126,7 +110,7 @@ export type PublicationItem = {
   relatedExperienceIds?: ExperienceItem["id"][];
   topics: TopicSlug[];
   order: number;
-  variantOrder?: VariantOverrides<number>;
+  resumeOrder?: number;
   webFeaturedOrder?: number;
 };
 
