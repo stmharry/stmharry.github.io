@@ -1,3 +1,7 @@
+import type { ResumeVariantId } from "./variants";
+
+export type { ResumeVariantId } from "./variants";
+
 export type TopicSlug =
   | "federated-learning"
   | "medical-ai"
@@ -6,7 +10,6 @@ export type TopicSlug =
   | "wireless-sensing"
   | "blockchain";
 
-export type ResumeVariantId = "research" | "applied";
 export type ResumeTargetId =
   | "bigtech-ml-infra"
   | "bigtech-research-engineer"

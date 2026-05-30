@@ -1,7 +1,8 @@
 import { describe, expect, test } from "bun:test";
 
 import { cvContent } from "../src/data/cv/content";
-import { resumeTargetOverlayById } from "../src/data/cv/targets";
+import { resumeTargetOverlayById, resumeTargetOverlays } from "../src/data/cv/targets";
+import { resumeVariantIds } from "../src/data/cv/variants";
 import {
   filterPublicationsByTopic,
   getExperienceForResume,
@@ -75,6 +76,11 @@ describe("publication selectors", () => {
 });
 
 describe("variant selectors", () => {
+  test("uses the canonical resume variant list", () => {
+    expect(resumeVariantIds).toEqual(["applied", "research"]);
+    expect(new Set(resumeVariantIds).size).toBe(resumeVariantIds.length);
+  });
+
   test("returns variant-specific profile copy", () => {
     const applied = getProfileForVariant(cvContent.profile, "applied");
     const research = getProfileForVariant(cvContent.profile, "research");
@@ -98,6 +104,12 @@ describe("variant selectors", () => {
     expect(research.length).toBeGreaterThan(applied.length - 1);
     expect(applied.every((publication) => publication.variantOrder?.applied !== undefined)).toBeTrue();
     expect(research.every((publication) => publication.variantOrder?.research !== undefined)).toBeTrue();
+  });
+
+  test("target overlays reference canonical base variants", () => {
+    const validVariantIds = new Set(resumeVariantIds);
+
+    expect(resumeTargetOverlays.every((overlay) => validVariantIds.has(overlay.baseVariant))).toBeTrue();
   });
 
   test("applies target-specific profile overrides on top of the base variant", () => {

@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import { cvContent } from "../src/data/cv/content";
 import { resumeTargetOverlays } from "../src/data/cv/targets";
+import { isResumeVariantId, resumeVariantIds, resumeVariants } from "../src/data/cv/variants";
 import {
   getExperienceForResume,
   getProfileForResume,
@@ -24,10 +25,6 @@ import type {
 } from "../src/data/cv/types";
 
 const projectRoot = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
-const baseGeneratedResumePaths: Record<ResumeVariantId, string> = {
-  applied: resolve(projectRoot, "resume/resume-applied.tex"),
-  research: resolve(projectRoot, "resume/resume-research.tex"),
-};
 const targetedResumeDir = resolve(projectRoot, "resume/targets");
 
 const DOCUMENT_PREAMBLE = String.raw`\documentclass[11pt]{article}
@@ -141,8 +138,6 @@ const EXPERIENCE_WIDTHS = {
   right: "0.31\\textwidth",
 } as const;
 
-const RESUME_VARIANTS: ResumeVariantId[] = ["applied", "research"];
-
 type GeneratedResumeSpec = {
   variant: ResumeVariantId;
   targetId?: ResumeTargetId;
@@ -158,7 +153,11 @@ const parseArgs = (argv: string[]) => {
     const next = argv[index + 1];
 
     if (current === "--variant" && next) {
-      args.variant = next as ResumeVariantId;
+      if (!isResumeVariantId(next)) {
+        throw new Error(`Unknown resume variant: ${next}. Expected one of: ${resumeVariantIds.join(", ")}`);
+      }
+
+      args.variant = next;
       index += 1;
     } else if (current === "--target" && next) {
       args.target = next as ResumeTargetId;
@@ -167,6 +166,10 @@ const parseArgs = (argv: string[]) => {
   }
 
   return args;
+};
+
+const getBaseGeneratedResumePath = (variant: ResumeVariantId): string => {
+  return resolve(projectRoot, `resume/resume-${variant}.tex`);
 };
 
 const buildGeneratedResumeSpecs = (variant?: ResumeVariantId, targetId?: ResumeTargetId): GeneratedResumeSpec[] => {
@@ -193,16 +196,16 @@ const buildGeneratedResumeSpecs = (variant?: ResumeVariantId, targetId?: ResumeT
       {
         variant,
         label: variant,
-        outputPath: baseGeneratedResumePaths[variant],
+        outputPath: getBaseGeneratedResumePath(variant),
       },
     ];
   }
 
   return [
-    ...RESUME_VARIANTS.map((currentVariant) => ({
-      variant: currentVariant,
-      label: currentVariant,
-      outputPath: baseGeneratedResumePaths[currentVariant],
+    ...resumeVariants.map((currentVariant) => ({
+      variant: currentVariant.id,
+      label: currentVariant.id,
+      outputPath: getBaseGeneratedResumePath(currentVariant.id),
     })),
     ...resumeTargetOverlays.map((overlay) => ({
       variant: overlay.baseVariant,
