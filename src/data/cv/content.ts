@@ -4,14 +4,14 @@ export const cvContent: CvContent = {
   profile: {
     name: "Tzu-Ming Harry Hsu",
     nativeName: "徐子旻",
-    tagline: "Embodied AI, ML systems, and AI product delivery",
-    headline: "AI researcher-engineer for embodied AI, ML systems, and product delivery",
+    tagline: "World Model, Embodied AI, and Computer Vision",
+    headline: "Frontier AI Researcher",
     location: "Taiwan and Boston",
     summaryBullets: [
-      "MIT-trained researcher-engineer with 20+ publications, patents, and theses across computer vision, federated learning, sensing, medical AI, and production ML systems.",
-      "Built large-scale experimentation infrastructure at Google spanning 1,000+ GPUs and 1M+ machine hours, with open-source code and dataset releases.",
-      "Recent production work includes 10 TB data operations, labeling loops, deployment automation, throughput gains, and cost-aware ML platform improvements.",
-      "Founder-operator experience raising $1MM+, hiring and leading teams up to 20 people, and translating technical roadmaps into product delivery.",
+      "MIT-trained Ph.D. working across world models, embodied AI, computer vision, and computer graphics.",
+      "Google Federated Learning core contributor with YFLOP-scale infrastructure orchestration, open-source research code, and datasets for rigorous model evaluation.",
+      "Generative AI startup model-training and evaluation architect with TB-scale data operations, human-in-the-loop annotation workflows, model training and evaluation, and scalable inference infrastructure experience.",
+      "Founder-operator with capital-raising and team-building experience, translating technical ambiguity into shipped products, investor narratives, and execution loops.",
     ],
     contacts: [
       {

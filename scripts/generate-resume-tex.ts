@@ -35,6 +35,12 @@ const DOCUMENT_PREAMBLE = String.raw`\documentclass[11pt]{article}
 \usepackage{array}
 
 \usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={Tzu-Ming Harry Hsu Resume},
+  pdfauthor={Tzu-Ming Harry Hsu},
+  pdfsubject={Frontier AI researcher profile for Member of Technical Staff roles in world models, embodied AI, computer vision, computer graphics, and ML systems},
+  pdfkeywords={frontier AI, Member of Technical Staff, world model, embodied AI, computer vision, computer graphics, federated learning, Google Federated Learning, generative AI, model evaluation, ML systems}
+}
 \usepackage[super]{nth}
 
 \usepackage{xparse}

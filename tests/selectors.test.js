@@ -100,11 +100,13 @@ describe("publication selectors", () => {
     ]);
   });
 
-  test("uses the curated hybrid resume profile", () => {
-    expect(cvContent.profile.headline).toContain("AI researcher-engineer");
-    expect(cvContent.profile.summaryBullets[0]).toContain("20+ publications");
-    expect(cvContent.profile.summaryBullets[1]).toContain("1,000+ GPUs");
-    expect(cvContent.profile.summaryBullets[2]).toContain("10 TB");
+  test("uses the frontier AI resume profile", () => {
+    expect(cvContent.profile.headline).toBe("Frontier AI Researcher");
+    expect(cvContent.profile.tagline).toBe("World Model, Embodied AI, and Computer Vision");
+    expect(cvContent.profile.summaryBullets[0]).toContain("world models");
+    expect(cvContent.profile.summaryBullets[1]).toContain("Google Federated Learning core contributor");
+    expect(cvContent.profile.summaryBullets[1]).toContain("YFLOP-scale");
+    expect(cvContent.profile.summaryBullets[2]).toContain("TB-scale data operations");
     expect(cvContent.profile.summaryBullets[3]).toContain("Founder-operator");
   });
 
