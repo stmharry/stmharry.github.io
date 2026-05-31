@@ -132,8 +132,8 @@ describe("resume selectors", () => {
     const resumeExperience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience));
 
     expect(resumeExperience.slice(0, 5).map((item) => item.id)).toEqual([
-      "clarq-ai",
       "iabit",
+      "clarq-ai",
       "dentscape",
       "codegreen-labs",
       "hashgreen-labs",

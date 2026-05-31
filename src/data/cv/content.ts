@@ -149,7 +149,7 @@ export const cvContent: CvContent = {
         url: "https://clarq-ai.com",
         address: "No. 141, Huaining St., West Dist., Taichung, Taiwan 403028",
       },
-      period: "Dec 2024 -- Present",
+      period: "Dec 2024 -- Jun 2026",
       role: "Co-founder & CTO",
       location: "Palo Alto, CA / Taipei, Taiwan",
       jobDescription:
