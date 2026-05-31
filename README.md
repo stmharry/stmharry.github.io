@@ -3,8 +3,8 @@
 Minimal personal website and resume pipeline for Tzu-Ming Harry Hsu.
 
 The site is a one-page React app focused on essentials: hero, links, experience,
-education, and curated publications. The resume pipeline generates one public
-PDF from the same typed CV data.
+education, and the canonical publication list. The resume pipeline generates one
+public PDF from the same typed CV data.
 
 ## Stack
 

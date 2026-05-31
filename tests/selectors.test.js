@@ -14,13 +14,14 @@ import {
 } from "../src/data/cv/selectors";
 
 describe("publication selectors", () => {
-  test("returns only curated web publications in featured order", () => {
-    const sorted = getWebPublications(cvContent.publications);
+  test("returns all web publications in resume order", () => {
+    const webPublications = getWebPublications(cvContent.publications);
+    const resumePublications = getResumePublications(cvContent.publications);
 
-    expect(sorted.length).toBeGreaterThan(0);
-    for (let index = 0; index < sorted.length - 1; index += 1) {
-      expect(sorted[index].webFeaturedOrder).toBeLessThan(sorted[index + 1].webFeaturedOrder);
-    }
+    expect(webPublications.length).toBe(cvContent.publications.length);
+    expect(webPublications.map((publication) => publication.id)).toEqual(
+      resumePublications.map((publication) => publication.id),
+    );
   });
 
   test("sorts same-year publications by ascending order", () => {
@@ -55,6 +56,8 @@ describe("publication selectors", () => {
 
   test("maps topic slug to configured label with fallback", () => {
     expect(getTopicLabelBySlug(cvContent.topics, "medical-ai")).toBe("Medical AI");
+    expect(getTopicLabelBySlug(cvContent.topics, "world-models-3d-ai")).toBe("World Models & 3D AI");
+    expect(getTopicLabelBySlug(cvContent.topics, "human-performance")).toBe("Human Performance");
   });
 
   test("groups publication links by related experience", () => {

@@ -99,13 +99,7 @@ export const sortPublicationsByYear = (publications: PublicationItem[]): Publica
 };
 
 export const getWebPublications = (publications: PublicationItem[]): PublicationItem[] => {
-  return publications
-    .filter((publication) => publication.webFeaturedOrder !== undefined)
-    .sort((left, right) => {
-      const leftOrder = left.webFeaturedOrder ?? Number.MAX_SAFE_INTEGER;
-      const rightOrder = right.webFeaturedOrder ?? Number.MAX_SAFE_INTEGER;
-      return leftOrder - rightOrder;
-    });
+  return sortPublicationsByYear(publications);
 };
 
 export const getResumePublications = (publications: PublicationItem[]): PublicationItem[] => {

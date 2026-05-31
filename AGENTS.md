@@ -35,7 +35,7 @@ should derive from typed data rather than duplicated prose.
 - Current search target: physical AI / embodied AI roles, US-first, senior IC.
 - Keep public site copy recruiter-forward, evidence-led, and low on personal or philosophical framing.
 - The website links to the single canonical resume PDF.
-- Publication UI renders only curated web-featured publications and filters that curated subset.
+- Publication UI renders the full canonical publication list and filters that list by topic.
 - Internal asset links in UI must resolve through `import.meta.env.BASE_URL`.
 - Theme follows system preference by default and includes the current manual light/dark override.
 - Use only quantified claims the user can defend tightly.

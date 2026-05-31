@@ -1,10 +1,11 @@
 export type TopicSlug =
-  | "federated-learning"
   | "medical-ai"
+  | "federated-learning"
   | "computer-vision"
-  | "ml-systems"
+  | "world-models-3d-ai"
   | "wireless-sensing"
-  | "blockchain";
+  | "ml-systems"
+  | "human-performance";
 
 export type Topic = {
   slug: TopicSlug;
@@ -110,7 +111,6 @@ export type PublicationItem = {
   relatedExperienceIds?: ExperienceItem["id"][];
   topics: TopicSlug[];
   order: number;
-  webFeaturedOrder?: number;
 };
 
 export type CvContent = {
