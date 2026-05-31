@@ -72,6 +72,7 @@ describe("publication selectors", () => {
 
     expect(publications.map((publication) => publication.id)).toEqual([
       "performance-frontier-freediving-2026",
+      "use-uncertainty-structure-2026",
       "dental-multinational-2025",
       "intraoral-bmc-2023",
       "molar-jod-2023",

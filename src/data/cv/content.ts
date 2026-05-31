@@ -570,6 +570,19 @@ export const cvContent: CvContent = {
       order: 26,
     },
     {
+      id: "use-uncertainty-structure-2026",
+      title: "USE: Uncertainty Structure Estimation for Robust Semi-Supervised Learning",
+      year: 2026,
+      venue: "arXiv Preprint arXiv:2603.00404",
+      scholarCitationUrl:
+        "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=dLAxLwUAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=dLAxLwUAAAAJ:bEWYMUwI8FkC",
+      paperUrl: "https://arxiv.org/abs/2603.00404",
+      authors: "Tsao-Lun Chen, Chen-Lin Liu, Tzu-Ming Harry Hsu, Tai-Hsien Wu, Ching-Chang Fu, Hsuan-Yi Eric Chou, Shun-Fa Su",
+      kind: "preprint",
+      topics: ["computer-vision"],
+      order: 27,
+    },
+    {
       id: "intraoral-bmc-2023",
       title: "Intra-Oral Scan Segmentation Using Deep Learning",
       year: 2023,
