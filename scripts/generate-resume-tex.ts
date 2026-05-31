@@ -6,7 +6,6 @@ import { cvContent } from "../src/data/cv/content";
 import {
   getExperienceForResume,
   getResumePublications,
-  sortExperienceByRecentPeriod,
 } from "../src/data/cv/selectors";
 import { escapeLatex, highlightSelfInAuthors } from "../src/resume/latex";
 import type {
@@ -310,7 +309,7 @@ const run = async (): Promise<void> => {
 
   await mkdir(resolve(projectRoot, "resume"), { recursive: true });
 
-  const experience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience));
+  const experience = getExperienceForResume(cvContent.experience);
   const publications = getResumePublications(cvContent.publications);
   const generatedContent = renderDocumentContent(cvContent.profile, experience, publications);
   const resumeTex = `${DOCUMENT_PREAMBLE}\n\n${generatedContent}\n\n${DOCUMENT_END}\n`;

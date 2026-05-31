@@ -129,15 +129,16 @@ describe("resume selectors", () => {
     expect(sorted.map((item) => item.id)).toEqual(["present-recent", "year-only", "month-year", "same-a", "same-b"]);
   });
 
-  test("sorts default resume experience by recent period", () => {
-    const resumeExperience = sortExperienceByRecentPeriod(getExperienceForResume(cvContent.experience));
+  test("uses canonical resume experience order", () => {
+    const resumeExperience = getExperienceForResume(cvContent.experience);
 
-    expect(resumeExperience.slice(0, 5).map((item) => item.id)).toEqual([
-      "iabit",
-      "clarq-ai",
+    expect(resumeExperience.slice(0, 6).map((item) => item.id)).toEqual([
       "dentscape",
+      "clarq-ai",
       "codegreen-labs",
       "hashgreen-labs",
+      "iabit",
+      "mit-ra",
     ]);
   });
 });
