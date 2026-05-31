@@ -70,12 +70,12 @@ describe("canonical CV content", () => {
 
   test("publication topic definitions match the career taxonomy", () => {
     expect(cvContent.topics.map((topic) => topic.slug)).toEqual([
-      "medical-ai",
-      "federated-learning",
-      "computer-vision",
       "world-models-3d-ai",
-      "wireless-sensing",
+      "computer-vision",
       "ml-systems",
+      "federated-learning",
+      "medical-ai",
+      "wireless-sensing",
       "human-performance",
     ]);
   });

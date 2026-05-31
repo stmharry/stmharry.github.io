@@ -62,12 +62,12 @@ export const cvContent: CvContent = {
     ],
   },
   topics: [
-    { slug: "medical-ai", label: "Medical AI" },
-    { slug: "federated-learning", label: "Federated Learning" },
-    { slug: "computer-vision", label: "Computer Vision" },
     { slug: "world-models-3d-ai", label: "World Models & 3D AI" },
-    { slug: "wireless-sensing", label: "Wireless Sensing" },
+    { slug: "computer-vision", label: "Computer Vision" },
     { slug: "ml-systems", label: "ML Systems" },
+    { slug: "federated-learning", label: "Federated Learning" },
+    { slug: "medical-ai", label: "Medical AI" },
+    { slug: "wireless-sensing", label: "Wireless Sensing" },
     { slug: "human-performance", label: "Human Performance" },
   ],
   education: [
