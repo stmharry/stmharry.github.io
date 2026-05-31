@@ -23,7 +23,7 @@ export const PublicationsSection = ({ publications, topics }: PublicationsSectio
 
   return (
     <section aria-labelledby="publications-heading" className="mt-14 sm:mt-18">
-      <SectionHeading id="publications-heading" title="Selected Publications">
+      <SectionHeading id="publications-heading" title="Publications">
         {availableTopics.length > 1 ? (
           <PublicationsFilterBar selectedFilter={topicFilter} availableTopics={availableTopics} onSelect={setTopicFilter} />
         ) : null}

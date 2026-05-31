@@ -296,7 +296,7 @@ const renderDocumentContent = (
     renderSectionEntries("Leadership Experiences", cvContent.leadership, renderLeadership),
     renderSectionEntries("Awards \\& Honors", cvContent.awards, renderAward),
     "\\newpage",
-    renderSectionEntries("Selected Publications", publications, renderPublication),
+    renderSectionEntries("Publications", publications, renderPublication),
   ]);
 };
 
