@@ -25,7 +25,15 @@ const DOCUMENT_PREAMBLE = String.raw`\documentclass[11pt]{article}
 
 \usepackage{xcolor}
 \usepackage{baskervillef}
-\usepackage{CJKutf8}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage{CJKutf8}
+  \newcommand{\renderNativeName}[1]{\begin{CJK*}{UTF8}{bkai}#1\end{CJK*}}
+\else
+  \usepackage{fontspec}
+  \newfontfamily\cjkfont{Heiti TC}
+  \newcommand{\renderNativeName}[1]{{\cjkfont #1}}
+\fi
 \usepackage[T1]{fontenc}
 
 \usepackage{titlesec}
@@ -37,8 +45,8 @@ const DOCUMENT_PREAMBLE = String.raw`\documentclass[11pt]{article}
 \hypersetup{
   pdftitle={Tzu-Ming Harry Hsu Resume},
   pdfauthor={Tzu-Ming Harry Hsu},
-  pdfsubject={Frontier AI researcher profile for Member of Technical Staff roles in world models, embodied AI, computer vision, computer graphics, and ML systems},
-  pdfkeywords={frontier AI, Member of Technical Staff, world model, embodied AI, computer vision, computer graphics, federated learning, Google Federated Learning, generative AI, model evaluation, ML systems}
+  pdfsubject={Physical AI researcher profile spanning robotics simulation, world models, embodied AI, robot learning, computer vision, and ML systems},
+  pdfkeywords={physical AI, Member of Technical Staff, robotics simulation, world models, embodied AI, robot learning, computer vision, ML systems, federated learning, Google Federated Learning}
 }
 \usepackage[super]{nth}
 
@@ -268,7 +276,7 @@ const renderHeader = (profile: Profile): string => {
     "\\begin{center}",
     `  {\\LARGE ${escapeLatex(profile.name)}} \\\\`,
     "  \\vspace{4pt}",
-    `  \\begin{CJK*}{UTF8}{bkai} ${profile.nativeName} \\end{CJK*}`,
+    `  \\renderNativeName{${profile.nativeName}}`,
     "\\end{center}",
     "",
     "\\begin{resumeItemList}[0in]",

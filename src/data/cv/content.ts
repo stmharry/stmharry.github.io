@@ -4,14 +4,14 @@ export const cvContent: CvContent = {
   profile: {
     name: "Tzu-Ming Harry Hsu",
     nativeName: "徐子旻",
-    tagline: "World Model, Embodied AI, and Computer Vision",
-    headline: "Frontier AI Researcher",
-    location: "Taiwan and Boston",
+    tagline: "World Models, Embodied AI, and Robot Learning",
+    headline: "Physical AI Researcher",
+    location: "San Francisco Bay Area",
     summaryBullets: [
-      "MIT-trained Ph.D. working across world models, embodied AI, computer vision, and computer graphics.",
-      "Google Federated Learning core contributor with YFLOP-scale infrastructure orchestration, open-source research code, and datasets for rigorous model evaluation.",
-      "Generative AI startup model-training and evaluation architect with TB-scale data operations, human-in-the-loop annotation workflows, model training and evaluation, and scalable inference infrastructure experience.",
-      "Founder-operator with capital-raising and team-building experience, translating technical ambiguity into shipped products, investor narratives, and execution loops.",
+      "Member of Technical Staff at Moonlake AI building simulation infrastructure for robotics, autonomy, and physical AI.",
+      "MIT-trained Ph.D. and Google Federated Learning core contributor, with YFLOP-scale experimentation infrastructure and open-source research artifacts.",
+      "Founder-operator with capital-raising, team-building, and production ML experience across data, training, evaluation, and scalable inference.",
+      "International Physics Olympiad world champion, bringing first-principles problem solving to ambitious technical systems.",
     ],
     contacts: [
       {
@@ -109,6 +109,24 @@ export const cvContent: CvContent = {
     },
   ],
   experience: [
+    {
+      id: "moonlake-ai",
+      organization: {
+        name: "Moonlake AI",
+        description: "simulation infrastructure for physical AI",
+        url: "https://www.moonlakeai.com",
+        address: "San Francisco, CA",
+      },
+      period: "Jul 2026 -- Present",
+      role: "Member of Technical Staff",
+      location: "San Francisco, CA",
+      jobDescription:
+        "Build simulation and evaluation infrastructure for robotics, autonomy, and physical AI, spanning world generation, robot-learning environments, and policy evaluation.",
+      summary:
+        "Build simulation and evaluation infrastructure for robotics, autonomy, and physical AI, spanning world generation, robot-learning environments, and policy evaluation.",
+      highlights: [],
+      highlighted: true,
+    },
     {
       id: "dentscape",
       organization: {

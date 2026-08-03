@@ -104,14 +104,15 @@ describe("publication selectors", () => {
     ]);
   });
 
-  test("uses the frontier AI resume profile", () => {
-    expect(cvContent.profile.headline).toBe("Frontier AI Researcher");
-    expect(cvContent.profile.tagline).toBe("World Model, Embodied AI, and Computer Vision");
-    expect(cvContent.profile.summaryBullets[0]).toContain("world models");
+  test("uses the physical AI resume profile", () => {
+    expect(cvContent.profile.headline).toBe("Physical AI Researcher");
+    expect(cvContent.profile.tagline).toBe("World Models, Embodied AI, and Robot Learning");
+    expect(cvContent.profile.location).toBe("San Francisco Bay Area");
+    expect(cvContent.profile.summaryBullets[0]).toContain("Moonlake AI");
     expect(cvContent.profile.summaryBullets[1]).toContain("Google Federated Learning core contributor");
     expect(cvContent.profile.summaryBullets[1]).toContain("YFLOP-scale");
-    expect(cvContent.profile.summaryBullets[2]).toContain("TB-scale data operations");
-    expect(cvContent.profile.summaryBullets[3]).toContain("Founder-operator");
+    expect(cvContent.profile.summaryBullets[2]).toContain("Founder-operator");
+    expect(cvContent.profile.summaryBullets[3]).toContain("International Physics Olympiad world champion");
   });
 
   test("returns resume experience entries without selection input", () => {
@@ -136,12 +137,12 @@ describe("resume selectors", () => {
     const resumeExperience = getExperienceForResume(cvContent.experience);
 
     expect(resumeExperience.slice(0, 6).map((item) => item.id)).toEqual([
+      "moonlake-ai",
       "dentscape",
       "clarq-ai",
       "codegreen-labs",
       "hashgreen-labs",
       "iabit",
-      "mit-ra",
     ]);
   });
 });

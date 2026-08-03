@@ -12,7 +12,7 @@ type HeroProps = {
   onCycleTheme: () => void;
 };
 
-const SUMMARY_TITLES = ["Builder", "Research", "Mission", "Life"];
+const SUMMARY_TITLES = ["Physical AI", "Research at Scale", "Founder-Operator", "IPhO"];
 
 type SummaryShowcaseProps = {
   bullets: string[];
