@@ -259,7 +259,7 @@ export const cvContent: CvContent = {
         url: "https://bit-biomed.com",
         address: "Fl. 8, No. 106, Sec. 1, Zhonghua Rd., Wanhua Dist., Taipei, Taiwan 108002",
       },
-      period: "2021 -- Present",
+      period: "2021 -- Jun 2026",
       role: "Consultant & Convener",
       location: "Taipei, Taiwan",
       jobDescription:
